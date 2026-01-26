@@ -16,6 +16,8 @@
 		73185B182F2745FC009C994E /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73185B172F2745FC009C994E /* BaseNavigationController.swift */; };
 		73185B1A2F274617009C994E /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73185B192F274617009C994E /* StartViewController.swift */; };
 		73185B1C2F274DBF009C994E /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73185B1B2F274DBF009C994E /* NetworkMonitor.swift */; };
+		739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F72F279DF800D94E4A /* BaseModel.swift */; };
+		739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F92F279ED900D94E4A /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		73185B172F2745FC009C994E /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		73185B192F274617009C994E /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		73185B1B2F274DBF009C994E /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		739A91F72F279DF800D94E4A /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		739A91F92F279ED900D94E4A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D095250D029524EE4447247C /* Pods_Pinjaman.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinjaman.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -114,6 +118,8 @@
 		73185B0B2F274567009C994E /* Http */ = {
 			isa = PBXGroup;
 			children = (
+				739A91F72F279DF800D94E4A /* BaseModel.swift */,
+				739A91F92F279ED900D94E4A /* NetworkManager.swift */,
 				73185B1B2F274DBF009C994E /* NetworkMonitor.swift */,
 			);
 			path = Http;
@@ -282,7 +288,9 @@
 			files = (
 				73185B1A2F274617009C994E /* StartViewController.swift in Sources */,
 				73185B1C2F274DBF009C994E /* NetworkMonitor.swift in Sources */,
+				739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */,
 				73185B182F2745FC009C994E /* BaseNavigationController.swift in Sources */,
+				739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */,
 				73185B032F2744C8009C994E /* AppDelegate.swift in Sources */,
 				73185B142F2745A8009C994E /* BaseViewController.swift in Sources */,
 				73185B162F2745DD009C994E /* BaseTabBarController.swift in Sources */,
