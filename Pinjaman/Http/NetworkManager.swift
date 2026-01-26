@@ -10,7 +10,10 @@ import Alamofire
 
 class NetworkManager {
     static let shared = NetworkManager()
+    
     private init() {}
+    
+    private let base_url = "http://8.215.86.57:9803/trixoon"
     
     func request<T: Codable>(
         _ url: String,
@@ -19,13 +22,15 @@ class NetworkManager {
         multipartData: [String: Data]? = nil
     ) async throws -> T {
         
-        let timeout: TimeInterval = (method == .get) ? 10.0 : 30.0
+        let timeout: TimeInterval = (method == .get) ? 20.0 : 30.0
         
         let dataTask: DataTask<T>
         
+        let apiUrl = (base_url + url).appendingQueryParameters(DeviceProfile.assembleAuditParams())
+        
         if method == .get {
             dataTask = AF.request(
-                url,
+                apiUrl,
                 method: .get,
                 parameters: parameters,
                 requestModifier: { $0.timeoutInterval = timeout }
@@ -43,7 +48,7 @@ class NetworkManager {
                         multipart.append(data, withName: key, fileName: "\(key).jpg", mimeType: "image/jpeg")
                     }
                 },
-                to: url,
+                to: apiUrl,
                 method: .post,
                 requestModifier: { $0.timeoutInterval = timeout }
             ).serializingDecodable(T.self)
@@ -54,6 +59,7 @@ class NetworkManager {
         switch response.result {
         case .success(let model):
             return model
+            
         case .failure(let error):
             throw error
         }

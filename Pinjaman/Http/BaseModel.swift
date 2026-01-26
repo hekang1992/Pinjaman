@@ -6,7 +6,7 @@
 //
 
 class BaseModel: Codable {
-    var taxant: Int?
+    var taxant: String?
     var troubleably: String?
     var standee: standeeModel?
 }

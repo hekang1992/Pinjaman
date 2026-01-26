@@ -7,8 +7,11 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 class StartViewController: BaseViewController {
+    
+    private let viewModel = StartViewModel()
     
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
@@ -47,7 +50,9 @@ class StartViewController: BaseViewController {
                 
             case .reachableViaWiFi, .reachableViaCellular:
                 NetworkMonitor.shared.stopListening()
-                
+                Task {
+                    await self.getInitInfo()
+                }
             }
         }
         
@@ -55,3 +60,14 @@ class StartViewController: BaseViewController {
     
 }
 
+extension StartViewController {
+    
+    private func getInitInfo() async {
+        do {
+            let model = try await viewModel.getInitInfo()
+        } catch {
+            
+        }
+    }
+    
+}

@@ -18,6 +18,11 @@
 		73185B1C2F274DBF009C994E /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73185B1B2F274DBF009C994E /* NetworkMonitor.swift */; };
 		739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F72F279DF800D94E4A /* BaseModel.swift */; };
 		739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F92F279ED900D94E4A /* NetworkManager.swift */; };
+		739A91FC2F27A04700D94E4A /* DeviceInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91FB2F27A04700D94E4A /* DeviceInspector.swift */; };
+		739A91FE2F27A0E800D94E4A /* SecurityVault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91FD2F27A0E800D94E4A /* SecurityVault.swift */; };
+		739A92002F27A10800D94E4A /* DeviceProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91FF2F27A10800D94E4A /* DeviceProfile.swift */; };
+		739A92022F27A3AB00D94E4A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A92012F27A3AB00D94E4A /* LoadingView.swift */; };
+		739A92042F27A3CB00D94E4A /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A92032F27A3C300D94E4A /* StartViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +40,11 @@
 		73185B1B2F274DBF009C994E /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		739A91F72F279DF800D94E4A /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		739A91F92F279ED900D94E4A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		739A91FB2F27A04700D94E4A /* DeviceInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInspector.swift; sourceTree = "<group>"; };
+		739A91FD2F27A0E800D94E4A /* SecurityVault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityVault.swift; sourceTree = "<group>"; };
+		739A91FF2F27A10800D94E4A /* DeviceProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceProfile.swift; sourceTree = "<group>"; };
+		739A92012F27A3AB00D94E4A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		739A92032F27A3C300D94E4A /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		D095250D029524EE4447247C /* Pods_Pinjaman.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinjaman.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -107,6 +117,7 @@
 		73185B0A2F274564009C994E /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				739A92032F27A3C300D94E4A /* StartViewModel.swift */,
 				73185B132F2745A8009C994E /* BaseViewController.swift */,
 				73185B152F2745DD009C994E /* BaseTabBarController.swift */,
 				73185B172F2745FC009C994E /* BaseNavigationController.swift */,
@@ -119,8 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				739A91F72F279DF800D94E4A /* BaseModel.swift */,
-				739A91F92F279ED900D94E4A /* NetworkManager.swift */,
 				73185B1B2F274DBF009C994E /* NetworkMonitor.swift */,
+				739A91F92F279ED900D94E4A /* NetworkManager.swift */,
 			);
 			path = Http;
 			sourceTree = "<group>";
@@ -163,6 +174,10 @@
 		73185B112F27456A009C994E /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				739A92012F27A3AB00D94E4A /* LoadingView.swift */,
+				739A91FF2F27A10800D94E4A /* DeviceProfile.swift */,
+				739A91FD2F27A0E800D94E4A /* SecurityVault.swift */,
+				739A91FB2F27A04700D94E4A /* DeviceInspector.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -286,11 +301,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				739A92042F27A3CB00D94E4A /* StartViewModel.swift in Sources */,
 				73185B1A2F274617009C994E /* StartViewController.swift in Sources */,
 				73185B1C2F274DBF009C994E /* NetworkMonitor.swift in Sources */,
 				739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */,
+				739A91FC2F27A04700D94E4A /* DeviceInspector.swift in Sources */,
+				739A91FE2F27A0E800D94E4A /* SecurityVault.swift in Sources */,
+				739A92022F27A3AB00D94E4A /* LoadingView.swift in Sources */,
 				73185B182F2745FC009C994E /* BaseNavigationController.swift in Sources */,
 				739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */,
+				739A92002F27A10800D94E4A /* DeviceProfile.swift in Sources */,
 				73185B032F2744C8009C994E /* AppDelegate.swift in Sources */,
 				73185B142F2745A8009C994E /* BaseViewController.swift in Sources */,
 				73185B162F2745DD009C994E /* BaseTabBarController.swift in Sources */,
