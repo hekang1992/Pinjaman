@@ -33,6 +33,7 @@
 		739A92192F27AE0200D94E4A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A92182F27AE0200D94E4A /* LoginView.swift */; };
 		739A921B2F27AE0F00D94E4A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A921A2F27AE0F00D94E4A /* BaseView.swift */; };
 		739A921D2F27AE8C00D94E4A /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A921C2F27AE8C00D94E4A /* ToastManager.swift */; };
+		739A921F2F27BD1D00D94E4A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A921E2F27BD1A00D94E4A /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		739A92182F27AE0200D94E4A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		739A921A2F27AE0F00D94E4A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		739A921C2F27AE8C00D94E4A /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
+		739A921E2F27BD1A00D94E4A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		D095250D029524EE4447247C /* Pods_Pinjaman.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinjaman.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				739A92182F27AE0200D94E4A /* LoginView.swift */,
+				739A921E2F27BD1A00D94E4A /* LoginViewModel.swift */,
 				739A920B2F27AA7800D94E4A /* UserManager.swift */,
 				739A920F2F27AAD600D94E4A /* LoginViewController.swift */,
 			);
@@ -335,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				739A921F2F27BD1D00D94E4A /* LoginViewModel.swift in Sources */,
 				739A92102F27AAD600D94E4A /* LoginViewController.swift in Sources */,
 				739A92122F27ABF500D94E4A /* LanguageType.swift in Sources */,
 				739A92042F27A3CB00D94E4A /* StartViewModel.swift in Sources */,

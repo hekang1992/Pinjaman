@@ -12,4 +12,6 @@ import RxCocoa
 class BaseView: UIView {
     
     let disposeBag = DisposeBag()
+    
+    let languageCode = LanguageManager.shared.currentType
 }

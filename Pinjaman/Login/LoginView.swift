@@ -14,6 +14,10 @@ class LoginView: BaseView {
     
     var backBlock: (() -> Void)?
     
+    var codeBlock: (() -> Void)?
+    
+    var loginBlock: (() -> Void)?
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "login_bg_image")
@@ -37,8 +41,7 @@ class LoginView: BaseView {
     
     lazy var headImageView: UIImageView = {
         let headImageView = UIImageView()
-        headImageView.contentMode = .scaleAspectFit
-        headImageView.backgroundColor = .red
+        headImageView.image = languageCode == .indonesian ? UIImage(named: "login_head_id_image") : UIImage(named: "login_head_en_image")
         return headImageView
     }()
     
@@ -118,7 +121,7 @@ class LoginView: BaseView {
     
     lazy var loginBtn: UIButton = {
         let loginBtn = UIButton(type: .custom)
-        loginBtn.setTitle(LStr("Log in"), for: .normal)
+        loginBtn.setImage(languageCode == .indonesian ? UIImage(named: "login_id_image") : UIImage(named: "login_en_image") , for: .normal)
         return loginBtn
     }()
     
@@ -200,8 +203,12 @@ class LoginView: BaseView {
         headImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview().offset(16)
-            make.width.equalTo(300)
-            make.height.equalTo(50)
+            if languageCode == .indonesian {
+                make.size.equalTo(CGSize(width: 332, height: 67))
+            }else {
+                make.size.equalTo(CGSize(width: 297, height: 48))
+            }
+            
         }
         phoneLabel.snp.makeConstraints { make in
             make.top.equalTo(headImageView.snp.bottom).offset(38)
@@ -268,6 +275,20 @@ class LoginView: BaseView {
             .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.backBlock?()
+            })
+            .disposed(by: disposeBag)
+        
+        codeBtn.rx.tap
+            .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.codeBlock?()
+            })
+            .disposed(by: disposeBag)
+        
+        loginBtn.rx.tap
+            .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.loginBlock?()
             })
             .disposed(by: disposeBag)
     }
