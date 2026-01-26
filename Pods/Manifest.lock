@@ -9,7 +9,14 @@ PODS:
   - IQKeyboardManagerSwift (6.5.16)
   - Kingfisher (8.6.2)
   - MJRefresh (3.7.9)
+  - RxCocoa (6.9.0):
+    - RxRelay (= 6.9.0)
+    - RxSwift (= 6.9.0)
+  - RxRelay (6.9.0):
+    - RxSwift (= 6.9.0)
+  - RxSwift (6.9.0)
   - SnapKit (5.7.1)
+  - Toast-Swift (5.1.1)
   - TYAlertController (1.2.0)
 
 DEPENDENCIES:
@@ -18,7 +25,10 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift (~> 6.5.16)
   - Kingfisher
   - MJRefresh
+  - RxCocoa
+  - RxSwift
   - SnapKit
+  - Toast-Swift
   - TYAlertController
 
 SPEC REPOS:
@@ -30,7 +40,11 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - Kingfisher
     - MJRefresh
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SnapKit
+    - Toast-Swift
     - TYAlertController
 
 SPEC CHECKSUMS:
@@ -41,9 +55,13 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
   Kingfisher: 23d18f54677d973b713e54ce6a8f5eef6e7056ba
   MJRefresh: ff9e531227924c84ce459338414550a05d2aea78
+  RxCocoa: ac16414696ae706516be3e1ab00fcce5bdc9be8a
+  RxRelay: 6b0c930e5cef57d5fe2032571e5e65b78e3cbdb1
+  RxSwift: 31649ace6aceeb422e16ff71c60804f9c3281ed9
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
   TYAlertController: c121090edb0bea7426f987da94cdddd81eef4231
 
-PODFILE CHECKSUM: 2c38f755c2f2541f02311bdbf0a95f35d290b2a6
+PODFILE CHECKSUM: dd352c5985005b499442fb40bda4324231ea7e92
 
 COCOAPODS: 1.16.2

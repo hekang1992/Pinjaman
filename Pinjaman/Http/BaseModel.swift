@@ -12,5 +12,5 @@ class BaseModel: Codable {
 }
 
 class standeeModel: Codable {
-    
+    var horm: String?
 }

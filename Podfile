@@ -7,9 +7,12 @@ target 'Pinjaman' do
 
   # Pods for Pinjaman
   pod 'SnapKit'
+  pod 'RxSwift'
+  pod 'RxCocoa'
   pod 'Kingfisher'
   pod 'Alamofire'
   pod 'MJRefresh'
+  pod 'Toast-Swift'
   pod 'FBSDKCoreKit'
   pod 'TYAlertController'
   pod 'IQKeyboardManagerSwift', '~> 6.5.16'
