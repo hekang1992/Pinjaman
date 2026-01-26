@@ -65,9 +65,17 @@ extension StartViewController {
     private func getInitInfo() async {
         do {
             let model = try await viewModel.getInitInfo()
+            let taxant = model.taxant ?? ""
+            if ["0", "00"].contains(taxant) {
+                self.changeRootVc()
+            }
         } catch {
             
         }
+    }
+    
+    private func changeRootVc() {
+        NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
     }
     
 }
