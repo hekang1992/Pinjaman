@@ -195,9 +195,9 @@
 		73185B102F27456A009C994E /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				739A92182F27AE0200D94E4A /* LoginView.swift */,
 				739A920B2F27AA7800D94E4A /* UserManager.swift */,
 				739A920F2F27AAD600D94E4A /* LoginViewController.swift */,
-				739A92182F27AE0200D94E4A /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";

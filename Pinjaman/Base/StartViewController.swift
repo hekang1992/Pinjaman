@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Alamofire
+import IQKeyboardManagerSwift
 
 class StartViewController: BaseViewController {
     
@@ -39,6 +40,9 @@ class StartViewController: BaseViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(50)
             make.width.height.equalTo(130)
         }
+        
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         NetworkMonitor.shared.startListening { status in
             switch status {
