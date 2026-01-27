@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import Kingfisher
+import RxSwift
+import RxCocoa
 
 class OneHomeView: BaseView {
     
@@ -29,6 +31,8 @@ class OneHomeView: BaseView {
             applyLabel.text = model.powerability ?? ""
         }
     }
+    
+    var applyBlock: ((misceeerModel) -> Void)?
     
     private lazy var bgImageView: UIImageView = {
         let iv = UIImageView()
@@ -180,6 +184,11 @@ class OneHomeView: BaseView {
         return label
     }()
     
+    lazy var applyBtn: UIButton = {
+        let applyBtn = UIButton(type: .custom)
+        return applyBtn
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
@@ -208,6 +217,7 @@ class OneHomeView: BaseView {
         threeImageView.addSubview(applyLabel)
         threeImageView.addSubview(loanLabel)
         contentView.addSubview(fourImageView)
+        contentView.addSubview(applyBtn)
         
         if languageCode == .english {
             contentView.addSubview(fiveImageView)
@@ -305,6 +315,13 @@ class OneHomeView: BaseView {
             make.height.equalTo(16)
         }
         
+        applyBtn.snp.makeConstraints { make in
+            make.top.equalTo(twoImageView)
+            make.bottom.equalTo(threeImageView).offset(-52.pix())
+            make.centerX.equalToSuperview()
+            make.width.equalTo(335.pix())
+        }
+        
         fourImageView.snp.makeConstraints { make in
             make.top.equalTo(threeImageView.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
@@ -329,10 +346,22 @@ class OneHomeView: BaseView {
                 make.bottom.equalToSuperview().offset(-20)
             }
         }
+        
+        applyBtn.rx.tap
+            .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                if let model = listModel?.misceeer?.first {
+                    self.applyBlock?(model)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
 extension OneHomeView {
+    
+    
     
     @objc private func handleTapOnLabel(_ gesture: UITapGestureRecognizer) {
         ToastManager.showLocal("1")

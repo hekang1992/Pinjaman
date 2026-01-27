@@ -13,17 +13,15 @@ class BaseViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
+    let languageCode = LanguageManager.shared.currentType
+    
     lazy var headView: AppHeadView = {
         let headView = AppHeadView()
         return headView
     }()
     
-    let languageCode = LanguageManager.shared.currentType
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = UIColor.init(hexString: "#ECEEF0")
+    func changeRootVc() {
+        NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
     }
-
+    
 }

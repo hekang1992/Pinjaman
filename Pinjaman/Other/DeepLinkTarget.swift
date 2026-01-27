@@ -69,10 +69,9 @@ final class DeepLinkNavigator {
             nav.pushViewController(vc, animated: true)
             
         case .productDetail(let productID):
-//            let vc = ProductViewController()
-//            vc.productID = productID
-//            nav.pushViewController(vc, animated: true)
-            break
+            let vc = ProductViewController()
+            vc.productID = productID
+            nav.pushViewController(vc, animated: true)
             
         case .main, .login, .order:
             

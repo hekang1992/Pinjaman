@@ -45,7 +45,7 @@ class BaseTabBarController: UITabBarController {
     private func createNavController(viewController: UIViewController, imageName: String) -> UINavigationController {
         let nav = BaseNavigationController(rootViewController: viewController)
         
-        viewController.view.backgroundColor = .white
+        viewController.view.backgroundColor = UIColor.init(hexString: "#ECEEF0")
         
         nav.tabBarItem = UITabBarItem(
             title: nil,

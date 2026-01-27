@@ -25,3 +25,10 @@
 "Privacy Policy" = "Kebijakan Privasi";
 "Settings" = "Pengaturan";
 "Log out of the account" = "Keluar dari akun";
+
+
+"Order List" = "Pesanan";
+"All" = "Semua";
+"In progress" = "Dalam Proses";
+"Repayment" = "Belum Lunas";
+"Finished" = "Lunas";

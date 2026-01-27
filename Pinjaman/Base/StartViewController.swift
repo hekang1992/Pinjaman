@@ -73,16 +73,13 @@ extension StartViewController {
             if ["0", "00"].contains(taxant) {
                 let languageCode = model.standee?.horm ?? ""
                 LanguageManager.shared.configure(with: languageCode)
-                self.changeRootVc()
+                try? await Task.sleep(nanoseconds: 250_000_000)
+                await MainActor.run {
+                    self.changeRootVc()
+                }
             }
         } catch {
             
-        }
-    }
-    
-    func changeRootVc() {
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
         }
     }
     

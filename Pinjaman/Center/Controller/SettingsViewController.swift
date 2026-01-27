@@ -199,8 +199,4 @@ extension SettingsViewController {
         }
     }
     
-    func changeRootVc() {
-        NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
-    }
-    
 }

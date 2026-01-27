@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class HomeViewModel {
     
@@ -21,6 +22,25 @@ class HomeViewModel {
         
         do {
             let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/troubleably")
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
+    func clickProductInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/lapsmeetingoon", method: .post, parameters: parameters)
             return model
         } catch {
             throw error

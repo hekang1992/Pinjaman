@@ -47,6 +47,11 @@
 		73EB77332F28A0520058A81C /* DeepLinkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB77322F28A0520058A81C /* DeepLinkTarget.swift */; };
 		73EB77352F28AF6B0058A81C /* AccountExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB77342F28AF6B0058A81C /* AccountExitView.swift */; };
 		73EB77372F28B5070058A81C /* AccountDeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB77362F28B5070058A81C /* AccountDeleteView.swift */; };
+		73F177212F28F98D0066A6AE /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F177202F28F9880066A6AE /* OrderViewModel.swift */; };
+		73F177232F28FC510066A6AE /* OrderEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F177222F28FC510066A6AE /* OrderEmptyView.swift */; };
+		73F177252F28FE7E0066A6AE /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F177242F28FE7E0066A6AE /* ProductViewController.swift */; };
+		73F177272F2902F00066A6AE /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F177262F2902F00066A6AE /* ProductView.swift */; };
+		73F177292F2905000066A6AE /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F177282F2904FE0066A6AE /* ProductViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +100,11 @@
 		73EB77322F28A0520058A81C /* DeepLinkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkTarget.swift; sourceTree = "<group>"; };
 		73EB77342F28AF6B0058A81C /* AccountExitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountExitView.swift; sourceTree = "<group>"; };
 		73EB77362F28B5070058A81C /* AccountDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDeleteView.swift; sourceTree = "<group>"; };
+		73F177202F28F9880066A6AE /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
+		73F177222F28FC510066A6AE /* OrderEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderEmptyView.swift; sourceTree = "<group>"; };
+		73F177242F28FE7E0066A6AE /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		73F177262F2902F00066A6AE /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
+		73F177282F2904FE0066A6AE /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
 		D095250D029524EE4447247C /* Pods_Pinjaman.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinjaman.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -204,7 +214,9 @@
 		73185B0D2F274568009C994E /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				73F177202F28F9880066A6AE /* OrderViewModel.swift */,
 				739A92072F27A77800D94E4A /* OrderViewController.swift */,
+				73F177222F28FC510066A6AE /* OrderEmptyView.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -222,6 +234,9 @@
 		73185B0F2F274569009C994E /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				73F177282F2904FE0066A6AE /* ProductViewModel.swift */,
+				73F177262F2902F00066A6AE /* ProductView.swift */,
+				73F177242F28FE7E0066A6AE /* ProductViewController.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -401,6 +416,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73F177272F2902F00066A6AE /* ProductView.swift in Sources */,
+				73F177252F28FE7E0066A6AE /* ProductViewController.swift in Sources */,
+				73F177292F2905000066A6AE /* ProductViewModel.swift in Sources */,
 				739A921F2F27BD1D00D94E4A /* LoginViewModel.swift in Sources */,
 				739A92102F27AAD600D94E4A /* LoginViewController.swift in Sources */,
 				73EB77312F2898790058A81C /* SettingsViewController.swift in Sources */,
@@ -416,6 +434,7 @@
 				739A91FC2F27A04700D94E4A /* DeviceInspector.swift in Sources */,
 				739A920A2F27A78200D94E4A /* CenterViewController.swift in Sources */,
 				73C501072F285A800093242A /* OneHomeView.swift in Sources */,
+				73F177232F28FC510066A6AE /* OrderEmptyView.swift in Sources */,
 				73C5010D2F286CD90093242A /* HomRateView.swift in Sources */,
 				739A92062F27A77000D94E4A /* HomeViewController.swift in Sources */,
 				739A91FE2F27A0E800D94E4A /* SecurityVault.swift in Sources */,
@@ -433,6 +452,7 @@
 				739A921B2F27AE0F00D94E4A /* BaseView.swift in Sources */,
 				739A92192F27AE0200D94E4A /* LoginView.swift in Sources */,
 				739A920C2F27AA7800D94E4A /* UserManager.swift in Sources */,
+				73F177212F28F98D0066A6AE /* OrderViewModel.swift in Sources */,
 				73C5010F2F287E8B0093242A /* MeCenterView.swift in Sources */,
 				73EB77372F28B5070058A81C /* AccountDeleteView.swift in Sources */,
 				73EB77282F2885AB0058A81C /* CenterListView.swift in Sources */,
