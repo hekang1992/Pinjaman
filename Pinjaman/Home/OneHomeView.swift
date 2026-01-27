@@ -112,7 +112,6 @@ class OneHomeView: BaseView {
         let iv = UIImageView()
         iv.layer.cornerRadius = 6
         iv.layer.masksToBounds = true
-        iv.backgroundColor = .red
         return iv
     }()
     

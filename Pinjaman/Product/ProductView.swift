@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class ProductView: UIView {
     
@@ -15,7 +16,7 @@ class ProductView: UIView {
             tableView.reloadData()
         }
     }
-
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.separatorStyle = .none
@@ -96,14 +97,67 @@ extension ProductView: UITableViewDelegate, UITableViewDataSource {
             make.size.equalTo(CGSize(width: 343.pix(), height: 29.pix()))
         }
         
-        let iv = UIImageView()
-        iv.image = UIImage(named: "pc_ha_head_image")
-        headView.addSubview(iv)
-        iv.snp.makeConstraints { make in
+        let headImageView = UIImageView()
+        headImageView.image = UIImage(named: "pc_ha_head_image")
+        headView.addSubview(headImageView)
+        headImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 347.pix(), height: 195.pix()))
             make.top.equalToSuperview().offset(20.pix())
         }
+        
+        let logoImageView = UIImageView()
+        logoImageView.layer.cornerRadius = 6
+        logoImageView.layer.masksToBounds = true
+        
+        let productLabel = UILabel()
+        productLabel.textAlignment = .left
+        productLabel.textColor = UIColor.init(hexString: "#FFFFFF")
+        productLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        
+        let limitLabel = UILabel()
+        limitLabel.textAlignment = .center
+        limitLabel.textColor = UIColor.init(hexString: "#FFFFFF")
+        limitLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        
+        let numLabel = UILabel()
+        numLabel.textAlignment = .center
+        numLabel.textColor = UIColor.init(hexString: "#FFFFFF")
+        numLabel.font = UIFont.systemFont(ofSize: 47, weight: .bold)
+        
+        headView.addSubview(productLabel)
+        headView.addSubview(logoImageView)
+        headView.addSubview(limitLabel)
+        headView.addSubview(numLabel)
+        
+        productLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview().offset(14)
+            make.top.equalToSuperview().offset(77.pix())
+            make.height.equalTo(17.pix())
+        }
+        
+        logoImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(nameLabel)
+            make.right.equalTo(nameLabel.snp.left).offset(-5)
+            make.width.height.equalTo(28)
+        }
+        
+        limitLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(productLabel.snp.bottom).offset(18.5.pix())
+            make.height.equalTo(19)
+        }
+        
+        numLabel.snp.makeConstraints { make in
+            make.top.equalTo(limitLabel.snp.bottom).offset(4.pix())
+            make.centerX.equalToSuperview()
+            make.height.equalTo(55.pix())
+        }
+        
+        productLabel.text = model?.wideious ?? ""
+        logoImageView.kf.setImage(with: URL(string: model?.spicly ?? ""))
+        limitLabel.text = model?.controwho ?? ""
+        numLabel.text = model?.epish ?? ""
         
         return headView
         
