@@ -50,7 +50,7 @@ class ProductView: UIView {
 extension ProductView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 374.pix()
+        return 334.pix()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -60,12 +60,12 @@ extension ProductView: UITableViewDelegate, UITableViewDataSource {
         let headView = UIView()
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "pc_head_image")
-        bgImageView.contentMode = .scaleAspectFill
+        bgImageView.contentMode = .scaleToFill
         
         headView.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
-            make.height.equalTo(284.pix())
+            make.height.equalTo(244.pix())
         }
         
         let nameLabel = UILabel()
@@ -94,6 +94,15 @@ extension ProductView: UITableViewDelegate, UITableViewDataSource {
             make.bottom.equalToSuperview().offset(-14.pix())
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 343.pix(), height: 29.pix()))
+        }
+        
+        let iv = UIImageView()
+        iv.image = UIImage(named: "pc_ha_head_image")
+        headView.addSubview(iv)
+        iv.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.size.equalTo(CGSize(width: 347.pix(), height: 195.pix()))
+            make.top.equalToSuperview().offset(20.pix())
         }
         
         return headView
