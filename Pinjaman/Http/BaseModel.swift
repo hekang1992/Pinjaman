@@ -32,4 +32,27 @@ class standeeModel: Codable {
     var horm: String?
     var angumedicalwise: String?
     var anaorderade: String?
+    var variousing: [variousingModel]?
+}
+
+class variousingModel: Codable {
+    var histrieastlike: String?
+    var misceeer: [misceeerModel]?
+}
+
+class misceeerModel: Codable {
+    var allosion: Int?
+    var wideious: String?
+    var spicly: String?
+    var powerability: String?
+    
+    var megfinishern: String?
+    var nuchine: String?
+    var putitive: String?
+    var pinndataad: String?
+    
+    var gentture: String?
+    var morning: String?
+    var butly: String?
+    
 }

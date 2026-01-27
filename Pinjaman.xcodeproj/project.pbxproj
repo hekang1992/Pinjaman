@@ -34,6 +34,10 @@
 		739A921B2F27AE0F00D94E4A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A921A2F27AE0F00D94E4A /* BaseView.swift */; };
 		739A921D2F27AE8C00D94E4A /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A921C2F27AE8C00D94E4A /* ToastManager.swift */; };
 		739A921F2F27BD1D00D94E4A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A921E2F27BD1A00D94E4A /* LoginViewModel.swift */; };
+		73C501072F285A800093242A /* OneHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C501062F285A800093242A /* OneHomeView.swift */; };
+		73C501092F285A890093242A /* TwoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C501082F285A890093242A /* TwoHomeView.swift */; };
+		73C5010B2F2865870093242A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5010A2F2865840093242A /* HomeViewModel.swift */; };
+		73C5010D2F286CD90093242A /* HomRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5010C2F286CD90093242A /* HomRateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +73,10 @@
 		739A921A2F27AE0F00D94E4A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		739A921C2F27AE8C00D94E4A /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		739A921E2F27BD1A00D94E4A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		73C501062F285A800093242A /* OneHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneHomeView.swift; sourceTree = "<group>"; };
+		73C501082F285A890093242A /* TwoHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoHomeView.swift; sourceTree = "<group>"; };
+		73C5010A2F2865840093242A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		73C5010C2F286CD90093242A /* HomRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomRateView.swift; sourceTree = "<group>"; };
 		D095250D029524EE4447247C /* Pods_Pinjaman.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinjaman.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -166,7 +174,11 @@
 		73185B0C2F274568009C994E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				73C5010A2F2865840093242A /* HomeViewModel.swift */,
+				73C501062F285A800093242A /* OneHomeView.swift */,
+				73C501082F285A890093242A /* TwoHomeView.swift */,
 				739A92052F27A77000D94E4A /* HomeViewController.swift */,
+				73C5010C2F286CD90093242A /* HomRateView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -348,6 +360,8 @@
 				739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */,
 				739A91FC2F27A04700D94E4A /* DeviceInspector.swift in Sources */,
 				739A920A2F27A78200D94E4A /* CenterViewController.swift in Sources */,
+				73C501072F285A800093242A /* OneHomeView.swift in Sources */,
+				73C5010D2F286CD90093242A /* HomRateView.swift in Sources */,
 				739A92062F27A77000D94E4A /* HomeViewController.swift in Sources */,
 				739A91FE2F27A0E800D94E4A /* SecurityVault.swift in Sources */,
 				739A92022F27A3AB00D94E4A /* LoadingView.swift in Sources */,
@@ -356,7 +370,9 @@
 				739A92002F27A10800D94E4A /* DeviceProfile.swift in Sources */,
 				739A92082F27A77800D94E4A /* OrderViewController.swift in Sources */,
 				73185B032F2744C8009C994E /* AppDelegate.swift in Sources */,
+				73C501092F285A890093242A /* TwoHomeView.swift in Sources */,
 				73185B142F2745A8009C994E /* BaseViewController.swift in Sources */,
+				73C5010B2F2865870093242A /* HomeViewModel.swift in Sources */,
 				73185B162F2745DD009C994E /* BaseTabBarController.swift in Sources */,
 				739A921B2F27AE0F00D94E4A /* BaseView.swift in Sources */,
 				739A92192F27AE0200D94E4A /* LoginView.swift in Sources */,

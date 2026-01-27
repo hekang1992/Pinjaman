@@ -11,19 +11,19 @@ struct DeviceProfile {
     static func assembleAuditParams() -> [String: String] {
         let idfv = SecurityVault.shared.getIDFV()
         
-        var dict: [String: String] = [
+        let dict: [String: String] = [
             "nauindustryation": "ios",
             "caliditor": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0",
             "dynathe": UIDevice.current.modelName,
             "aroundet": idfv,
             "fund": UIDevice.current.systemVersion,
             "rachably": "pinjaman-lar",
-            "anaorderade": "sessionId",
+            "anaorderade": UserManager.shared.getToken() ?? "",
             "dermary": idfv,
-            "horm": Locale.current.identifier,
+            "horm": Locale.preferredLanguages.first ?? "en-US",
             "iterable": DeviceInspector.isProxyActive() ? "1" : "0",
             "soldierast": DeviceInspector.isVPNActive() ? "1" : "0",
-            "agor": Locale.preferredLanguages.first ?? "en-US"
+            "agor": LanguageManager.shared.currentType.rawValue
         ]
         return dict
     }
