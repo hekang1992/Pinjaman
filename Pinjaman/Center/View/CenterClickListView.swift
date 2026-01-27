@@ -16,19 +16,19 @@ class CenterClickListView: BaseView {
     
     lazy var bgView: UIView = {
         let bgView = UIView()
-        bgView.layer.cornerRadius = 16
+        bgView.layer.cornerRadius = 16.pix()
         bgView.layer.masksToBounds = true
         bgView.backgroundColor = UIColor.init(hexString: "#FFFFFF")
         return bgView
     }()
     
-    lazy var logoImageView: UIImageView = {
-        let logoImageView = UIImageView()
-        logoImageView.layer.cornerRadius = 5
-        logoImageView.layer.masksToBounds = true
-        logoImageView.backgroundColor = .red
-        return logoImageView
-    }()
+//    lazy var logoImageView: UIImageView = {
+//        let logoImageView = UIImageView()
+//        logoImageView.layer.cornerRadius = 5
+//        logoImageView.layer.masksToBounds = true
+//        logoImageView.backgroundColor = .red
+//        return logoImageView
+//    }()
     
     lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
@@ -52,7 +52,7 @@ class CenterClickListView: BaseView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgView)
-        bgView.addSubview(logoImageView)
+//        bgView.addSubview(logoImageView)
         bgView.addSubview(nameLabel)
         bgView.addSubview(rightImageView)
         bgView.addSubview(tapBtn)
@@ -66,14 +66,14 @@ class CenterClickListView: BaseView {
             make.right.equalToSuperview().offset(-20.pix())
             make.width.height.height.equalTo(24)
         }
-        logoImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(20.pix())
-            make.width.height.equalTo(30)
-        }
+//        logoImageView.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+//            make.left.equalToSuperview().offset(20.pix())
+//            make.width.height.equalTo(30)
+//        }
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalTo(logoImageView.snp.right).offset(10.pix())
+            make.left.equalToSuperview().offset(20.pix())
             make.height.equalTo(20.pix())
         }
         tapBtn.snp.makeConstraints { make in

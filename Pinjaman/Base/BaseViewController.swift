@@ -13,6 +13,8 @@ class BaseViewController: UIViewController {
         let headView = AppHeadView()
         return headView
     }()
+    
+    let languageCode = LanguageManager.shared.currentType
 
     override func viewDidLoad() {
         super.viewDidLoad()

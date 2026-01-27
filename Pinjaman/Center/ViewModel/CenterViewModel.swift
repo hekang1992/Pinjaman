@@ -28,4 +28,42 @@ class CenterViewModel {
         
     }
     
+    func accountExitInfo() async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/taxant")
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
+    func accountDeleteInfo() async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/putitive")
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
 }
