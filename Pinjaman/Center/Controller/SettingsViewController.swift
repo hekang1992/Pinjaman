@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import TYAlertController
+import RxSwift
+import RxCocoa
 
 class SettingsViewController: BaseViewController {
     
@@ -100,6 +102,13 @@ class SettingsViewController: BaseViewController {
             self?.popExitAccount()
         }
         
+        deleteBtn.rx.tap
+            .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.popDeleteAccount()
+            })
+            .disposed(by: disposeBag)
+        
     }
     
 }
@@ -111,19 +120,42 @@ extension SettingsViewController {
         let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
         self.present(alertVc!, animated: true)
         
+        popView.confirmAction
+            .subscribe(onNext: { [weak self] in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        popView.cancelAction
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                Task {
+                    await self.exitInfo()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func popDeleteAccount() {
+        
+        let popView = AccountDeleteView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
+        self.present(alertVc!, animated: true)
+        
         popView.oneBlock = { [weak self] in
             self?.dismiss(animated: true)
         }
         
         popView.twoBlock = { [weak self] in
             guard let self = self else { return }
+            if popView.sureBtn.isSelected == false {
+                ToastManager.showLocal("Please confirm the above agreement first.")
+                return
+            }
             Task {
-                await self.exitInfo()
+                await self.deleteInfo()
             }
         }
-    }
-    
-    private func popDeleteAccount() {
         
     }
     
@@ -132,6 +164,24 @@ extension SettingsViewController {
 extension SettingsViewController {
     
     private func exitInfo() async {
+        do {
+            let model = try await viewModel.accountExitInfo()
+            let taxant = model.taxant ?? ""
+            ToastManager.showLocal(model.troubleably ?? "")
+            if ["0", "00"].contains(taxant) {
+                self.dismiss(animated: true)
+                UserManager.shared.clearUserInfo()
+                try? await Task.sleep(nanoseconds: 500_000_000)
+                await MainActor.run {
+                    self.changeRootVc()
+                }
+            }
+        } catch {
+            
+        }
+    }
+    
+    private func deleteInfo() async {
         do {
             let model = try await viewModel.accountDeleteInfo()
             let taxant = model.taxant ?? ""

@@ -46,6 +46,7 @@
 		73EB77312F2898790058A81C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB77302F2898790058A81C /* SettingsViewController.swift */; };
 		73EB77332F28A0520058A81C /* DeepLinkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB77322F28A0520058A81C /* DeepLinkTarget.swift */; };
 		73EB77352F28AF6B0058A81C /* AccountExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB77342F28AF6B0058A81C /* AccountExitView.swift */; };
+		73EB77372F28B5070058A81C /* AccountDeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB77362F28B5070058A81C /* AccountDeleteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		73EB77302F2898790058A81C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		73EB77322F28A0520058A81C /* DeepLinkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkTarget.swift; sourceTree = "<group>"; };
 		73EB77342F28AF6B0058A81C /* AccountExitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountExitView.swift; sourceTree = "<group>"; };
+		73EB77362F28B5070058A81C /* AccountDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDeleteView.swift; sourceTree = "<group>"; };
 		D095250D029524EE4447247C /* Pods_Pinjaman.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinjaman.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -273,6 +275,7 @@
 				73C5010E2F287E8B0093242A /* MeCenterView.swift */,
 				73EB77292F2890F30058A81C /* CenterClickListView.swift */,
 				73EB77342F28AF6B0058A81C /* AccountExitView.swift */,
+				73EB77362F28B5070058A81C /* AccountDeleteView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				739A92192F27AE0200D94E4A /* LoginView.swift in Sources */,
 				739A920C2F27AA7800D94E4A /* UserManager.swift in Sources */,
 				73C5010F2F287E8B0093242A /* MeCenterView.swift in Sources */,
+				73EB77372F28B5070058A81C /* AccountDeleteView.swift in Sources */,
 				73EB77282F2885AB0058A81C /* CenterListView.swift in Sources */,
 				73EB77352F28AF6B0058A81C /* AccountExitView.swift in Sources */,
 			);

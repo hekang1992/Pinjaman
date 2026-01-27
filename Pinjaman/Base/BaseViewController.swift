@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class BaseViewController: UIViewController {
+    
+    let disposeBag = DisposeBag()
     
     lazy var headView: AppHeadView = {
         let headView = AppHeadView()
