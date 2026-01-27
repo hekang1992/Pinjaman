@@ -250,7 +250,7 @@ class OneHomeView: BaseView {
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview().offset(28)
+            make.centerX.equalToSuperview().offset(14)
             make.top.equalToSuperview().offset(60)
             make.height.equalTo(17)
         }

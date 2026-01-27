@@ -1,0 +1,102 @@
+//
+//  CenterViewController.swift
+//  Pinjaman
+//
+//  Created by hekang on 2026/1/26.
+//
+
+import UIKit
+import SnapKit
+import MJRefresh
+
+class CenterViewController: BaseViewController {
+    
+    private let viewModel = CenterViewModel()
+    
+    lazy var mineView: MeCenterView = {
+        let mineView = MeCenterView()
+        mineView.backgroundColor = UIColor.init(hexString: "#ECEEF0")
+        return mineView
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.addSubview(mineView)
+        mineView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        mineView.scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            guard let self = self else { return }
+            Task {
+                await self.centerInfo()
+            }
+        })
+        
+        mineView.leftBlock = { [weak self] in
+            guard let self = self else { return }
+            ToastManager.showLocal("left")
+        }
+        
+        mineView.rightBlock = { [weak self] in
+            guard let self = self else { return }
+            ToastManager.showLocal("right")
+        }
+        
+        mineView.oneBlock = { [weak self] in
+            guard let self = self else { return }
+            ToastManager.showLocal("1")
+        }
+        
+        mineView.twoBlock = { [weak self] in
+            guard let self = self else { return }
+            ToastManager.showLocal("2")
+        }
+        
+        mineView.threeBlock = { [weak self] in
+            guard let self = self else { return }
+            ToastManager.showLocal("3")
+        }
+        
+        mineView.fourBlock = { [weak self] in
+            guard let self = self else { return }
+            ToastManager.showLocal("4")
+        }
+        
+        mineView.listTapClick = { [weak self] pageUrl in
+            guard let self = self else { return }
+            if pageUrl.hasPrefix(scheme_url) {
+                DeepLinkNavigator.navigate(to: pageUrl, from: self)
+            }else if pageUrl.hasPrefix("http") {
+                
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Task {
+            await self.centerInfo()
+        }
+    }
+    
+}
+
+extension CenterViewController {
+    
+    private func centerInfo() async {
+        do {
+            let model = try await viewModel.getCenterInfo()
+            let taxant = model.taxant ?? ""
+            if ["0", "00"].contains(taxant) {
+                let listArray = model.standee?.veriid ?? []
+                self.mineView.listArray = listArray
+            }
+            await self.mineView.scrollView.mj_header?.endRefreshing()
+        } catch {
+            await self.mineView.scrollView.mj_header?.endRefreshing()
+        }
+    }
+    
+}

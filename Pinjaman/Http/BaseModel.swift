@@ -33,6 +33,7 @@ class standeeModel: Codable {
     var angumedicalwise: String?
     var anaorderade: String?
     var variousing: [variousingModel]?
+    var veriid: [veriidModel]?
 }
 
 class variousingModel: Codable {
@@ -55,4 +56,10 @@ class misceeerModel: Codable {
     var morning: String?
     var butly: String?
     
+}
+
+class veriidModel: Codable {
+    var asform: String?
+    var dreamorium: String?
+    var wish: String?
 }
