@@ -17,6 +17,7 @@ class ProductViewController: BaseViewController {
     
     lazy var productView: ProductView = {
         let productView = ProductView(frame: .zero)
+        productView.backgroundColor = UIColor.init(hexString: "#ECEEF0")
         return productView
     }()
     
@@ -34,7 +35,6 @@ class ProductViewController: BaseViewController {
         super.viewDidLoad()
         
         view.addSubview(headView)
-        headView.nameLabel.text = LStr("Settings")
         headView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
         }
@@ -84,6 +84,9 @@ extension ProductViewController {
             let taxant = model.taxant ?? ""
             if ["0", "00"].contains(taxant) {
                 if let standeeModel = model.standee {
+                    if let republicanModel = standeeModel.republican {
+                        self.setupUI(with: republicanModel)
+                    }
                     self.productView.standeeModel = standeeModel
                 }
             }
@@ -95,6 +98,11 @@ extension ProductViewController {
                 self.productView.tableView.mj_header?.endRefreshing()
             }
         }
+    }
+    
+    private func setupUI(with model: republicanModel) {
+        self.headView.nameLabel.text = model.wideious ?? ""
+        self.clickBtn.setTitle(model.powerability ?? "", for: .normal)
     }
     
 }

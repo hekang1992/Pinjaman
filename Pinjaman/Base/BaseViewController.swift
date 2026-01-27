@@ -24,4 +24,9 @@ class BaseViewController: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.init(hexString: "#ECEEF0")
+    }
+    
 }
