@@ -34,6 +34,11 @@
 		739A921B2F27AE0F00D94E4A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A921A2F27AE0F00D94E4A /* BaseView.swift */; };
 		739A921D2F27AE8C00D94E4A /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A921C2F27AE8C00D94E4A /* ToastManager.swift */; };
 		739A921F2F27BD1D00D94E4A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A921E2F27BD1A00D94E4A /* LoginViewModel.swift */; };
+		73AD85102F29ADE800090E11 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD850F2F29ADE800090E11 /* PhotoViewController.swift */; };
+		73AD85122F29AE2800090E11 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD85112F29AE2800090E11 /* PersonalViewController.swift */; };
+		73AD85142F29AE3700090E11 /* PhonesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD85132F29AE3700090E11 /* PhonesViewController.swift */; };
+		73AD85162F29AE4900090E11 /* PaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD85152F29AE4900090E11 /* PaysViewController.swift */; };
+		73AD85182F29BEA700090E11 /* PhotoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD85172F29BEA700090E11 /* PhotoListView.swift */; };
 		73C501072F285A800093242A /* OneHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C501062F285A800093242A /* OneHomeView.swift */; };
 		73C501092F285A890093242A /* TwoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C501082F285A890093242A /* TwoHomeView.swift */; };
 		73C5010B2F2865870093242A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5010A2F2865840093242A /* HomeViewModel.swift */; };
@@ -88,6 +93,11 @@
 		739A921A2F27AE0F00D94E4A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		739A921C2F27AE8C00D94E4A /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		739A921E2F27BD1A00D94E4A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		73AD850F2F29ADE800090E11 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		73AD85112F29AE2800090E11 /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
+		73AD85132F29AE3700090E11 /* PhonesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonesViewController.swift; sourceTree = "<group>"; };
+		73AD85152F29AE4900090E11 /* PaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaysViewController.swift; sourceTree = "<group>"; };
+		73AD85172F29BEA700090E11 /* PhotoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListView.swift; sourceTree = "<group>"; };
 		73C501062F285A800093242A /* OneHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneHomeView.swift; sourceTree = "<group>"; };
 		73C501082F285A890093242A /* TwoHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoHomeView.swift; sourceTree = "<group>"; };
 		73C5010A2F2865840093242A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -236,10 +246,9 @@
 		73185B0F2F274569009C994E /* Product */ = {
 			isa = PBXGroup;
 			children = (
-				73F177262F2902F00066A6AE /* ProductView.swift */,
-				73F1772A2F2908ED0066A6AE /* ProductViewCell.swift */,
-				73F177282F2904FE0066A6AE /* ProductViewModel.swift */,
-				73F177242F28FE7E0066A6AE /* ProductViewController.swift */,
+				73AD850C2F29AC4400090E11 /* View */,
+				73AD850E2F29AC4F00090E11 /* Controller */,
+				73AD850D2F29AC4900090E11 /* ViewModel */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -267,6 +276,36 @@
 				73EB772B2F2896820058A81C /* AppHeadView.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		73AD850C2F29AC4400090E11 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				73F177262F2902F00066A6AE /* ProductView.swift */,
+				73F1772A2F2908ED0066A6AE /* ProductViewCell.swift */,
+				73AD85172F29BEA700090E11 /* PhotoListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		73AD850D2F29AC4900090E11 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				73F177282F2904FE0066A6AE /* ProductViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		73AD850E2F29AC4F00090E11 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				73F177242F28FE7E0066A6AE /* ProductViewController.swift */,
+				73AD850F2F29ADE800090E11 /* PhotoViewController.swift */,
+				73AD85112F29AE2800090E11 /* PersonalViewController.swift */,
+				73AD85132F29AE3700090E11 /* PhonesViewController.swift */,
+				73AD85152F29AE4900090E11 /* PaysViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		73EB772D2F2898260058A81C /* ViewModel */ = {
@@ -428,12 +467,15 @@
 				739A92122F27ABF500D94E4A /* LanguageType.swift in Sources */,
 				73EB77332F28A0520058A81C /* DeepLinkTarget.swift in Sources */,
 				739A92042F27A3CB00D94E4A /* StartViewModel.swift in Sources */,
+				73AD85102F29ADE800090E11 /* PhotoViewController.swift in Sources */,
+				73AD85122F29AE2800090E11 /* PersonalViewController.swift in Sources */,
 				73185B1A2F274617009C994E /* StartViewController.swift in Sources */,
 				73185B1C2F274DBF009C994E /* NetworkMonitor.swift in Sources */,
 				739A921D2F27AE8C00D94E4A /* ToastManager.swift in Sources */,
 				73EB772A2F2890F30058A81C /* CenterClickListView.swift in Sources */,
 				739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */,
 				73F1772B2F2908ED0066A6AE /* ProductViewCell.swift in Sources */,
+				73AD85142F29AE3700090E11 /* PhonesViewController.swift in Sources */,
 				73EB77262F2883C00058A81C /* CenterViewModel.swift in Sources */,
 				739A91FC2F27A04700D94E4A /* DeviceInspector.swift in Sources */,
 				739A920A2F27A78200D94E4A /* CenterViewController.swift in Sources */,
@@ -441,6 +483,7 @@
 				73F177232F28FC510066A6AE /* OrderEmptyView.swift in Sources */,
 				73C5010D2F286CD90093242A /* HomRateView.swift in Sources */,
 				739A92062F27A77000D94E4A /* HomeViewController.swift in Sources */,
+				73AD85162F29AE4900090E11 /* PaysViewController.swift in Sources */,
 				739A91FE2F27A0E800D94E4A /* SecurityVault.swift in Sources */,
 				739A92022F27A3AB00D94E4A /* LoadingView.swift in Sources */,
 				73185B182F2745FC009C994E /* BaseNavigationController.swift in Sources */,
@@ -456,6 +499,7 @@
 				739A921B2F27AE0F00D94E4A /* BaseView.swift in Sources */,
 				739A92192F27AE0200D94E4A /* LoginView.swift in Sources */,
 				739A920C2F27AA7800D94E4A /* UserManager.swift in Sources */,
+				73AD85182F29BEA700090E11 /* PhotoListView.swift in Sources */,
 				73F177212F28F98D0066A6AE /* OrderViewModel.swift in Sources */,
 				73C5010F2F287E8B0093242A /* MeCenterView.swift in Sources */,
 				73EB77372F28B5070058A81C /* AccountDeleteView.swift in Sources */,

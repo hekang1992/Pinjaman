@@ -17,6 +17,8 @@ class ProductView: UIView {
         }
     }
     
+    var cellBlock: ((mnesteryModel) -> Void)?
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.separatorStyle = .none
@@ -172,6 +174,12 @@ extension ProductView: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductViewCell", for: indexPath) as! ProductViewCell
         cell.model = model
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let model = standeeModel?.mnestery?[indexPath.row] {
+            self.cellBlock?(model)
+        }
     }
     
 }

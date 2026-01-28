@@ -8,12 +8,16 @@
 import UIKit
 import SnapKit
 import MJRefresh
+import RxSwift
+import RxCocoa
 
 class ProductViewController: BaseViewController {
     
     var productID: String = ""
     
     private let viewModel = ProductViewModel()
+    
+    var model: BaseModel?
     
     lazy var productView: ProductView = {
         let productView = ProductView(frame: .zero)
@@ -57,6 +61,29 @@ class ProductViewController: BaseViewController {
             make.bottom.equalTo(clickBtn.snp.top).offset(-15.pix())
         }
         
+        productView.cellBlock = { [weak self] model in
+            guard let self = self else { return }
+            let nascorium = model.nascorium ?? ""
+            if nascorium == "1" {
+                self.clickModelToPage(with: model, productID: productID)
+            }else {
+                if let clickModel = self.model?.standee?.annsureist {
+                    self.clickModelToPage(with: clickModel, productID: productID)
+                }
+            }
+        }
+        
+        clickBtn.rx.tap
+            .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self,
+                      let model = model,
+                      let clickModel = model.standee?.annsureist
+                else { return }
+                self.clickModelToPage(with: clickModel, productID: productID)
+            })
+            .disposed(by: disposeBag)
+        
         productView.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             guard let self = self else { return }
             Task {
@@ -83,6 +110,7 @@ extension ProductViewController {
             let model = try await viewModel.productInfo(with: parameters)
             let taxant = model.taxant ?? ""
             if ["0", "00"].contains(taxant) {
+                self.model = model
                 if let standeeModel = model.standee {
                     if let republicanModel = standeeModel.republican {
                         self.setupUI(with: republicanModel)

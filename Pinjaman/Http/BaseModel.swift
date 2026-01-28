@@ -38,6 +38,19 @@ class standeeModel: Codable {
     var mnestery: [mnesteryModel]?
     var annsureist: mnesteryModel?
     var republican: republicanModel?
+    var olivory: olivoryModel?
+    var lovefaction: olivoryModel?
+}
+
+class olivoryModel: Codable {
+    var howeveracy: String?
+    var tedi: tediModel?
+}
+
+class tediModel: Codable {
+    var tomoeconomyet: String?
+    var neverful: String?
+    var pentecostate: String?
 }
 
 class variousingModel: Codable {

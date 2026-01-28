@@ -1,0 +1,33 @@
+//
+//  PersonalViewController.swift
+//  Pinjaman
+//
+//  Created by hekang on 2026/1/28.
+//
+
+import UIKit
+
+class PersonalViewController: UIViewController {
+    
+    var productID: String = ""
+    
+    var mnesteryModel: mnesteryModel?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

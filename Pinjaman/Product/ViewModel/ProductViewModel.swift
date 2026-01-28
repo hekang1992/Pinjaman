@@ -26,6 +26,25 @@ class ProductViewModel {
         } catch {
             throw error
         }
+    }
+    
+    func photoInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/courseesque", method: .get, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
         
     }
+    
 }
