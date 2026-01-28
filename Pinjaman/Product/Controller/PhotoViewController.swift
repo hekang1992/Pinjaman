@@ -7,6 +7,10 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import BRPickerView
+import TYAlertController
 
 class PhotoViewController: BaseViewController {
     
@@ -17,6 +21,8 @@ class PhotoViewController: BaseViewController {
     var model: BaseModel?
     
     private let viewModel = ProductViewModel()
+    
+    private let cameraManager = CameraManager()
     
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
@@ -120,12 +126,96 @@ class PhotoViewController: BaseViewController {
             make.bottom.equalToSuperview().offset(-30.pix())
         }
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        oneListView.tapClickBlock = { [weak self] in
+            guard let self = self, let model = model else { return }
+            self.judgePhotoOrFaceInfo(with: model, type: "0")
+        }
+        
+        twoListView.tapClickBlock = { [weak self] in
+            guard let self = self, let model = model else { return }
+            self.judgePhotoOrFaceInfo(with: model, type: "0")
+        }
+        
+        clickBtn.rx.tap
+            .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self, let model = model else { return }
+                self.judgePhotoOrFaceInfo(with: model, type: "1")
+            })
+            .disposed(by: disposeBag)
+        
         Task {
             await self.photoInfo()
+        }
+        
+    }
+    
+}
+
+extension PhotoViewController {
+    
+    private func judgePhotoOrFaceInfo(with model: BaseModel, type: String) {
+        let idUrl = model.standee?.olivory?.howeveracy ?? ""
+        let faceUrl = model.standee?.lovefaction?.howeveracy ?? ""
+        if idUrl.isEmpty {
+            self.popAuthPageView()
+            return
+        }
+        if faceUrl.isEmpty {
+            self.popFacePageView()
+            return
+        }
+    }
+    
+    private func popAuthPageView() {
+        let popView = PopAlertPhotoView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
+        popView.bgImageView.image = languageCode == .indonesian ? UIImage(named: "alert_de_ph_id_image") : UIImage(named: "alert_de_ph_en_image")
+        self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+        
+        popView.sureBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true) { [weak self] in
+                guard let self = self else { return }
+                cameraManager.presentCamera(from: self, device: .rear)
+                cameraManager.onImageCaptured = { [weak self] data in
+                    guard let imageData = data else { return }
+                    Task {
+                        await self?.uploadImageInfo(with: imageData, type: "11")
+                    }
+                }
+            }
+        }
+    }
+    
+    private func popFacePageView() {
+        let popView = PopAlertPhotoView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
+        popView.bgImageView.image = languageCode == .indonesian ? UIImage(named: "alert_de_face_id_image") : UIImage(named: "alert_de_face_en_image")
+        self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+        
+        popView.sureBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true) { [weak self] in
+                guard let self = self else { return }
+                cameraManager.presentCamera(from: self, device: .front)
+                cameraManager.onImageCaptured = { [weak self] data in
+                    guard let imageData = data else { return }
+                    Task {
+                        await self?.uploadImageInfo(with: imageData, type: "10")
+                    }
+                }
+            }
         }
     }
     
@@ -145,6 +235,123 @@ extension PhotoViewController {
         } catch {
             
         }
+    }
+    
+    private func uploadImageInfo(with data: Data, type: String) async {
+        do {
+            let parameters = ["histrieastlike": type,
+                              "activityaneity": "2",
+                              "curvier": "",
+                              "studentic": "1",
+                              "pictoly": UserManager.shared.getPhone() ?? ""]
+            let multipartData = ["experiblackair": data]
+            let model = try await viewModel.uploadImageInfo(with: parameters, multipartData: multipartData)
+            let taxant = model.taxant ?? ""
+            if ["0", "00"].contains(taxant) {
+                /// PHOTO
+                if type == "11" {
+                    if let standeeModel = model.standee {
+                        self.sheetView(with: standeeModel)
+                    }
+                }else {
+                    /// FACE
+                    
+                }
+            }else {
+                ToastManager.showLocal(model.troubleably ?? "")
+            }
+        } catch {
+            
+        }
+    }
+    
+    private func sheetView(with model: standeeModel) {
+        let popView = SavePhotoMessageView(frame: self.view.bounds)
+        popView.model = model
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .actionSheet)
+        self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+        
+        popView.timeBlock = { [weak self] tx in
+            guard let self = self else { return }
+            self.tapTimeClick(dateTx: tx)
+        }
+        
+        popView.saveBlock = { [weak self] in
+            guard let self = self else { return }
+        }
+        
+    }
+    
+}
+
+extension PhotoViewController {
+    
+    private func tapTimeClick(dateTx: UITextField) {
+        let currentTime = dateTx.text ?? ""
+        let selectedDate = parseDate(from: currentTime)
+        showDatePicker(for: dateTx, with: selectedDate)
+    }
+    
+    private func showDatePicker(for dateTx: UITextField, with selectedDate: Date) {
+        let datePickerView = createDatePickerView()
+        datePickerView.selectDate = selectedDate
+        datePickerView.pickerStyle = createPickerStyle()
+        
+        datePickerView.resultBlock = { [weak self] selectedDate, _ in
+            self?.updateTime(dateTx: dateTx, with: selectedDate)
+        }
+        
+        datePickerView.show()
+    }
+    
+    private func createDatePickerView() -> BRDatePickerView {
+        let pickerView = BRDatePickerView()
+        pickerView.pickerMode = .YMD
+        pickerView.title = languageCode == .indonesian ? "Pemilihan tanggal" : "Date selection"
+        return pickerView
+    }
+    
+    private func parseDate(from timeString: String?) -> Date {
+        guard let timeString = timeString, !timeString.isEmpty else {
+            return defaultDate()
+        }
+        
+        return parseDateString(timeString) ?? defaultDate()
+    }
+    
+    private func parseDateString(_ dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.date(from: dateString)
+    }
+    
+    private func defaultDate() -> Date {
+        return parseDateString("30/12/1992") ?? Date()
+    }
+    
+    private func createPickerStyle() -> BRPickerStyle {
+        let style = BRPickerStyle()
+        style.rowHeight = 45
+        style.language = "en"
+        style.doneBtnTitle = languageCode == .indonesian ? "OKE" : "OK"
+        style.cancelBtnTitle = languageCode == .indonesian ? "Batal" : "Cancel"
+        style.doneTextColor = UIColor(hexString: "#333333")
+        style.selectRowTextColor = UIColor(hexString: "#333333")
+        style.pickerTextFont = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
+        style.selectRowTextFont = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
+        return style
+    }
+    
+    private func updateTime(dateTx: UITextField, with date: Date?) {
+        guard let date = date else { return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateTx.text = dateFormatter.string(from: date)
     }
     
 }

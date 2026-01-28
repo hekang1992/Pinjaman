@@ -42,5 +42,10 @@
 "Next" = "Berikutnya";
 "ID card front photo" = "Tampilan depan KTP";
 "Face recognition" = "Pengenalan wajah";
-"Upload" = "Upload";
-"Finish" = "Finish";
+"Upload" = "Mengunggah";
+"Finish" = "Menyelesaikan";
+"Identity information" = "Informasi identitas";
+"Real name" = "Nama Sesuai KTP";
+"ID Number" = "Nomor KTP";
+"Birthday" = "Ulang Tahun";
+"Confirm" = "Mengonfirmasi";

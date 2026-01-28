@@ -40,6 +40,9 @@ class standeeModel: Codable {
     var republican: republicanModel?
     var olivory: olivoryModel?
     var lovefaction: olivoryModel?
+    var pentecostate: String?
+    var neverful: String?
+    var tomoeconomyet: String?
 }
 
 class olivoryModel: Codable {

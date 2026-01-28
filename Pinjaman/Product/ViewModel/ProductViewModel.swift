@@ -47,4 +47,23 @@ class ProductViewModel {
         
     }
     
+    func uploadImageInfo(with parameters: [String: String], multipartData: [String: Data]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/bedose", method: .post, parameters: parameters, multipartData: multipartData)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
 }

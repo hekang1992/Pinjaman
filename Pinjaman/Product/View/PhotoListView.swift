@@ -7,8 +7,12 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class PhotoListView: BaseView {
+    
+    var tapClickBlock: (() -> Void)?
     
     lazy var descLabel: UILabel = {
         let descLabel = UILabel()
@@ -43,6 +47,11 @@ class PhotoListView: BaseView {
         nameLabel.layer.masksToBounds = true
         return nameLabel
     }()
+    
+    lazy var clickBtn: UIButton = {
+        let clickBtn = UIButton(type: .custom)
+        return clickBtn
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,6 +59,7 @@ class PhotoListView: BaseView {
         addSubview(bgView)
         bgView.addSubview(bgImageView)
         bgImageView.addSubview(nameLabel)
+        addSubview(clickBtn)
         descLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
@@ -74,6 +84,17 @@ class PhotoListView: BaseView {
                 make.size.equalTo(CGSize(width: 106, height: 30))
             }
         }
+        clickBtn.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        clickBtn.rx.tap
+            .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.tapClickBlock?()
+            })
+            .disposed(by: disposeBag)
+        
     }
     
     required init?(coder: NSCoder) {

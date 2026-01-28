@@ -39,6 +39,9 @@
 		73AD85142F29AE3700090E11 /* PhonesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD85132F29AE3700090E11 /* PhonesViewController.swift */; };
 		73AD85162F29AE4900090E11 /* PaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD85152F29AE4900090E11 /* PaysViewController.swift */; };
 		73AD85182F29BEA700090E11 /* PhotoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD85172F29BEA700090E11 /* PhotoListView.swift */; };
+		73AD851A2F29D17E00090E11 /* PopAlertPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD85192F29D17E00090E11 /* PopAlertPhotoView.swift */; };
+		73AD851C2F29D52400090E11 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD851B2F29D52400090E11 /* CameraManager.swift */; };
+		73AD851F2F29DA4000090E11 /* SavePhotoMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD851E2F29DA4000090E11 /* SavePhotoMessageView.swift */; };
 		73C501072F285A800093242A /* OneHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C501062F285A800093242A /* OneHomeView.swift */; };
 		73C501092F285A890093242A /* TwoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C501082F285A890093242A /* TwoHomeView.swift */; };
 		73C5010B2F2865870093242A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5010A2F2865840093242A /* HomeViewModel.swift */; };
@@ -98,6 +101,10 @@
 		73AD85132F29AE3700090E11 /* PhonesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonesViewController.swift; sourceTree = "<group>"; };
 		73AD85152F29AE4900090E11 /* PaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaysViewController.swift; sourceTree = "<group>"; };
 		73AD85172F29BEA700090E11 /* PhotoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListView.swift; sourceTree = "<group>"; };
+		73AD85192F29D17E00090E11 /* PopAlertPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAlertPhotoView.swift; sourceTree = "<group>"; };
+		73AD851B2F29D52400090E11 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		73AD851D2F29D65C00090E11 /* Pinjaman.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pinjaman.entitlements; sourceTree = "<group>"; };
+		73AD851E2F29DA4000090E11 /* SavePhotoMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePhotoMessageView.swift; sourceTree = "<group>"; };
 		73C501062F285A800093242A /* OneHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneHomeView.swift; sourceTree = "<group>"; };
 		73C501082F285A890093242A /* TwoHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoHomeView.swift; sourceTree = "<group>"; };
 		73C5010A2F2865840093242A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -170,6 +177,7 @@
 		73185B022F2744C8009C994E /* Pinjaman */ = {
 			isa = PBXGroup;
 			children = (
+				73AD851D2F29D65C00090E11 /* Pinjaman.entitlements */,
 				73185AFB2F2744C8009C994E /* Info.plist */,
 				73185AFA2F2744C8009C994E /* Assets.xcassets */,
 				73185AF92F2744C8009C994E /* AppDelegate.swift */,
@@ -284,6 +292,8 @@
 				73F177262F2902F00066A6AE /* ProductView.swift */,
 				73F1772A2F2908ED0066A6AE /* ProductViewCell.swift */,
 				73AD85172F29BEA700090E11 /* PhotoListView.swift */,
+				73AD85192F29D17E00090E11 /* PopAlertPhotoView.swift */,
+				73AD851E2F29DA4000090E11 /* SavePhotoMessageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,6 +301,7 @@
 		73AD850D2F29AC4900090E11 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				73AD851B2F29D52400090E11 /* CameraManager.swift */,
 				73F177282F2904FE0066A6AE /* ProductViewModel.swift */,
 			);
 			path = ViewModel;
@@ -438,13 +449,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pinjaman/Pods-Pinjaman-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pinjaman/Pods-Pinjaman-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -464,6 +471,7 @@
 				739A921F2F27BD1D00D94E4A /* LoginViewModel.swift in Sources */,
 				739A92102F27AAD600D94E4A /* LoginViewController.swift in Sources */,
 				73EB77312F2898790058A81C /* SettingsViewController.swift in Sources */,
+				73AD851F2F29DA4000090E11 /* SavePhotoMessageView.swift in Sources */,
 				739A92122F27ABF500D94E4A /* LanguageType.swift in Sources */,
 				73EB77332F28A0520058A81C /* DeepLinkTarget.swift in Sources */,
 				739A92042F27A3CB00D94E4A /* StartViewModel.swift in Sources */,
@@ -473,6 +481,7 @@
 				73185B1C2F274DBF009C994E /* NetworkMonitor.swift in Sources */,
 				739A921D2F27AE8C00D94E4A /* ToastManager.swift in Sources */,
 				73EB772A2F2890F30058A81C /* CenterClickListView.swift in Sources */,
+				73AD851A2F29D17E00090E11 /* PopAlertPhotoView.swift in Sources */,
 				739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */,
 				73F1772B2F2908ED0066A6AE /* ProductViewCell.swift in Sources */,
 				73AD85142F29AE3700090E11 /* PhonesViewController.swift in Sources */,
@@ -486,6 +495,7 @@
 				73AD85162F29AE4900090E11 /* PaysViewController.swift in Sources */,
 				739A91FE2F27A0E800D94E4A /* SecurityVault.swift in Sources */,
 				739A92022F27A3AB00D94E4A /* LoadingView.swift in Sources */,
+				73AD851C2F29D52400090E11 /* CameraManager.swift in Sources */,
 				73185B182F2745FC009C994E /* BaseNavigationController.swift in Sources */,
 				739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */,
 				739A92002F27A10800D94E4A /* DeviceProfile.swift in Sources */,
@@ -538,6 +548,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Pinjaman/Pinjaman.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 57MBH2272N;
@@ -577,6 +588,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Pinjaman/Pinjaman.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 57MBH2272N;

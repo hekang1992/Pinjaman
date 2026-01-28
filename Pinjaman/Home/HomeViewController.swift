@@ -29,6 +29,14 @@ class HomeViewController: BaseViewController {
         
         oneView.applyBlock = { [weak self] model in
             guard let self = self else { return }
+            if !UserManager.shared.isLogin {
+                let loginVc = BaseNavigationController(
+                    rootViewController: LoginViewController()
+                )
+                loginVc.modalPresentationStyle = .fullScreen
+                self.present(loginVc, animated: true)
+                return
+            }
             let productID = String(model.allosion ?? 0)
             Task {
                 await self.clickProductInfo(with: productID)
