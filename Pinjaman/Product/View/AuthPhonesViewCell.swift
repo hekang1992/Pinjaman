@@ -29,6 +29,11 @@ class AuthPhonesViewCell: UITableViewCell {
                     oneFiled.text = model.tomoeconomyet ?? ""
                 }
             }
+            
+            let novendecevidenceeer = model.novendecevidenceeer ?? ""
+            let tomoeconomyet = model.tomoeconomyet ?? ""
+            twoFiled.text = novendecevidenceeer.isEmpty ? "" : "\(tomoeconomyet): \(novendecevidenceeer)"
+            
         }
     }
     
@@ -120,7 +125,7 @@ class AuthPhonesViewCell: UITableViewCell {
         let ctBtn = UIButton(type: .custom)
         return ctBtn
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear

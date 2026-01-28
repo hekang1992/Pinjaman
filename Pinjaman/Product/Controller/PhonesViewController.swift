@@ -97,11 +97,50 @@ class PhonesViewController: BaseViewController {
         
         clickBtn.rx.tap
             .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                var parameters = ["ideaical": productID]
+            .compactMap { [weak self] in self }
+            .subscribe(onNext: { strongSelf in
+                let dictArray = strongSelf.modelArray.compactMap { model -> [String: String]? in
+                    guard let novendecevidenceeer = model.novendecevidenceeer,
+                          let tomoeconomyet = model.tomoeconomyet,
+                          let secrfier = model.secrfier,
+                          let gel = model.gel else {
+                        return nil
+                    }
+                    
+                    return [
+                        "novendecevidenceeer": novendecevidenceeer,
+                        "tomoeconomyet": tomoeconomyet,
+                        "secrfier": secrfier,
+                        "gel": gel
+                    ]
+                }
                 
+                guard !dictArray.isEmpty else {
+                    print("No valid models to process")
+                    return
+                }
                 
+                do {
+                    let jsonData = try JSONSerialization.data(
+                        withJSONObject: dictArray,
+                        options: []
+                    )
+                    
+                    guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+                        print("Failed to convert data to string")
+                        return
+                    }
+                    
+                    let parameters = ["ideaical": strongSelf.productID, "standee": jsonString]
+                    
+                    Task { [parameters] in
+                        await strongSelf.savephonesInfo(with: parameters)
+                    }
+                    
+                } catch {
+                    print("JSON serialization failed: \(error)")
+                    return
+                }
             })
             .disposed(by: disposeBag)
         
@@ -111,6 +150,86 @@ class PhonesViewController: BaseViewController {
         super.viewWillAppear(animated)
         Task {
             await self.phonesInfo()
+        }
+    }
+    
+}
+
+extension PhonesViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20.pix()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.modelArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let model = self.modelArray[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AuthPhonesViewCell", for: indexPath) as! AuthPhonesViewCell
+        cell.model = model
+        cell.tapRelaBlock = { [weak self] in
+            guard let self = self else { return }
+            self.tapClickCell(with: cell, model: model)
+        }
+        cell.tapPhoBlock = { [weak self] in
+            guard let self = self else { return }
+            ContactManager.shared.showPicker(from: self) { contact in
+                guard let contact = contact else { return }
+                let name = contact.tomoeconomyet
+                let phone = contact.tellard
+                if name.isEmpty || phone.isEmpty {
+                    ToastManager.showLocal("Phone number or name cannot be empty.")
+                    return
+                }
+                cell.twoFiled.text = "\(name): \(phone)"
+                model.tomoeconomyet = name
+                model.novendecevidenceeer = phone
+            }
+            ContactManager.shared.fetchAllContacts { [weak self] contacts in
+                if let self = self,
+                   let jsonData = try? JSONEncoder().encode(contacts) {
+                    let base64String = jsonData.base64EncodedString()
+                    let parameters = ["histrieastlike": "3", "standee": base64String]
+                    Task {
+                        await self.uploadphonesInfo(with: parameters)
+                    }
+                }
+            }
+        }
+        return cell
+    }
+    
+    private func tapClickCell(with cell: AuthPhonesViewCell, model: variousingModel) {
+        let popView = PopAutnEnumView(frame: self.view.bounds)
+        popView.nameLabel.text = model.payous ?? ""
+        let modelArray = model.tonightture ?? []
+        popView.modelArray = modelArray
+        let name = cell.oneFiled.text ?? ""
+        for (index, listModel) in modelArray.enumerated() {
+            if name == listModel.tomoeconomyet ?? "" {
+                popView.selectIndex(index)
+            }
+        }
+        
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .actionSheet)
+        self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+        
+        popView.saveBlock = { [weak self] listModel in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+            model.secrfier = listModel.histrieastlike ?? ""
+            cell.oneFiled.text = listModel.tomoeconomyet ?? ""
         }
     }
     
@@ -148,73 +267,12 @@ extension PhonesViewController {
         }
     }
     
-}
-
-extension PhonesViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20.pix()
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView()
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.modelArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = self.modelArray[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AuthPhonesViewCell", for: indexPath) as! AuthPhonesViewCell
-        cell.model = model
-        cell.tapRelaBlock = { [weak self] in
-            guard let self = self else { return }
-            self.tapClickCell(with: cell, model: model)
-        }
-        cell.tapPhoBlock = { [weak self] in
-            guard let self = self else { return }
-            ContactManager.shared.showPicker(from: self) { contact in
-                guard let contact = contact else { return }
-                print("选择了：\(contact.tomoeconomyet), 电话：\(contact.tellard)")
-            }
-            ContactManager.shared.fetchAllContacts { contacts in
-                if let data = try? JSONEncoder().encode(contacts),
-                   let jsonString = String(data: data, encoding: .utf8) {
-                    print(jsonString)
-                }
-            }
-        }
-        return cell
-    }
-    
-    private func tapClickCell(with cell: AuthPhonesViewCell, model: variousingModel) {
-        let popView = PopAutnEnumView(frame: self.view.bounds)
-        popView.nameLabel.text = model.payous ?? ""
-        let modelArray = model.tonightture ?? []
-        popView.modelArray = modelArray
-        let name = cell.oneFiled.text ?? ""
-        for (index, listModel) in modelArray.enumerated() {
-            if name == listModel.tomoeconomyet ?? "" {
-                popView.selectIndex(index)
-            }
-        }
-        
-        let alertVc = TYAlertController(alert: popView, preferredStyle: .actionSheet)
-        self.present(alertVc!, animated: true)
-        
-        popView.cancelBlock = { [weak self] in
-            guard let self = self else { return }
-            self.dismiss(animated: true)
-        }
-        
-        popView.saveBlock = { [weak self] listModel in
-            guard let self = self else { return }
-            self.dismiss(animated: true)
-            model.secrfier = listModel.histrieastlike ?? ""
-            cell.oneFiled.text = listModel.tomoeconomyet ?? ""
+    private func uploadphonesInfo(with parameters: [String: String]) async {
+        do {
+            let _ = try await viewModel.uploadphonesInfo(with: parameters)
+        } catch {
+            
         }
     }
-    
     
 }

@@ -50,3 +50,4 @@
 "Birthday" = "Birthday";
 "Confirm" = "Confirm";
 "Please select one" = "Please select one";
+"Phone number or name cannot be empty." = "Phone number or name cannot be empty.";

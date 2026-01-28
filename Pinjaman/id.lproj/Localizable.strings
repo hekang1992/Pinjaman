@@ -50,3 +50,4 @@
 "Birthday" = "Ulang Tahun";
 "Confirm" = "Mengonfirmasi";
 "Please select one" = "Silakan pilih salah satu";
+"Phone number or name cannot be empty." = "Nomor telepon atau nama tidak boleh kosong.";

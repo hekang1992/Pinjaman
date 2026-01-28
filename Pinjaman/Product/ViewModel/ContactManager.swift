@@ -38,7 +38,7 @@ class ContactManager: NSObject {
                 
                 do {
                     try self.contactStore.enumerateContacts(with: request) { (contact, stop) in
-                        let name = "\(contact.givenName)-\(contact.familyName)".trimmingCharacters(in: .whitespaces)
+                        let name = "\(contact.givenName) \(contact.familyName)".trimmingCharacters(in: .whitespaces)
 
                         let phones = contact.phoneNumbers.map { $0.value.stringValue }.joined(separator: ",")
                         
@@ -142,7 +142,7 @@ class ContactManager: NSObject {
 
 extension ContactManager: CNContactPickerDelegate {
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
-        let name = "\(contact.givenName)-\(contact.familyName)".trimmingCharacters(in: .whitespaces)
+        let name = "\(contact.givenName) \(contact.familyName)".trimmingCharacters(in: .whitespaces)
         
         let phoneNumber = contact.phoneNumbers.first?.value.stringValue ?? ""
         
