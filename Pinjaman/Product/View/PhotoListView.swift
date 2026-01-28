@@ -36,6 +36,13 @@ class PhotoListView: BaseView {
         return bgView
     }()
     
+    lazy var peopleImageView: UIImageView = {
+        let peopleImageView = UIImageView()
+        peopleImageView.layer.contents = 16
+        peopleImageView.layer.masksToBounds = true
+        return peopleImageView
+    }()
+    
     lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.textAlignment = .center
@@ -60,6 +67,7 @@ class PhotoListView: BaseView {
         bgView.addSubview(bgImageView)
         bgImageView.addSubview(nameLabel)
         addSubview(clickBtn)
+        bgImageView.addSubview(peopleImageView)
         descLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
@@ -75,6 +83,11 @@ class PhotoListView: BaseView {
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 332.pix(), height: 170.pix()))
+        }
+        peopleImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.left.equalToSuperview().offset(20)
+            make.size.equalTo(CGSize(width: 163.pix(), height: 97.pix()))
         }
         nameLabel.snp.makeConstraints { make in
             make.right.bottom.equalToSuperview().inset(16.pix())

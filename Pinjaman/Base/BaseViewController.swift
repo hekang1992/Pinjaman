@@ -46,32 +46,52 @@ extension BaseViewController {
         }
     }
     
-    func clickModelToPage(with model: mnesteryModel, productID: String) {
+    func productdetilInfo(with productID: String, viewModel: ProductViewModel) async {
+        let parameters = ["ideaical": productID]
+        do {
+            let model = try await viewModel.productInfo(with: parameters)
+            let taxant = model.taxant ?? ""
+            if ["0", "00"].contains(taxant) {
+                if let mnesteryModel = model.standee?.annsureist, let republicanModel = model.standee?.republican {
+                    self.clickModelToPage(with: mnesteryModel,
+                                          republicanModel: republicanModel,
+                                          productID: productID)
+                }
+            }
+        } catch {
+            
+        }
+    }
+    
+    func clickModelToPage(with model: mnesteryModel, republicanModel: republicanModel, productID: String) {
         let type = model.gymnhelparian ?? ""
-        ToastManager.showLocal(type)
         switch type {
         case "seraneous":
             let photoVc = PhotoViewController()
             photoVc.mnesteryModel = model
             photoVc.productID = productID
+            photoVc.republicanModel = republicanModel
             self.navigationController?.pushViewController(photoVc, animated: true)
             
         case "volitosity":
             let personalVc = PersonalViewController()
             personalVc.mnesteryModel = model
             personalVc.productID = productID
+            personalVc.republicanModel = republicanModel
             self.navigationController?.pushViewController(personalVc, animated: true)
             
         case "vagauthorityier":
             let phonesVc = PhonesViewController()
             phonesVc.mnesteryModel = model
             phonesVc.productID = productID
+            phonesVc.republicanModel = republicanModel
             self.navigationController?.pushViewController(phonesVc, animated: true)
             
         case "philefeelition":
             let paysVc = PaysViewController()
             paysVc.mnesteryModel = model
             paysVc.productID = productID
+            paysVc.republicanModel = republicanModel
             self.navigationController?.pushViewController(paysVc, animated: true)
             
         case "":

@@ -42,6 +42,8 @@
 		73AD851A2F29D17E00090E11 /* PopAlertPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD85192F29D17E00090E11 /* PopAlertPhotoView.swift */; };
 		73AD851C2F29D52400090E11 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD851B2F29D52400090E11 /* CameraManager.swift */; };
 		73AD851F2F29DA4000090E11 /* SavePhotoMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD851E2F29DA4000090E11 /* SavePhotoMessageView.swift */; };
+		73AD85212F29F1DD00090E11 /* OvaViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD85202F29F1DD00090E11 /* OvaViewCell.swift */; };
+		73AD85232F29F1E700090E11 /* CpoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD85222F29F1E700090E11 /* CpoViewCell.swift */; };
 		73C501072F285A800093242A /* OneHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C501062F285A800093242A /* OneHomeView.swift */; };
 		73C501092F285A890093242A /* TwoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C501082F285A890093242A /* TwoHomeView.swift */; };
 		73C5010B2F2865870093242A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5010A2F2865840093242A /* HomeViewModel.swift */; };
@@ -105,6 +107,8 @@
 		73AD851B2F29D52400090E11 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		73AD851D2F29D65C00090E11 /* Pinjaman.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pinjaman.entitlements; sourceTree = "<group>"; };
 		73AD851E2F29DA4000090E11 /* SavePhotoMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePhotoMessageView.swift; sourceTree = "<group>"; };
+		73AD85202F29F1DD00090E11 /* OvaViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvaViewCell.swift; sourceTree = "<group>"; };
+		73AD85222F29F1E700090E11 /* CpoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpoViewCell.swift; sourceTree = "<group>"; };
 		73C501062F285A800093242A /* OneHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneHomeView.swift; sourceTree = "<group>"; };
 		73C501082F285A890093242A /* TwoHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoHomeView.swift; sourceTree = "<group>"; };
 		73C5010A2F2865840093242A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -294,6 +298,8 @@
 				73AD85172F29BEA700090E11 /* PhotoListView.swift */,
 				73AD85192F29D17E00090E11 /* PopAlertPhotoView.swift */,
 				73AD851E2F29DA4000090E11 /* SavePhotoMessageView.swift */,
+				73AD85202F29F1DD00090E11 /* OvaViewCell.swift */,
+				73AD85222F29F1E700090E11 /* CpoViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -449,9 +455,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pinjaman/Pods-Pinjaman-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pinjaman/Pods-Pinjaman-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -478,9 +488,11 @@
 				73AD85102F29ADE800090E11 /* PhotoViewController.swift in Sources */,
 				73AD85122F29AE2800090E11 /* PersonalViewController.swift in Sources */,
 				73185B1A2F274617009C994E /* StartViewController.swift in Sources */,
+				73AD85212F29F1DD00090E11 /* OvaViewCell.swift in Sources */,
 				73185B1C2F274DBF009C994E /* NetworkMonitor.swift in Sources */,
 				739A921D2F27AE8C00D94E4A /* ToastManager.swift in Sources */,
 				73EB772A2F2890F30058A81C /* CenterClickListView.swift in Sources */,
+				73AD85232F29F1E700090E11 /* CpoViewCell.swift in Sources */,
 				73AD851A2F29D17E00090E11 /* PopAlertPhotoView.swift in Sources */,
 				739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */,
 				73F1772B2F2908ED0066A6AE /* ProductViewCell.swift in Sources */,

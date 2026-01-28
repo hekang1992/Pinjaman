@@ -65,10 +65,17 @@ class ProductViewController: BaseViewController {
             guard let self = self else { return }
             let nascorium = model.nascorium ?? ""
             if nascorium == "1" {
-                self.clickModelToPage(with: model, productID: productID)
+                if let republicanModel = self.model?.standee?.republican {
+                    self.clickModelToPage(with: model,
+                                          republicanModel: republicanModel,
+                                          productID: productID)
+                }
+                
             }else {
-                if let clickModel = self.model?.standee?.annsureist {
-                    self.clickModelToPage(with: clickModel, productID: productID)
+                if let clickModel = self.model?.standee?.annsureist, let republicanModel = self.model?.standee?.republican {
+                    self.clickModelToPage(with: clickModel,
+                                          republicanModel: republicanModel,
+                                          productID: productID)
                 }
             }
         }
@@ -78,16 +85,19 @@ class ProductViewController: BaseViewController {
             .subscribe(onNext: { [weak self] in
                 guard let self = self,
                       let model = model,
-                      let clickModel = model.standee?.annsureist
+                      let clickModel = model.standee?.annsureist,
+                      let republicanModel = model.standee?.republican
                 else { return }
-                self.clickModelToPage(with: clickModel, productID: productID)
+                self.clickModelToPage(with: clickModel,
+                                      republicanModel: republicanModel,
+                                      productID: productID)
             })
             .disposed(by: disposeBag)
         
         productView.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             guard let self = self else { return }
             Task {
-                await self.productdetilInfo()
+                await self.productPagedetilInfo()
             }
         })
         
@@ -96,7 +106,7 @@ class ProductViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Task {
-            await self.productdetilInfo()
+            await self.productPagedetilInfo()
         }
     }
     
@@ -104,7 +114,7 @@ class ProductViewController: BaseViewController {
 
 extension ProductViewController {
     
-    private func productdetilInfo() async {
+    private func productPagedetilInfo() async {
         let parameters = ["ideaical": productID]
         do {
             let model = try await viewModel.productInfo(with: parameters)

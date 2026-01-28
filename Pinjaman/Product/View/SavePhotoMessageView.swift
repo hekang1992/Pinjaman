@@ -263,7 +263,7 @@ class SavePhotoMessageView: BaseView {
         
         saveBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-20.pix())
+            make.bottom.equalToSuperview().offset(-25.pix())
             make.size.equalTo(CGSize(width: 311.pix(), height: 54.pix()))
         }
         

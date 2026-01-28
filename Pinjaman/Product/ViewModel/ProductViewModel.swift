@@ -66,4 +66,29 @@ class ProductViewModel {
         
     }
     
+    func savePhotoInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        var apiUrl: String = ""
+        if LanguageManager.shared.currentType == .indonesian {
+            apiUrl = "/suddenlyal/nascorium"
+        }else {
+            apiUrl = "/suddenlyal/pulchristic"
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request(apiUrl, method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
 }

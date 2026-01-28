@@ -12,6 +12,8 @@ class PhonesViewController: UIViewController {
     var productID: String = ""
     
     var mnesteryModel: mnesteryModel?
+    
+    var republicanModel: republicanModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()

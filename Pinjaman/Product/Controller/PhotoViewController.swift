@@ -9,12 +9,15 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 import BRPickerView
 import TYAlertController
 
 class PhotoViewController: BaseViewController {
     
     var productID: String = ""
+    
+    var republicanModel: republicanModel?
     
     var mnesteryModel: mnesteryModel?
     
@@ -52,12 +55,14 @@ class PhotoViewController: BaseViewController {
     lazy var oneListView: PhotoListView = {
         let oneListView = PhotoListView()
         oneListView.descLabel.text = LStr("ID card front photo")
+        oneListView.peopleImageView.image = UIImage(named: "pho_place_image")
         return oneListView
     }()
     
     lazy var twoListView: PhotoListView = {
         let twoListView = PhotoListView()
         twoListView.descLabel.text = LStr("Face recognition")
+        twoListView.peopleImageView.image = UIImage(named: "face_place_image")
         return twoListView
     }()
     
@@ -165,6 +170,12 @@ extension PhotoViewController {
             self.popFacePageView()
             return
         }
+        if type == "1" {
+            Task {
+                await self.productdetilInfo(with: productID, viewModel: viewModel)
+            }
+        }
+        
     }
     
     private func popAuthPageView() {
@@ -223,6 +234,99 @@ extension PhotoViewController {
 
 extension PhotoViewController {
     
+    private func sheetView(with model: standeeModel) {
+        let popView = SavePhotoMessageView(frame: self.view.bounds)
+        popView.model = model
+        let alertVc = TYAlertController(alert: popView, preferredStyle: .actionSheet)
+        self.present(alertVc!, animated: true)
+        
+        popView.cancelBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+        
+        popView.timeBlock = { [weak self] tx in
+            guard let self = self else { return }
+            self.tapTimeClick(dateTx: tx)
+        }
+        
+        popView.saveBlock = { [weak self] in
+            guard let self = self else { return }
+            let name = popView.oneFiled.text ?? ""
+            let idnum = popView.twoFiled.text ?? ""
+            let dateTime = popView.threeFiled.text ?? ""
+            Task {
+                let parameters = ["pentecostate": dateTime,
+                                  "neverful": idnum,
+                                  "tomoeconomyet": name,
+                                  "novendecevidenceeer": UserManager.shared.getPhone() ?? "",
+                                  "moneyetic": self.republicanModel?.receivester ?? "",
+                                  "ideaical": self.productID]
+                await self.savePhotoInfo(with: parameters)
+            }
+        }
+        
+    }
+    
+    private func tapTimeClick(dateTx: UITextField) {
+        let selectedDate = parseDate(from: dateTx.text)
+        showDatePicker(for: dateTx, with: selectedDate)
+    }
+    
+    private func showDatePicker(for dateTx: UITextField, with selectedDate: Date) {
+        let datePickerView = BRDatePickerView()
+        datePickerView.pickerMode = .YMD
+        datePickerView.title = languageCode == .indonesian ? "Pemilihan tanggal" : "Date selection"
+        datePickerView.selectDate = selectedDate
+        datePickerView.pickerStyle = createPickerStyle()
+        
+        datePickerView.resultBlock = { [weak self] selectedDate, _ in
+            self?.updateTime(dateTx: dateTx, with: selectedDate)
+        }
+        
+        datePickerView.show()
+    }
+    
+    private func parseDate(from timeString: String?) -> Date {
+        guard let timeString = timeString, !timeString.isEmpty else {
+            return defaultDate()
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.date(from: timeString) ?? defaultDate()
+    }
+    
+    private func defaultDate() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.date(from: "30/12/1992") ?? Date()
+    }
+    
+    private func createPickerStyle() -> BRPickerStyle {
+        let style = BRPickerStyle()
+        style.rowHeight = 45
+        style.language = "en"
+        style.doneBtnTitle = languageCode == .indonesian ? "OKE" : "OK"
+        style.cancelBtnTitle = languageCode == .indonesian ? "Batal" : "Cancel"
+        style.doneTextColor = UIColor(hexString: "#333333")
+        style.selectRowTextColor = UIColor(hexString: "#333333")
+        style.pickerTextFont = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
+        style.selectRowTextFont = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
+        return style
+    }
+    
+    private func updateTime(dateTx: UITextField, with date: Date?) {
+        guard let date = date else { return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateTx.text = dateFormatter.string(from: date)
+    }
+    
+}
+
+extension PhotoViewController {
+    
     private func photoInfo() async {
         do {
             let parameters = ["ideaical": productID,
@@ -231,6 +335,47 @@ extension PhotoViewController {
             let taxant = model.taxant ?? ""
             if ["0", "00"].contains(taxant) {
                 self.model = model
+                let idUrl = model.standee?.olivory?.howeveracy ?? ""
+                let faceUrl = model.standee?.lovefaction?.howeveracy ?? ""
+                if !idUrl.isEmpty {
+                    oneListView.nameLabel.text = LStr("Finish")
+                    oneListView.nameLabel.backgroundColor = UIColor.init(hexString: "#EF974D")
+                    oneListView.layer.borderWidth = 1
+                    oneListView.layer.borderColor = UIColor.white.cgColor
+                    
+                    oneListView.peopleImageView.kf.setImage(with: URL(string: idUrl)) { result in
+                        switch result {
+                        case .success(_):
+                            DispatchQueue.main.async {
+                                self.oneListView.peopleImageView.layer.cornerRadius = 16
+                                self.oneListView.peopleImageView.layer.masksToBounds = true
+                            }
+                        case .failure(let error):
+                            print("error: \(error)")
+                        }
+                    }
+                    
+                }
+                
+                if !faceUrl.isEmpty {
+                    twoListView.nameLabel.text = LStr("Finish")
+                    twoListView.nameLabel.backgroundColor = UIColor.init(hexString: "#EF974D")
+                    twoListView.layer.borderWidth = 1
+                    twoListView.layer.borderColor = UIColor.white.cgColor
+                    
+                    twoListView.peopleImageView.kf.setImage(with: URL(string: faceUrl)) { result in
+                        switch result {
+                        case .success(_):
+                            DispatchQueue.main.async {
+                                self.twoListView.peopleImageView.layer.cornerRadius = 16
+                                self.twoListView.peopleImageView.layer.masksToBounds = true
+                            }
+                        case .failure(let error):
+                            print("error: \(error)")
+                        }
+                    }
+                    
+                }
             }
         } catch {
             
@@ -255,7 +400,11 @@ extension PhotoViewController {
                     }
                 }else {
                     /// FACE
-                    
+                    Task {
+                        await self.photoInfo()
+                        try? await Task.sleep(nanoseconds: 250_000_000)
+                        await self.productdetilInfo(with: productID, viewModel: viewModel)
+                    }
                 }
             }else {
                 ToastManager.showLocal(model.troubleably ?? "")
@@ -265,93 +414,21 @@ extension PhotoViewController {
         }
     }
     
-    private func sheetView(with model: standeeModel) {
-        let popView = SavePhotoMessageView(frame: self.view.bounds)
-        popView.model = model
-        let alertVc = TYAlertController(alert: popView, preferredStyle: .actionSheet)
-        self.present(alertVc!, animated: true)
-        
-        popView.cancelBlock = { [weak self] in
-            guard let self = self else { return }
-            self.dismiss(animated: true)
+    private func savePhotoInfo(with parameters: [String: String]) async {
+        do {
+            let model = try await viewModel.savePhotoInfo(with: parameters)
+            let taxant = model.taxant ?? ""
+            if ["0", "00"].contains(taxant) {
+                self.dismiss(animated: true)
+                Task {
+                    await self.photoInfo()
+                }
+            }else {
+                ToastManager.showLocal(model.troubleably ?? "")
+            }
+        } catch {
+            
         }
-        
-        popView.timeBlock = { [weak self] tx in
-            guard let self = self else { return }
-            self.tapTimeClick(dateTx: tx)
-        }
-        
-        popView.saveBlock = { [weak self] in
-            guard let self = self else { return }
-        }
-        
-    }
-    
-}
-
-extension PhotoViewController {
-    
-    private func tapTimeClick(dateTx: UITextField) {
-        let currentTime = dateTx.text ?? ""
-        let selectedDate = parseDate(from: currentTime)
-        showDatePicker(for: dateTx, with: selectedDate)
-    }
-    
-    private func showDatePicker(for dateTx: UITextField, with selectedDate: Date) {
-        let datePickerView = createDatePickerView()
-        datePickerView.selectDate = selectedDate
-        datePickerView.pickerStyle = createPickerStyle()
-        
-        datePickerView.resultBlock = { [weak self] selectedDate, _ in
-            self?.updateTime(dateTx: dateTx, with: selectedDate)
-        }
-        
-        datePickerView.show()
-    }
-    
-    private func createDatePickerView() -> BRDatePickerView {
-        let pickerView = BRDatePickerView()
-        pickerView.pickerMode = .YMD
-        pickerView.title = languageCode == .indonesian ? "Pemilihan tanggal" : "Date selection"
-        return pickerView
-    }
-    
-    private func parseDate(from timeString: String?) -> Date {
-        guard let timeString = timeString, !timeString.isEmpty else {
-            return defaultDate()
-        }
-        
-        return parseDateString(timeString) ?? defaultDate()
-    }
-    
-    private func parseDateString(_ dateString: String) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        return dateFormatter.date(from: dateString)
-    }
-    
-    private func defaultDate() -> Date {
-        return parseDateString("30/12/1992") ?? Date()
-    }
-    
-    private func createPickerStyle() -> BRPickerStyle {
-        let style = BRPickerStyle()
-        style.rowHeight = 45
-        style.language = "en"
-        style.doneBtnTitle = languageCode == .indonesian ? "OKE" : "OK"
-        style.cancelBtnTitle = languageCode == .indonesian ? "Batal" : "Cancel"
-        style.doneTextColor = UIColor(hexString: "#333333")
-        style.selectRowTextColor = UIColor(hexString: "#333333")
-        style.pickerTextFont = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
-        style.selectRowTextFont = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
-        return style
-    }
-    
-    private func updateTime(dateTx: UITextField, with date: Date?) {
-        guard let date = date else { return }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        dateTx.text = dateFormatter.string(from: date)
     }
     
 }
