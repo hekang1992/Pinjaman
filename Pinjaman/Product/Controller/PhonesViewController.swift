@@ -21,7 +21,7 @@ class PhonesViewController: BaseViewController {
     
     var mnesteryModel: mnesteryModel?
     
-    var modelArray: [individualsterModel] = []
+    var modelArray: [variousingModel] = []
     
     private let viewModel = ProductViewModel()
     
@@ -52,8 +52,7 @@ class PhonesViewController: BaseViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(OvaViewCell.self, forCellReuseIdentifier: "OvaViewCell")
-        tableView.register(CpoViewCell.self, forCellReuseIdentifier: "CpoViewCell")
+        tableView.register(AuthPhonesViewCell.self, forCellReuseIdentifier: "AuthPhonesViewCell")
         tableView.layer.cornerRadius = 16
         tableView.layer.masksToBounds = true
         if #available(iOS 15.0, *) {
@@ -101,14 +100,7 @@ class PhonesViewController: BaseViewController {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 var parameters = ["ideaical": productID]
-                for model in modelArray {
-                    let key = model.taxant ?? ""
-                    let value = model.histrieastlike ?? ""
-                    parameters[key] = value
-                }
-                Task {
-                    await self.savepersonalInfo(with: parameters)
-                }
+                
                 
             })
             .disposed(by: disposeBag)
@@ -118,7 +110,7 @@ class PhonesViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Task {
-            await self.personalInfo()
+            await self.phonesInfo()
         }
     }
     
@@ -126,13 +118,13 @@ class PhonesViewController: BaseViewController {
 
 extension PhonesViewController {
     
-    private func personalInfo() async {
+    private func phonesInfo() async {
         do {
             let parameters = ["ideaical": productID]
             let model = try await viewModel.phonesInfo(with: parameters)
             let taxant = model.taxant ?? ""
             if ["0", "00"].contains(taxant) {
-                self.modelArray = model.standee?.individualster ?? []
+                self.modelArray = model.standee?.ticmost?.variousing ?? []
                 self.tableView.reloadData()
             }
         } catch {
@@ -140,7 +132,7 @@ extension PhonesViewController {
         }
     }
     
-    private func savepersonalInfo(with parameters: [String: String]) async {
+    private func savephonesInfo(with parameters: [String: String]) async {
         do {
             let model = try await viewModel.savephonesInfo(with: parameters)
             let taxant = model.taxant ?? ""
@@ -174,36 +166,32 @@ extension PhonesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = self.modelArray[indexPath.row]
-        let colfy = model.colfy ?? ""
-        if colfy == "sceneition" {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OvaViewCell", for: indexPath) as! OvaViewCell
-            cell.model = model
-            cell.textChangeBlock = { title in
-                model.windowfication = title
-                model.histrieastlike = title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AuthPhonesViewCell", for: indexPath) as! AuthPhonesViewCell
+        cell.model = model
+        cell.tapRelaBlock = { [weak self] in
+            guard let self = self else { return }
+            self.tapClickCell(with: cell, model: model)
+        }
+        cell.tapPhoBlock = { [weak self] in
+            guard let self = self else { return }
+            ContactManager.shared.showPicker(from: self) { contact in
+                guard let contact = contact else { return }
+                print("选择了：\(contact.tomoeconomyet), 电话：\(contact.tellard)")
             }
-            return cell
-        }else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CpoViewCell", for: indexPath) as! CpoViewCell
-            cell.model = model
-            cell.tapBlock = { [weak self] in
-                guard let self = self else { return }
-                self.view.endEditing(true)
-                if colfy == "reasonee" {
-                    self.tapClickCell(with: cell, model: model)
-                }else {
-                    
+            ContactManager.shared.fetchAllContacts { contacts in
+                if let data = try? JSONEncoder().encode(contacts),
+                   let jsonString = String(data: data, encoding: .utf8) {
+                    print(jsonString)
                 }
             }
-            return cell
         }
-        
+        return cell
     }
     
-    private func tapClickCell(with cell: CpoViewCell, model: individualsterModel) {
+    private func tapClickCell(with cell: AuthPhonesViewCell, model: variousingModel) {
         let popView = PopAutnEnumView(frame: self.view.bounds)
-        popView.nameLabel.text = model.asform ?? ""
-        let modelArray = model.trachyify ?? []
+        popView.nameLabel.text = model.payous ?? ""
+        let modelArray = model.tonightture ?? []
         popView.modelArray = modelArray
         let name = cell.oneFiled.text ?? ""
         for (index, listModel) in modelArray.enumerated() {
@@ -223,8 +211,7 @@ extension PhonesViewController: UITableViewDelegate, UITableViewDataSource {
         popView.saveBlock = { [weak self] listModel in
             guard let self = self else { return }
             self.dismiss(animated: true)
-            model.windowfication = listModel.tomoeconomyet ?? ""
-            model.histrieastlike = listModel.histrieastlike ?? ""
+            model.secrfier = listModel.histrieastlike ?? ""
             cell.oneFiled.text = listModel.tomoeconomyet ?? ""
         }
     }

@@ -44,6 +44,7 @@ class standeeModel: Codable {
     var neverful: String?
     var tomoeconomyet: String?
     var individualster: [individualsterModel]?
+    var ticmost: ticmostModel?
 }
 
 class individualsterModel: Codable {
@@ -71,6 +72,16 @@ class tediModel: Codable {
 class variousingModel: Codable {
     var histrieastlike: String?
     var misceeer: [misceeerModel]?
+    var secrfier: String?
+    var tomoeconomyet: String?
+    var novendecevidenceeer: String?
+    var gel: String?
+    var punctious: String?
+    var payous: String?
+    var tomoous: String?
+    var fire: String?
+    var zyg: String?
+    var tonightture: [trachyifyModel]?
 }
 
 class misceeerModel: Codable {
@@ -102,6 +113,10 @@ class longadeModel: Codable {
 class adibilityModel: Codable {
     var asform: String?
     var punctious: String?
+}
+
+class ticmostModel: Codable {
+    var variousing: [variousingModel]?
 }
 
 class trachyifyModel: Codable {

@@ -18,6 +18,8 @@
 		73185B1C2F274DBF009C994E /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73185B1B2F274DBF009C994E /* NetworkMonitor.swift */; };
 		737DE11B2F2A316400CF7941 /* PopAutnEnumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE11A2F2A316400CF7941 /* PopAutnEnumView.swift */; };
 		737DE11D2F2A334700CF7941 /* AuthListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE11C2F2A334700CF7941 /* AuthListViewCell.swift */; };
+		737DE11F2F2A43CA00CF7941 /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE11E2F2A43CA00CF7941 /* ContactManager.swift */; };
+		737DE1212F2A452100CF7941 /* AuthPhonesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE1202F2A452100CF7941 /* AuthPhonesViewCell.swift */; };
 		739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F72F279DF800D94E4A /* BaseModel.swift */; };
 		739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F92F279ED900D94E4A /* NetworkManager.swift */; };
 		739A91FC2F27A04700D94E4A /* DeviceInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91FB2F27A04700D94E4A /* DeviceInspector.swift */; };
@@ -82,6 +84,8 @@
 		73185B1B2F274DBF009C994E /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		737DE11A2F2A316400CF7941 /* PopAutnEnumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAutnEnumView.swift; sourceTree = "<group>"; };
 		737DE11C2F2A334700CF7941 /* AuthListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthListViewCell.swift; sourceTree = "<group>"; };
+		737DE11E2F2A43CA00CF7941 /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
+		737DE1202F2A452100CF7941 /* AuthPhonesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhonesViewCell.swift; sourceTree = "<group>"; };
 		739A91F72F279DF800D94E4A /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		739A91F92F279ED900D94E4A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		739A91FB2F27A04700D94E4A /* DeviceInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInspector.swift; sourceTree = "<group>"; };
@@ -306,6 +310,7 @@
 				73AD85222F29F1E700090E11 /* CpoViewCell.swift */,
 				737DE11A2F2A316400CF7941 /* PopAutnEnumView.swift */,
 				737DE11C2F2A334700CF7941 /* AuthListViewCell.swift */,
+				737DE1202F2A452100CF7941 /* AuthPhonesViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 		73AD850D2F29AC4900090E11 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				737DE11E2F2A43CA00CF7941 /* ContactManager.swift */,
 				73AD851B2F29D52400090E11 /* CameraManager.swift */,
 				73F177282F2904FE0066A6AE /* ProductViewModel.swift */,
 			);
@@ -524,7 +530,9 @@
 				73C501092F285A890093242A /* TwoHomeView.swift in Sources */,
 				73185B142F2745A8009C994E /* BaseViewController.swift in Sources */,
 				73C5010B2F2865870093242A /* HomeViewModel.swift in Sources */,
+				737DE11F2F2A43CA00CF7941 /* ContactManager.swift in Sources */,
 				73185B162F2745DD009C994E /* BaseTabBarController.swift in Sources */,
+				737DE1212F2A452100CF7941 /* AuthPhonesViewCell.swift in Sources */,
 				73EB772C2F2896820058A81C /* AppHeadView.swift in Sources */,
 				739A921B2F27AE0F00D94E4A /* BaseView.swift in Sources */,
 				739A92192F27AE0200D94E4A /* LoginView.swift in Sources */,
