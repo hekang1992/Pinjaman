@@ -151,6 +151,12 @@ class SavePhotoMessageView: BaseView {
         return saveBtn
     }()
     
+    lazy var rightImageView: UIImageView = {
+        let rightImageView = UIImageView()
+        rightImageView.image = UIImage(named: "cpo_lis_l_r_image")
+        return rightImageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(contentView)
@@ -170,6 +176,7 @@ class SavePhotoMessageView: BaseView {
         bgView.addSubview(threeLabel)
         bgView.addSubview(threeView)
         threeView.addSubview(threeFiled)
+        threeView.addSubview(rightImageView)
         threeView.addSubview(clickBtn)
         
         bgView.addSubview(saveBtn)
@@ -255,6 +262,12 @@ class SavePhotoMessageView: BaseView {
         threeFiled.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(12.pix())
             make.top.bottom.equalToSuperview()
+        }
+        
+        rightImageView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-10)
+            make.width.height.equalTo(20)
         }
         
         clickBtn.snp.makeConstraints { make in

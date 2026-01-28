@@ -43,6 +43,18 @@ class standeeModel: Codable {
     var pentecostate: String?
     var neverful: String?
     var tomoeconomyet: String?
+    var individualster: [individualsterModel]?
+}
+
+class individualsterModel: Codable {
+    var asform: String?
+    var betterern: String?
+    var taxant: String?
+    var colfy: String?/// 枚举类型
+    var windowfication: String?
+    var histrieastlike: String?
+    var enough: String?
+    var trachyify: [trachyifyModel]?
 }
 
 class olivoryModel: Codable {
@@ -90,6 +102,32 @@ class longadeModel: Codable {
 class adibilityModel: Codable {
     var asform: String?
     var punctious: String?
+}
+
+class trachyifyModel: Codable {
+    var tomoeconomyet: String?
+    var histrieastlike: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case tomoeconomyet, histrieastlike
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        if let intValue = try? container.decode(Int.self, forKey: .tomoeconomyet) {
+            tomoeconomyet = String(intValue)
+        } else {
+            tomoeconomyet = try? container.decode(String.self, forKey: .tomoeconomyet)
+        }
+        
+        if let intValue = try? container.decode(Int.self, forKey: .histrieastlike) {
+            histrieastlike = String(intValue)
+        } else {
+            histrieastlike = try? container.decode(String.self, forKey: .histrieastlike)
+        }
+    }
+    
 }
 
 class mnesteryModel: Codable {

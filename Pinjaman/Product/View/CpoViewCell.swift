@@ -16,6 +16,20 @@ class CpoViewCell: UITableViewCell {
     
     var tapBlock: (() -> Void)?
     
+    var model: individualsterModel? {
+        didSet {
+            guard let model = model else { return }
+            oneLabel.text = model.asform ?? ""
+            oneFiled.placeholder = model.betterern ?? ""
+            
+//            let enough = model.enough ?? ""
+//            oneFiled.keyboardType = enough == "1" ? .numberPad : .default
+            
+            let windowfication = model.windowfication ?? ""
+            oneFiled.text = windowfication
+        }
+    }
+    
     lazy var oneLabel: UILabel = {
         let oneLabel = UILabel()
         oneLabel.textAlignment = .left
@@ -36,12 +50,19 @@ class CpoViewCell: UITableViewCell {
         let oneFiled = UITextField()
         oneFiled.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         oneFiled.textColor = UIColor.init(hexString: "#333333")
+        oneFiled.isEnabled = false
         return oneFiled
     }()
     
     lazy var bgView: UIView = {
         let bgView = UIView()
         return bgView
+    }()
+    
+    lazy var rightImageView: UIImageView = {
+        let rightImageView = UIImageView()
+        rightImageView.image = UIImage(named: "cpo_lis_l_r_image")
+        return rightImageView
     }()
     
     lazy var clickBtn: UIButton = {
@@ -57,6 +78,7 @@ class CpoViewCell: UITableViewCell {
         bgView.addSubview(oneLabel)
         bgView.addSubview(oneView)
         oneView.addSubview(oneFiled)
+        oneView.addSubview(rightImageView)
         oneView.addSubview(clickBtn)
         
         bgView.snp.makeConstraints { make in
@@ -77,6 +99,11 @@ class CpoViewCell: UITableViewCell {
             make.left.equalTo(oneLabel)
             make.centerX.equalToSuperview()
             make.height.equalTo(54)
+        }
+        rightImageView.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-8)
+            make.width.height.equalTo(20.pix())
+            make.centerY.equalToSuperview()
         }
         oneFiled.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(12)

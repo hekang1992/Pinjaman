@@ -28,6 +28,10 @@ class ProductViewModel {
         }
     }
     
+}
+
+extension ProductViewModel {
+    
     func photoInfo(with parameters: [String: String]) async throws -> BaseModel {
         
         LoadingView.shared.show()
@@ -84,6 +88,108 @@ class ProductViewModel {
         
         do {
             let model: BaseModel = try await NetworkManager.shared.request(apiUrl, method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+}
+
+extension ProductViewModel {
+    
+    func personalInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/sugfold", method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
+    func savepersonalInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/carcerful", method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
+}
+
+extension ProductViewModel {
+    
+    func phonesInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/dreamorium", method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
+    func savephonesInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/wish", method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
+    func uploadphonesInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/nuchine", method: .post, parameters: parameters)
             return model
         } catch {
             throw error

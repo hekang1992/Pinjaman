@@ -10,6 +10,22 @@ import SnapKit
 
 class OvaViewCell: UITableViewCell {
     
+    var model: individualsterModel? {
+        didSet {
+            guard let model = model else { return }
+            oneLabel.text = model.asform ?? ""
+            oneFiled.placeholder = model.betterern ?? ""
+            
+            let enough = model.enough ?? ""
+            oneFiled.keyboardType = enough == "1" ? .numberPad : .default
+            
+            let windowfication = model.windowfication ?? ""
+            oneFiled.text = windowfication
+        }
+    }
+    
+    var textChangeBlock: ((String) -> Void)?
+    
     lazy var oneLabel: UILabel = {
         let oneLabel = UILabel()
         oneLabel.textAlignment = .left
@@ -30,6 +46,7 @@ class OvaViewCell: UITableViewCell {
         let oneFiled = UITextField()
         oneFiled.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         oneFiled.textColor = UIColor.init(hexString: "#333333")
+        oneFiled.addTarget(self, action: #selector(oneFiledChange(_:)), for: .editingChanged)
         return oneFiled
     }()
     
@@ -75,6 +92,11 @@ class OvaViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func oneFiledChange(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        self.textChangeBlock?(text)
     }
     
 }
