@@ -190,3 +190,45 @@ extension ProductViewModel {
     }
     
 }
+
+extension ProductViewModel {
+    
+    func paysInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/variousing", method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
+    func savepaysInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/histrieastlike", method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
+}

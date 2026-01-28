@@ -107,7 +107,7 @@ class PaysViewController: BaseViewController {
                     parameters[key] = value
                 }
                 Task {
-                    await self.savepersonalInfo(with: parameters)
+                    await self.savepaysInfo(with: parameters)
                 }
                 
             })
@@ -118,7 +118,7 @@ class PaysViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Task {
-            await self.personalInfo()
+            await self.paysInfo()
         }
     }
     
@@ -126,10 +126,10 @@ class PaysViewController: BaseViewController {
 
 extension PaysViewController {
     
-    private func personalInfo() async {
+    private func paysInfo() async {
         do {
             let parameters = ["ideaical": productID]
-            let model = try await viewModel.personalInfo(with: parameters)
+            let model = try await viewModel.paysInfo(with: parameters)
             let taxant = model.taxant ?? ""
             if ["0", "00"].contains(taxant) {
                 self.modelArray = model.standee?.individualster ?? []
@@ -140,9 +140,9 @@ extension PaysViewController {
         }
     }
     
-    private func savepersonalInfo(with parameters: [String: String]) async {
+    private func savepaysInfo(with parameters: [String: String]) async {
         do {
-            let model = try await viewModel.savepersonalInfo(with: parameters)
+            let model = try await viewModel.savepaysInfo(with: parameters)
             let taxant = model.taxant ?? ""
             if ["0", "00"].contains(taxant) {
                 Task {

@@ -47,17 +47,6 @@ class standeeModel: Codable {
     var ticmost: ticmostModel?
 }
 
-class individualsterModel: Codable {
-    var asform: String?
-    var betterern: String?
-    var taxant: String?
-    var colfy: String?/// 枚举类型
-    var windowfication: String?
-    var histrieastlike: String?
-    var enough: String?
-    var trachyify: [trachyifyModel]?
-}
-
 class olivoryModel: Codable {
     var howeveracy: String?
     var tedi: tediModel?
@@ -260,5 +249,42 @@ class republicanModel: Codable {
         
         longade = try? container.decode(longadeModel.self, forKey: .longade)
     }
+}
+
+class individualsterModel: Codable {
+    var asform: String?
+    var betterern: String?
+    var taxant: String?
+    var colfy: String?
+    var windowfication: String?
+    var histrieastlike: String?
+    var enough: String?
+    var trachyify: [trachyifyModel]?
     
+    enum CodingKeys: String, CodingKey {
+        case asform, betterern, taxant, colfy, windowfication
+        case histrieastlike, enough, trachyify
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        asform = try container.decodeIfPresent(String.self, forKey: .asform)
+        betterern = try container.decodeIfPresent(String.self, forKey: .betterern)
+        taxant = try container.decodeIfPresent(String.self, forKey: .taxant)
+        colfy = try container.decodeIfPresent(String.self, forKey: .colfy)
+        windowfication = try container.decodeIfPresent(String.self, forKey: .windowfication)
+        histrieastlike = try container.decodeIfPresent(String.self, forKey: .histrieastlike)
+        if let intValue = try? container.decode(Int.self, forKey: .enough) {
+            enough = String(intValue)
+        } else {
+            enough = try? container.decode(String.self, forKey: .enough)
+        }
+        
+        if let trachyifyArray = try container.decodeIfPresent([trachyifyModel].self, forKey: .trachyify) {
+            trachyify = trachyifyArray.isEmpty ? nil : trachyifyArray
+        } else {
+            trachyify = nil
+        }
+    }
 }
