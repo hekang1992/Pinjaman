@@ -2,7 +2,7 @@
 //  AppMacInfo.swift
 //  Pinjaman
 //
-//  Created by hekang on 2026/1/29.
+//  Created by Daniel Thomas Miller on 2026/1/29.
 //
 
 import UIKit

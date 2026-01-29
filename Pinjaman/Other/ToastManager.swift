@@ -2,11 +2,11 @@
 //  ToastManager.swift
 //  Pinjaman
 //
-//  Created by hekang on 2026/1/26.
+//  Created by Daniel Thomas Miller on 2026/1/26.
 //
 
 import UIKit
-import Loaf
+import Toast_Swift
 
 class ToastManager {
     
@@ -81,4 +81,3 @@ extension Int {
         return CGFloat(self) / 375.0 * UIScreen.main.bounds.width
     }
 }
-

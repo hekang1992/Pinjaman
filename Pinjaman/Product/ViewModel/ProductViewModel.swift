@@ -2,7 +2,7 @@
 //  ProductViewModel.swift
 //  Pinjaman
 //
-//  Created by hekang on 2026/1/27.
+//  Created by Daniel Thomas Miller on 2026/1/27.
 //
 
 import Foundation

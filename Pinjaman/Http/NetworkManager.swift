@@ -2,7 +2,7 @@
 //  NetworkManager.swift
 //  Pinjaman
 //
-//  Created by hekang on 2026/1/26.
+//  Created by Daniel Thomas Miller on 2026/1/26.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  CenterViewModel.swift
 //  Pinjaman
 //
-//  Created by hekang on 2026/1/27.
+//  Created by Daniel Thomas Miller on 2026/1/27.
 //
 
 import Foundation
@@ -25,8 +25,10 @@ class CenterViewModel {
         } catch {
             throw error
         }
-        
     }
+}
+
+extension CenterViewModel {
     
     func accountExitInfo() async throws -> BaseModel {
         
@@ -44,7 +46,6 @@ class CenterViewModel {
         } catch {
             throw error
         }
-        
     }
     
     func accountDeleteInfo() async throws -> BaseModel {
@@ -63,7 +64,6 @@ class CenterViewModel {
         } catch {
             throw error
         }
-        
     }
     
 }
