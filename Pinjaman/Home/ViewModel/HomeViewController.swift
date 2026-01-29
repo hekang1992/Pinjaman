@@ -16,6 +16,8 @@ class HomeViewController: BaseViewController {
     
     private let locationService = LocationService()
     
+    var locationParameters: [String: String] = [:]
+    
     lazy var oneView: OneHomeView = {
         let view = OneHomeView()
         view.backgroundColor = UIColor(hexString: "#ECEEF0")
@@ -35,9 +37,7 @@ class HomeViewController: BaseViewController {
         setupViews()
         setupActions()
         setupRefresh()
-        locationService.requestCurrentLocation { locationDict in
-            print("locationDict====\(locationDict ?? [:])")
-        }
+        locationService.requestCurrentLocation { locationDict in }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,7 +76,26 @@ private extension HomeViewController {
             }
             
             let productID = String(model.allosion ?? 0)
-            Task { await self.clickProductInfo(with: productID) }
+            
+            Task {
+                let status = CLLocationManager().authorizationStatus
+                if LanguageManager.shared.currentType == .indonesian {
+                    if status == .restricted || status == .denied {
+                        self.showSettingsAlert()
+                        return
+                    }
+                }
+                
+                Task {
+                    await self.clickProductInfo(with: productID)
+                }
+                
+                Task {
+                    await self.uploadAppInfo()
+                }
+            }
+            
+            
         }
         
         twoView.tapCellBlock = { [weak self] model in
@@ -88,7 +107,25 @@ private extension HomeViewController {
             }
             
             let productID = String(model.allosion ?? 0)
-            Task { await self.clickProductInfo(with: productID) }
+            
+            Task {
+                let status = CLLocationManager().authorizationStatus
+                if LanguageManager.shared.currentType == .indonesian {
+                    if status == .restricted || status == .denied {
+                        self.showSettingsAlert()
+                        return
+                    }
+                }
+                
+                Task {
+                    await self.clickProductInfo(with: productID)
+                }
+                
+                Task {
+                    await self.uploadAppInfo()
+                }
+            }
+            
         }
         
         twoView.tapBanBlock = { [weak self] model in
@@ -168,15 +205,6 @@ private extension HomeViewController {
     
     func clickProductInfo(with productID: String) async {
         
-        let status = CLLocationManager().authorizationStatus
-        
-        if languageCode == .indonesian {
-            if status == .restricted || status == .denied {
-                self.showSettingsAlert()
-                return
-            }
-        }
-        
         let parameters = [
             "forgetaire": "1001",
             "sacridirectorive": "1000",
@@ -202,6 +230,53 @@ private extension HomeViewController {
         let pageUrl = model.standee?.howeveracy ?? ""
         clickPageInfo(with: pageUrl)
     }
+    
+    private func uploadAppInfo() async {
+        locationService.requestCurrentLocation { [weak self] locationDict in
+            Task {
+                await self?.uploadLocationInfo(with: locationDict ?? [:])
+            }
+        }
+        Task {
+            await self.uploadMacInfo()
+        }
+    }
+}
+
+extension HomeViewController {
+    
+    private func uploadLocationInfo(with parameters: [String: String]) async {
+        do {
+            let _ = try await viewModel.uploadLocationInfo(with: parameters)
+        } catch {
+            
+        }
+    }
+    
+    private func uploadMacInfo() async {
+        await withCheckedContinuation { continuation in
+            DeviceCollector.collect { dict in
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: dict, options: [])
+                    let base64String = jsonData.base64EncodedString()
+                    
+                    let parameters = ["standee": base64String]
+                    
+                    Task {
+                        do {
+                            let _ = try await self.viewModel.uploadMacInfo(with: parameters)
+                            continuation.resume()
+                        } catch {
+                            continuation.resume()
+                        }
+                    }
+                } catch {
+                    continuation.resume()
+                }
+            }
+        }
+    }
+    
 }
 
 private extension HomeViewController {

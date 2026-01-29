@@ -17,5 +17,6 @@ target 'Pinjaman' do
   pod 'BRPickerView'
   pod 'TYAlertController'
   pod 'FSPagerView'
+  pod 'DeviceKit'
   pod 'IQKeyboardManagerSwift', '~> 6.5.16'
 end

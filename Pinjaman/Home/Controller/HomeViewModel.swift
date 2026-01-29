@@ -83,4 +83,26 @@ extension HomeViewModel {
         
     }
     
+    func uploadLocationInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/spicly", method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
+    func uploadMacInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/powerability", method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
 }
