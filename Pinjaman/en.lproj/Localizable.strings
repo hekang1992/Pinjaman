@@ -51,3 +51,8 @@
 "Confirm" = "Confirm";
 "Please select one" = "Please select one";
 "Phone number or name cannot be empty." = "Phone number or name cannot be empty.";
+
+
+"Location Services Disabled" = "Location Services Disabled";
+"Please enable location services in Settings to allow the app to determine your location." = "Please enable location services in Settings to allow the app to determine your location.";
+"Cancel" = "Cancel";

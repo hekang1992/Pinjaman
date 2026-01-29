@@ -27,13 +27,13 @@
 		7391FFB92F2B25A2004E2226 /* HomeProductViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFB82F2B25A2004E2226 /* HomeProductViewCell.swift */; };
 		7391FFBB2F2B2C0C004E2226 /* HomeHeadViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFBA2F2B2C0C004E2226 /* HomeHeadViewCell.swift */; };
 		7391FFBD2F2B2D17004E2226 /* HomeBnViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFBC2F2B2D17004E2226 /* HomeBnViewCell.swift */; };
+		7391FFBF2F2B3942004E2226 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFBE2F2B3942004E2226 /* LocationService.swift */; };
 		739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F72F279DF800D94E4A /* BaseModel.swift */; };
 		739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F92F279ED900D94E4A /* NetworkManager.swift */; };
 		739A91FC2F27A04700D94E4A /* DeviceInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91FB2F27A04700D94E4A /* DeviceInspector.swift */; };
 		739A91FE2F27A0E800D94E4A /* SecurityVault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91FD2F27A0E800D94E4A /* SecurityVault.swift */; };
 		739A92002F27A10800D94E4A /* DeviceProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91FF2F27A10800D94E4A /* DeviceProfile.swift */; };
 		739A92022F27A3AB00D94E4A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A92012F27A3AB00D94E4A /* LoadingView.swift */; };
-		739A92042F27A3CB00D94E4A /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A92032F27A3C300D94E4A /* StartViewModel.swift */; };
 		739A92062F27A77000D94E4A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A92052F27A77000D94E4A /* HomeViewController.swift */; };
 		739A92082F27A77800D94E4A /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A92072F27A77800D94E4A /* OrderViewController.swift */; };
 		739A920A2F27A78200D94E4A /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A92092F27A78200D94E4A /* CenterViewController.swift */; };
@@ -100,13 +100,13 @@
 		7391FFB82F2B25A2004E2226 /* HomeProductViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProductViewCell.swift; sourceTree = "<group>"; };
 		7391FFBA2F2B2C0C004E2226 /* HomeHeadViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeadViewCell.swift; sourceTree = "<group>"; };
 		7391FFBC2F2B2D17004E2226 /* HomeBnViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBnViewCell.swift; sourceTree = "<group>"; };
+		7391FFBE2F2B3942004E2226 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		739A91F72F279DF800D94E4A /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		739A91F92F279ED900D94E4A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		739A91FB2F27A04700D94E4A /* DeviceInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInspector.swift; sourceTree = "<group>"; };
 		739A91FD2F27A0E800D94E4A /* SecurityVault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityVault.swift; sourceTree = "<group>"; };
 		739A91FF2F27A10800D94E4A /* DeviceProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceProfile.swift; sourceTree = "<group>"; };
 		739A92012F27A3AB00D94E4A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		739A92032F27A3C300D94E4A /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		739A92052F27A77000D94E4A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		739A92072F27A77800D94E4A /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		739A92092F27A78200D94E4A /* CenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
@@ -226,7 +226,6 @@
 			children = (
 				739A921A2F27AE0F00D94E4A /* BaseView.swift */,
 				739A92112F27ABF500D94E4A /* LanguageType.swift */,
-				739A92032F27A3C300D94E4A /* StartViewModel.swift */,
 				73185B132F2745A8009C994E /* BaseViewController.swift */,
 				73185B152F2745DD009C994E /* BaseTabBarController.swift */,
 				73185B172F2745FC009C994E /* BaseNavigationController.swift */,
@@ -299,6 +298,7 @@
 		73185B112F27456A009C994E /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				7391FFBE2F2B3942004E2226 /* LocationService.swift */,
 				73EB77322F28A0520058A81C /* DeepLinkTarget.swift */,
 				739A921C2F27AE8C00D94E4A /* ToastManager.swift */,
 				739A92012F27A3AB00D94E4A /* LoadingView.swift */,
@@ -536,9 +536,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pinjaman/Pods-Pinjaman-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pinjaman/Pods-Pinjaman-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -562,7 +566,6 @@
 				73AD851F2F29DA4000090E11 /* SavePhotoMessageView.swift in Sources */,
 				739A92122F27ABF500D94E4A /* LanguageType.swift in Sources */,
 				73EB77332F28A0520058A81C /* DeepLinkTarget.swift in Sources */,
-				739A92042F27A3CB00D94E4A /* StartViewModel.swift in Sources */,
 				73AD85102F29ADE800090E11 /* PhotoViewController.swift in Sources */,
 				737DE11D2F2A334700CF7941 /* AuthListViewCell.swift in Sources */,
 				73AD85122F29AE2800090E11 /* PersonalViewController.swift in Sources */,
@@ -614,6 +617,7 @@
 				73C5010F2F287E8B0093242A /* MeCenterView.swift in Sources */,
 				73EB77372F28B5070058A81C /* AccountDeleteView.swift in Sources */,
 				73EB77282F2885AB0058A81C /* CenterListView.swift in Sources */,
+				7391FFBF2F2B3942004E2226 /* LocationService.swift in Sources */,
 				73EB77352F28AF6B0058A81C /* AccountExitView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

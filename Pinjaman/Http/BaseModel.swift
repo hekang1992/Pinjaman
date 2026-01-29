@@ -45,6 +45,14 @@ class standeeModel: Codable {
     var tomoeconomyet: String?
     var individualster: [individualsterModel]?
     var ticmost: ticmostModel?
+    var stillarian: stillarianModel?
+}
+
+class stillarianModel: Codable {
+    var dayist: String?
+    var camer: String?
+    var scelry: String?
+    var oenful: String?
 }
 
 class olivoryModel: Codable {

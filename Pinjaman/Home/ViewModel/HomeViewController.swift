@@ -8,10 +8,13 @@
 import UIKit
 import SnapKit
 import MJRefresh
+import CoreLocation
 
 class HomeViewController: BaseViewController {
     
     private let viewModel = HomeViewModel()
+    
+    private let locationService = LocationService()
     
     lazy var oneView: OneHomeView = {
         let view = OneHomeView()
@@ -32,6 +35,9 @@ class HomeViewController: BaseViewController {
         setupViews()
         setupActions()
         setupRefresh()
+        locationService.requestCurrentLocation { locationDict in
+            print("locationDict====\(locationDict ?? [:])")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +57,16 @@ private extension HomeViewController {
     }
     
     func setupActions() {
+        
+        oneView.loanBlock = { [weak self] in
+            guard let self = self else { return }
+            guard UserManager.shared.isLogin else {
+                self.presentLogin()
+                return
+            }
+            ToastManager.showLocal("loan")
+        }
+        
         oneView.applyBlock = { [weak self] model in
             guard let self = self else { return }
             
@@ -151,6 +167,16 @@ private extension HomeViewController {
     }
     
     func clickProductInfo(with productID: String) async {
+        
+        let status = CLLocationManager().authorizationStatus
+        
+        if languageCode == .indonesian {
+            if status == .restricted || status == .denied {
+                self.showSettingsAlert()
+                return
+            }
+        }
+        
         let parameters = [
             "forgetaire": "1001",
             "sacridirectorive": "1000",
@@ -179,6 +205,31 @@ private extension HomeViewController {
 }
 
 private extension HomeViewController {
+    
+    private func showSettingsAlert() {
+        DispatchQueue.main.async {
+            
+            let alert = UIAlertController(
+                title: LStr("Location Services Disabled"),
+                message: LStr("Please enable location services in Settings to allow the app to determine your location."),
+                preferredStyle: .alert
+            )
+            
+            let cancelAction = UIAlertAction(title: LStr("Cancel"), style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            
+            let settingsAction = UIAlertAction(title: LStr("Settings"), style: .default) { _ in
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+            }
+            alert.addAction(settingsAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     
     func clickPageInfo(with pageUrl: String) {
         if pageUrl.hasPrefix(scheme_url) {

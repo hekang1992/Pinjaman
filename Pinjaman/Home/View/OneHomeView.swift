@@ -34,6 +34,8 @@ class OneHomeView: BaseView {
     
     var applyBlock: ((misceeerModel) -> Void)?
     
+    var loanBlock: (() -> Void)?
+    
     private lazy var bgImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "one_home_head_image")
@@ -360,10 +362,8 @@ class OneHomeView: BaseView {
 
 extension OneHomeView {
     
-    
-    
     @objc private func handleTapOnLabel(_ gesture: UITapGestureRecognizer) {
-        ToastManager.showLocal("1")
+        self.loanBlock?()
     }
     
 }

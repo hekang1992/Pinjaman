@@ -16,6 +16,8 @@ class LoginViewController: BaseViewController {
     
     private let viewModel = LoginViewModel()
     
+    private let locationService = LocationService()
+    
     lazy var loginView: LoginView = {
         let loginView = LoginView()
         return loginView
@@ -62,6 +64,8 @@ class LoginViewController: BaseViewController {
                 await self.loginInfo(with: phone, code: code)
             }
         }
+        
+        locationService.requestCurrentLocation { locationDict in }
     }
     
     override func viewDidAppear(_ animated: Bool) {

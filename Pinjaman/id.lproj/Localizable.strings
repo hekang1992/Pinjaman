@@ -51,3 +51,9 @@
 "Confirm" = "Mengonfirmasi";
 "Please select one" = "Silakan pilih salah satu";
 "Phone number or name cannot be empty." = "Nomor telepon atau nama tidak boleh kosong.";
+
+
+"Location Services Disabled" = "Layanan Lokasi Dinonaktifkan";
+"Please enable location services in Settings to allow the app to determine your location." = "Harap aktifkan layanan lokasi di Pengaturan untuk mengizinkan aplikasi menentukan lokasi Anda.";
+"Cancel" = "Batal";
+"Settings" = "Pengaturan";
