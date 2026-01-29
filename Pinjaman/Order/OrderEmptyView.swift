@@ -17,8 +17,9 @@ class OrderEmptyView: BaseView {
     lazy var emptyBtn: UIButton = {
         let emptyBtn = UIButton(type: .custom)
         let imagename = languageCode == .indonesian ? "pty_id_image" : "pty_en_image"
-        emptyBtn.setBackgroundImage(UIImage(named: imagename), for: .normal)
+        emptyBtn.setImage(UIImage(named: imagename), for: .normal)
         emptyBtn.adjustsImageWhenHighlighted = false
+        emptyBtn.imageView?.contentMode = .scaleAspectFit
         return emptyBtn
     }()
     
@@ -27,7 +28,7 @@ class OrderEmptyView: BaseView {
         addSubview(emptyBtn)
         emptyBtn.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.size.equalTo(CGSize(width: 178.pix(), height: 278.pix()))
+            make.size.equalTo(CGSize(width: 193.pix(), height: 255.pix()))
         }
         
         emptyBtn.rx.tap
