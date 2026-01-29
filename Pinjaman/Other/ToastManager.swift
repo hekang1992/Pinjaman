@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Toast_Swift
+import Loaf
 
 class ToastManager {
     

@@ -15,8 +15,8 @@ target 'Pinjaman' do
   pod 'Toast-Swift'
   pod 'FBSDKCoreKit'
   pod 'BRPickerView'
+  pod 'IQKeyboardManagerSwift', '~> 6.5.16'
   pod 'TYAlertController'
   pod 'FSPagerView'
   pod 'DeviceKit'
-  pod 'IQKeyboardManagerSwift', '~> 6.5.16'
 end
