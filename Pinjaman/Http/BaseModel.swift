@@ -100,7 +100,8 @@ class misceeerModel: Codable {
     var gentture: String?
     var morning: String?
     var butly: String?
-    
+    var troubleably: String?
+    var howeveracy: String?
 }
 
 class veriidModel: Codable {

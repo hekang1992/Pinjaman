@@ -24,6 +24,9 @@
 		7391FFAA2F2AFB62004E2226 /* OrderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFA92F2AFB62004E2226 /* OrderViewCell.swift */; };
 		7391FFAC2F2B0611004E2226 /* OrderNorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFAB2F2B0611004E2226 /* OrderNorViewCell.swift */; };
 		7391FFAE2F2B08E1004E2226 /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFAD2F2B08E1004E2226 /* OrderListViewController.swift */; };
+		7391FFB92F2B25A2004E2226 /* HomeProductViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFB82F2B25A2004E2226 /* HomeProductViewCell.swift */; };
+		7391FFBB2F2B2C0C004E2226 /* HomeHeadViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFBA2F2B2C0C004E2226 /* HomeHeadViewCell.swift */; };
+		7391FFBD2F2B2D17004E2226 /* HomeBnViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFBC2F2B2D17004E2226 /* HomeBnViewCell.swift */; };
 		739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F72F279DF800D94E4A /* BaseModel.swift */; };
 		739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F92F279ED900D94E4A /* NetworkManager.swift */; };
 		739A91FC2F27A04700D94E4A /* DeviceInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91FB2F27A04700D94E4A /* DeviceInspector.swift */; };
@@ -94,6 +97,9 @@
 		7391FFA92F2AFB62004E2226 /* OrderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewCell.swift; sourceTree = "<group>"; };
 		7391FFAB2F2B0611004E2226 /* OrderNorViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNorViewCell.swift; sourceTree = "<group>"; };
 		7391FFAD2F2B08E1004E2226 /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListViewController.swift; sourceTree = "<group>"; };
+		7391FFB82F2B25A2004E2226 /* HomeProductViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProductViewCell.swift; sourceTree = "<group>"; };
+		7391FFBA2F2B2C0C004E2226 /* HomeHeadViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeadViewCell.swift; sourceTree = "<group>"; };
+		7391FFBC2F2B2D17004E2226 /* HomeBnViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBnViewCell.swift; sourceTree = "<group>"; };
 		739A91F72F279DF800D94E4A /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		739A91F92F279ED900D94E4A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		739A91FB2F27A04700D94E4A /* DeviceInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInspector.swift; sourceTree = "<group>"; };
@@ -242,11 +248,9 @@
 		73185B0C2F274568009C994E /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				73C5010A2F2865840093242A /* HomeViewModel.swift */,
-				73C501062F285A800093242A /* OneHomeView.swift */,
-				73C501082F285A890093242A /* TwoHomeView.swift */,
-				739A92052F27A77000D94E4A /* HomeViewController.swift */,
-				73C5010C2F286CD90093242A /* HomRateView.swift */,
+				7391FFB72F2B2575004E2226 /* View */,
+				7391FFB62F2B2574004E2226 /* Controller */,
+				7391FFB52F2B256D004E2226 /* ViewModel */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -329,6 +333,35 @@
 				73F177222F28FC510066A6AE /* OrderEmptyView.swift */,
 				7391FFA92F2AFB62004E2226 /* OrderViewCell.swift */,
 				7391FFAB2F2B0611004E2226 /* OrderNorViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7391FFB52F2B256D004E2226 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				739A92052F27A77000D94E4A /* HomeViewController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7391FFB62F2B2574004E2226 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				73C5010A2F2865840093242A /* HomeViewModel.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7391FFB72F2B2575004E2226 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				73C501062F285A800093242A /* OneHomeView.swift */,
+				73C501082F285A890093242A /* TwoHomeView.swift */,
+				73C5010C2F286CD90093242A /* HomRateView.swift */,
+				7391FFBA2F2B2C0C004E2226 /* HomeHeadViewCell.swift */,
+				7391FFBC2F2B2D17004E2226 /* HomeBnViewCell.swift */,
+				7391FFB82F2B25A2004E2226 /* HomeProductViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -503,13 +536,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pinjaman/Pods-Pinjaman-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pinjaman/Pods-Pinjaman-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -555,6 +584,7 @@
 				73C501072F285A800093242A /* OneHomeView.swift in Sources */,
 				73F177232F28FC510066A6AE /* OrderEmptyView.swift in Sources */,
 				73C5010D2F286CD90093242A /* HomRateView.swift in Sources */,
+				7391FFB92F2B25A2004E2226 /* HomeProductViewCell.swift in Sources */,
 				739A92062F27A77000D94E4A /* HomeViewController.swift in Sources */,
 				73AD85162F29AE4900090E11 /* PaysViewController.swift in Sources */,
 				739A91FE2F27A0E800D94E4A /* SecurityVault.swift in Sources */,
@@ -565,8 +595,10 @@
 				739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */,
 				739A92002F27A10800D94E4A /* DeviceProfile.swift in Sources */,
 				739A92082F27A77800D94E4A /* OrderViewController.swift in Sources */,
+				7391FFBD2F2B2D17004E2226 /* HomeBnViewCell.swift in Sources */,
 				73185B032F2744C8009C994E /* AppDelegate.swift in Sources */,
 				73C501092F285A890093242A /* TwoHomeView.swift in Sources */,
+				7391FFBB2F2B2C0C004E2226 /* HomeHeadViewCell.swift in Sources */,
 				73185B142F2745A8009C994E /* BaseViewController.swift in Sources */,
 				73C5010B2F2865870093242A /* HomeViewModel.swift in Sources */,
 				737DE11F2F2A43CA00CF7941 /* ContactManager.swift in Sources */,

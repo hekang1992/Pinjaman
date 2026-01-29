@@ -1,0 +1,190 @@
+//
+//  HomeViewController.swift
+//  Pinjaman
+//
+//  Created by hekang on 2026/1/26.
+//
+
+import UIKit
+import SnapKit
+import MJRefresh
+
+class HomeViewController: BaseViewController {
+    
+    private let viewModel = HomeViewModel()
+    
+    lazy var oneView: OneHomeView = {
+        let view = OneHomeView()
+        view.backgroundColor = UIColor(hexString: "#ECEEF0")
+        view.isHidden = true
+        return view
+    }()
+    
+    lazy var twoView: TwoHomeView = {
+        let view = TwoHomeView()
+        view.backgroundColor = UIColor(hexString: "#ECEEF0")
+        view.isHidden = true
+        return view
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        setupActions()
+        setupRefresh()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Task { await getHomeInfo() }
+    }
+}
+
+private extension HomeViewController {
+    
+    func setupViews() {
+        view.addSubview(oneView)
+        oneView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        
+        view.addSubview(twoView)
+        twoView.snp.makeConstraints { $0.edges.equalToSuperview() }
+    }
+    
+    func setupActions() {
+        oneView.applyBlock = { [weak self] model in
+            guard let self = self else { return }
+            
+            guard UserManager.shared.isLogin else {
+                self.presentLogin()
+                return
+            }
+            
+            let productID = String(model.allosion ?? 0)
+            Task { await self.clickProductInfo(with: productID) }
+        }
+        
+        twoView.tapCellBlock = { [weak self] model in
+            guard let self = self else { return }
+            
+            guard UserManager.shared.isLogin else {
+                self.presentLogin()
+                return
+            }
+            
+            let productID = String(model.allosion ?? 0)
+            Task { await self.clickProductInfo(with: productID) }
+        }
+        
+        twoView.tapBanBlock = { [weak self] model in
+            guard let self = self else { return }
+            let pageUrl = model.howeveracy ?? ""
+            clickPageInfo(with: pageUrl)
+        }
+        
+    }
+    
+    func setupRefresh() {
+        oneView.scrollView.mj_header = MJRefreshNormalHeader { [weak self] in
+            guard let self = self else { return }
+            Task { await self.getHomeInfo() }
+        }
+        twoView.tableView.mj_header = MJRefreshNormalHeader { [weak self] in
+            guard let self = self else { return }
+            Task { await self.getHomeInfo() }
+        }
+    }
+    
+    func presentLogin() {
+        let loginVc = BaseNavigationController(
+            rootViewController: LoginViewController()
+        )
+        loginVc.modalPresentationStyle = .fullScreen
+        present(loginVc, animated: true)
+    }
+}
+
+private extension HomeViewController {
+    
+    func getHomeInfo() async {
+        defer {
+            Task { @MainActor in
+                self.oneView.scrollView.mj_header?.endRefreshing()
+                self.twoView.tableView.mj_header?.endRefreshing()
+            }
+        }
+        
+        do {
+            let model = try await viewModel.getHomeInfo()
+            handleHomeInfo(model)
+        } catch {
+            
+        }
+    }
+    
+    func handleHomeInfo(_ model: BaseModel) {
+        let taxant = model.taxant ?? ""
+        guard ["0", "00"].contains(taxant) else {
+            ToastManager.showLocal(model.troubleably ?? "")
+            return
+        }
+        
+        let list = model.standee?.variousing ?? []
+        
+        if let oneModel = list.first(where: { $0.histrieastlike == "horm" }) {
+            oneView.listModel = oneModel
+            oneView.isHidden = false
+            twoView.isHidden = true
+            return
+        }
+        
+        if (model.standee?.variousing?.first(where: { $0.histrieastlike == "brom" })) != nil {
+            let modelArray = model.standee?.variousing ?? []
+            let lastModels = modelArray.contains(where: { $0.histrieastlike == "nomisive" })
+            ? modelArray.filter { $0.histrieastlike != "nomisive" }
+            : modelArray
+            
+            twoView.modelArry = lastModels
+            oneView.isHidden = true
+            twoView.isHidden = false
+        }
+        
+    }
+    
+    func clickProductInfo(with productID: String) async {
+        let parameters = [
+            "forgetaire": "1001",
+            "sacridirectorive": "1000",
+            "tersery": "1000",
+            "ideaical": productID
+        ]
+        
+        do {
+            let model = try await viewModel.clickProductInfo(with: parameters)
+            handleProductInfo(model)
+        } catch {
+            
+        }
+    }
+    
+    func handleProductInfo(_ model: BaseModel) {
+        let taxant = model.taxant ?? ""
+        guard ["0", "00"].contains(taxant) else {
+            ToastManager.showLocal(model.troubleably ?? "")
+            return
+        }
+        
+        let pageUrl = model.standee?.howeveracy ?? ""
+        clickPageInfo(with: pageUrl)
+    }
+}
+
+private extension HomeViewController {
+    
+    func clickPageInfo(with pageUrl: String) {
+        if pageUrl.hasPrefix(scheme_url) {
+            DeepLinkNavigator.navigate(to: pageUrl, from: self)
+        } else if pageUrl.hasPrefix("http") {
+            goContentWebVc(with: pageUrl)
+        }
+    }
+}
