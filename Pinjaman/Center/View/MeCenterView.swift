@@ -215,7 +215,7 @@ class MeCenterView: BaseView {
         
         for (index, model) in models.enumerated() {
             let listView = CenterClickListView()
-//            listView.logoImageView.kf.setImage(with: URL(string: model.dreamorium ?? ""))
+            //            listView.logoImageView.kf.setImage(with: URL(string: model.dreamorium ?? ""))
             listView.nameLabel.text = model.asform ?? ""
             
             
