@@ -55,6 +55,13 @@ class PhotoListView: BaseView {
         return nameLabel
     }()
     
+    lazy var trptImageView: UIImageView = {
+        let trptImageView = UIImageView()
+        trptImageView.image = UIImage(named: "sel_g_image")
+        trptImageView.isHidden = true
+        return trptImageView
+    }()
+    
     lazy var clickBtn: UIButton = {
         let clickBtn = UIButton(type: .custom)
         return clickBtn
@@ -68,6 +75,7 @@ class PhotoListView: BaseView {
         bgImageView.addSubview(nameLabel)
         addSubview(clickBtn)
         bgImageView.addSubview(peopleImageView)
+        bgView.addSubview(trptImageView)
         descLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
@@ -97,6 +105,13 @@ class PhotoListView: BaseView {
                 make.size.equalTo(CGSize(width: 106, height: 30))
             }
         }
+        
+        trptImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(50)
+            make.right.equalToSuperview().offset(-18)
+            make.width.height.equalTo(26)
+        }
+        
         clickBtn.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

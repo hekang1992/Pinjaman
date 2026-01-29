@@ -342,7 +342,7 @@ extension PhotoViewController {
                     oneListView.nameLabel.backgroundColor = UIColor.init(hexString: "#EF974D")
                     oneListView.layer.borderWidth = 1
                     oneListView.layer.borderColor = UIColor.white.cgColor
-                    
+                    oneListView.trptImageView.isHidden = false
                     oneListView.peopleImageView.kf.setImage(with: URL(string: idUrl)) { result in
                         switch result {
                         case .success(_):
@@ -362,7 +362,7 @@ extension PhotoViewController {
                     twoListView.nameLabel.backgroundColor = UIColor.init(hexString: "#EF974D")
                     twoListView.layer.borderWidth = 1
                     twoListView.layer.borderColor = UIColor.white.cgColor
-                    
+                    twoListView.trptImageView.isHidden = false
                     twoListView.peopleImageView.kf.setImage(with: URL(string: faceUrl)) { result in
                         switch result {
                         case .success(_):

@@ -68,14 +68,16 @@ class ProductViewController: BaseViewController {
                 if let republicanModel = self.model?.standee?.republican {
                     self.clickModelToPage(with: model,
                                           republicanModel: republicanModel,
-                                          productID: productID)
+                                          productID: productID,
+                                          viewModel: viewModel)
                 }
                 
             }else {
                 if let clickModel = self.model?.standee?.annsureist, let republicanModel = self.model?.standee?.republican {
                     self.clickModelToPage(with: clickModel,
                                           republicanModel: republicanModel,
-                                          productID: productID)
+                                          productID: productID,
+                                          viewModel: viewModel)
                 }
             }
         }
@@ -84,13 +86,13 @@ class ProductViewController: BaseViewController {
             .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 guard let self = self,
-                      let model = model,
-                      let clickModel = model.standee?.annsureist,
-                      let republicanModel = model.standee?.republican
-                else { return }
+                      let model = model else { return }
+                let clickModel = model.standee?.annsureist
+                let republicanModel = model.standee?.republican
                 self.clickModelToPage(with: clickModel,
                                       republicanModel: republicanModel,
-                                      productID: productID)
+                                      productID: productID,
+                                      viewModel: viewModel)
             })
             .disposed(by: disposeBag)
         

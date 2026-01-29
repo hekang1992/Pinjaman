@@ -30,7 +30,7 @@ class BaseViewController: UIViewController {
 extension BaseViewController {
     
     func changeRootVc() {
-        NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil, userInfo: ["tab": 0])
     }
     
     func toProductDetailVc() {
@@ -52,19 +52,21 @@ extension BaseViewController {
             let model = try await viewModel.productInfo(with: parameters)
             let taxant = model.taxant ?? ""
             if ["0", "00"].contains(taxant) {
-                if let mnesteryModel = model.standee?.annsureist, let republicanModel = model.standee?.republican {
-                    self.clickModelToPage(with: mnesteryModel,
-                                          republicanModel: republicanModel,
-                                          productID: productID)
-                }
+                let mnesteryModel = model.standee?.annsureist
+                let republicanModel = model.standee?.republican
+                self.clickModelToPage(with: mnesteryModel,
+                                      republicanModel: republicanModel ?? nil,
+                                      productID: productID,
+                                      viewModel: viewModel)
+                
             }
         } catch {
             
         }
     }
     
-    func clickModelToPage(with model: mnesteryModel, republicanModel: republicanModel, productID: String) {
-        let type = model.gymnhelparian ?? ""
+    func clickModelToPage(with model: mnesteryModel?, republicanModel: republicanModel?, productID: String, viewModel: ProductViewModel) {
+        let type = model?.gymnhelparian ?? ""
         switch type {
         case "seraneous":
             let photoVc = PhotoViewController()
@@ -95,11 +97,55 @@ extension BaseViewController {
             self.navigationController?.pushViewController(paysVc, animated: true)
             
         case "":
-            break
+            Task {
+                if let republicanModel = republicanModel {
+                    await self.orderToPage(with: republicanModel, viewModel: viewModel)
+                }
+            }
             
         default:
             break
         }
+    }
+    
+    private func orderToPage(with model: republicanModel, viewModel: ProductViewModel) async {
+        let moneyetic = model.receivester ?? ""
+        let epish = model.epish ?? ""
+        let willior = model.willior ?? ""
+        let shouldarian = model.shouldarian ?? ""
+        let necessary = model.wideious ?? ""
+        
+        let parameters = ["moneyetic": moneyetic,
+                          "epish": epish,
+                          "willior": willior,
+                          "shouldarian": shouldarian,
+                          "necessary": necessary]
+        
+        do {
+            let model = try await viewModel.applyReallyInfo(with: parameters)
+            let taxant = model.taxant ?? ""
+            if ["0", "00"].contains(taxant) {
+                let pageUrl = model.standee?.howeveracy ?? ""
+                if pageUrl.hasPrefix(scheme_url) {
+                    DeepLinkNavigator.navigate(to: pageUrl, from: self)
+                }else if pageUrl.hasPrefix("http") {
+                    self.goContentWebVc(with: pageUrl)
+                }
+            }
+        } catch {
+            
+        }
+        
+    }
+    
+}
+
+extension BaseViewController {
+    
+    func goContentWebVc(with pageUrl: String) {
+        let contentVc = H5ContentController()
+        contentVc.pageUrl = pageUrl
+        self.navigationController?.pushViewController(contentVc, animated: true)
     }
     
 }

@@ -20,6 +20,7 @@
 		737DE11D2F2A334700CF7941 /* AuthListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE11C2F2A334700CF7941 /* AuthListViewCell.swift */; };
 		737DE11F2F2A43CA00CF7941 /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE11E2F2A43CA00CF7941 /* ContactManager.swift */; };
 		737DE1212F2A452100CF7941 /* AuthPhonesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE1202F2A452100CF7941 /* AuthPhonesViewCell.swift */; };
+		7391FFA82F2AF360004E2226 /* H5ContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFA72F2AF360004E2226 /* H5ContentController.swift */; };
 		739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F72F279DF800D94E4A /* BaseModel.swift */; };
 		739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F92F279ED900D94E4A /* NetworkManager.swift */; };
 		739A91FC2F27A04700D94E4A /* DeviceInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91FB2F27A04700D94E4A /* DeviceInspector.swift */; };
@@ -86,6 +87,7 @@
 		737DE11C2F2A334700CF7941 /* AuthListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthListViewCell.swift; sourceTree = "<group>"; };
 		737DE11E2F2A43CA00CF7941 /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 		737DE1202F2A452100CF7941 /* AuthPhonesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhonesViewCell.swift; sourceTree = "<group>"; };
+		7391FFA72F2AF360004E2226 /* H5ContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H5ContentController.swift; sourceTree = "<group>"; };
 		739A91F72F279DF800D94E4A /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		739A91F92F279ED900D94E4A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		739A91FB2F27A04700D94E4A /* DeviceInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInspector.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				73AD85112F29AE2800090E11 /* PersonalViewController.swift */,
 				73AD85132F29AE3700090E11 /* PhonesViewController.swift */,
 				73AD85152F29AE4900090E11 /* PaysViewController.swift */,
+				7391FFA72F2AF360004E2226 /* H5ContentController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				73EB772A2F2890F30058A81C /* CenterClickListView.swift in Sources */,
 				73AD85232F29F1E700090E11 /* CpoViewCell.swift in Sources */,
 				73AD851A2F29D17E00090E11 /* PopAlertPhotoView.swift in Sources */,
+				7391FFA82F2AF360004E2226 /* H5ContentController.swift in Sources */,
 				739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */,
 				73F1772B2F2908ED0066A6AE /* ProductViewCell.swift in Sources */,
 				73AD85142F29AE3700090E11 /* PhonesViewController.swift in Sources */,

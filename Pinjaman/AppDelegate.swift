@@ -27,11 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
 
     private func rootNotiVc() {
-        NotificationCenter.default.addObserver(self, selector: #selector(changeRootVc), name: NSNotification.Name("changeRootVc"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeRootVc(_:)), name: NSNotification.Name("changeRootVc"), object: nil)
     }
     
-    @objc func changeRootVc() {
-        window?.rootViewController = BaseTabBarController()
+    @objc func changeRootVc(_ noti: Notification) {
+        let userInfo = noti.userInfo as? [String: Int]
+        let tabBar = BaseTabBarController()
+        tabBar.selectedIndex = userInfo?["tab"] ?? 0
+        window?.rootViewController = tabBar
     }
     
 }

@@ -105,7 +105,7 @@ extension HomeViewController {
         if pageUrl.hasPrefix(scheme_url) {
             DeepLinkNavigator.navigate(to: pageUrl, from: self)
         }else if pageUrl.hasPrefix("http") {
-            
+            self.goContentWebVc(with: pageUrl)
         }
     }
     

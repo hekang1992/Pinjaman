@@ -73,9 +73,16 @@ final class DeepLinkNavigator {
             vc.productID = productID
             nav.pushViewController(vc, animated: true)
             
-        case .main, .login, .order:
+        case .main:
+            NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil, userInfo: ["tab": 0])
             
-            break
+        case .login:
+            UserManager.shared.clearUserInfo()
+            NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil, userInfo: ["tab": 0])
+            
+        case .order:
+            NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil, userInfo: ["tab": 1])
+            
         }
     }
 }
