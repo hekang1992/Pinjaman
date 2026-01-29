@@ -21,6 +21,9 @@
 		737DE11F2F2A43CA00CF7941 /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE11E2F2A43CA00CF7941 /* ContactManager.swift */; };
 		737DE1212F2A452100CF7941 /* AuthPhonesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE1202F2A452100CF7941 /* AuthPhonesViewCell.swift */; };
 		7391FFA82F2AF360004E2226 /* H5ContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFA72F2AF360004E2226 /* H5ContentController.swift */; };
+		7391FFAA2F2AFB62004E2226 /* OrderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFA92F2AFB62004E2226 /* OrderViewCell.swift */; };
+		7391FFAC2F2B0611004E2226 /* OrderNorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFAB2F2B0611004E2226 /* OrderNorViewCell.swift */; };
+		7391FFAE2F2B08E1004E2226 /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391FFAD2F2B08E1004E2226 /* OrderListViewController.swift */; };
 		739A91F82F279DFD00D94E4A /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F72F279DF800D94E4A /* BaseModel.swift */; };
 		739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91F92F279ED900D94E4A /* NetworkManager.swift */; };
 		739A91FC2F27A04700D94E4A /* DeviceInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A91FB2F27A04700D94E4A /* DeviceInspector.swift */; };
@@ -88,6 +91,9 @@
 		737DE11E2F2A43CA00CF7941 /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 		737DE1202F2A452100CF7941 /* AuthPhonesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhonesViewCell.swift; sourceTree = "<group>"; };
 		7391FFA72F2AF360004E2226 /* H5ContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H5ContentController.swift; sourceTree = "<group>"; };
+		7391FFA92F2AFB62004E2226 /* OrderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewCell.swift; sourceTree = "<group>"; };
+		7391FFAB2F2B0611004E2226 /* OrderNorViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNorViewCell.swift; sourceTree = "<group>"; };
+		7391FFAD2F2B08E1004E2226 /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListViewController.swift; sourceTree = "<group>"; };
 		739A91F72F279DF800D94E4A /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		739A91F92F279ED900D94E4A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		739A91FB2F27A04700D94E4A /* DeviceInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInspector.swift; sourceTree = "<group>"; };
@@ -248,9 +254,9 @@
 		73185B0D2F274568009C994E /* Order */ = {
 			isa = PBXGroup;
 			children = (
-				73F177202F28F9880066A6AE /* OrderViewModel.swift */,
-				739A92072F27A77800D94E4A /* OrderViewController.swift */,
-				73F177222F28FC510066A6AE /* OrderEmptyView.swift */,
+				7391FFB42F2B099C004E2226 /* View */,
+				7391FFB22F2B0996004E2226 /* Controller */,
+				7391FFB12F2B0989004E2226 /* ViewModel */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -298,6 +304,33 @@
 				73EB772B2F2896820058A81C /* AppHeadView.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		7391FFB12F2B0989004E2226 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				73F177202F28F9880066A6AE /* OrderViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7391FFB22F2B0996004E2226 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				739A92072F27A77800D94E4A /* OrderViewController.swift */,
+				7391FFAD2F2B08E1004E2226 /* OrderListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7391FFB42F2B099C004E2226 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				73F177222F28FC510066A6AE /* OrderEmptyView.swift */,
+				7391FFA92F2AFB62004E2226 /* OrderViewCell.swift */,
+				7391FFAB2F2B0611004E2226 /* OrderNorViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		73AD850C2F29AC4400090E11 /* View */ = {
@@ -507,6 +540,7 @@
 				73185B1A2F274617009C994E /* StartViewController.swift in Sources */,
 				73AD85212F29F1DD00090E11 /* OvaViewCell.swift in Sources */,
 				73185B1C2F274DBF009C994E /* NetworkMonitor.swift in Sources */,
+				7391FFAC2F2B0611004E2226 /* OrderNorViewCell.swift in Sources */,
 				739A921D2F27AE8C00D94E4A /* ToastManager.swift in Sources */,
 				73EB772A2F2890F30058A81C /* CenterClickListView.swift in Sources */,
 				73AD85232F29F1E700090E11 /* CpoViewCell.swift in Sources */,
@@ -525,6 +559,7 @@
 				73AD85162F29AE4900090E11 /* PaysViewController.swift in Sources */,
 				739A91FE2F27A0E800D94E4A /* SecurityVault.swift in Sources */,
 				739A92022F27A3AB00D94E4A /* LoadingView.swift in Sources */,
+				7391FFAA2F2AFB62004E2226 /* OrderViewCell.swift in Sources */,
 				73AD851C2F29D52400090E11 /* CameraManager.swift in Sources */,
 				73185B182F2745FC009C994E /* BaseNavigationController.swift in Sources */,
 				739A91FA2F279ED900D94E4A /* NetworkManager.swift in Sources */,
@@ -543,6 +578,7 @@
 				739A920C2F27AA7800D94E4A /* UserManager.swift in Sources */,
 				73AD85182F29BEA700090E11 /* PhotoListView.swift in Sources */,
 				73F177212F28F98D0066A6AE /* OrderViewModel.swift in Sources */,
+				7391FFAE2F2B08E1004E2226 /* OrderListViewController.swift in Sources */,
 				73C5010F2F287E8B0093242A /* MeCenterView.swift in Sources */,
 				73EB77372F28B5070058A81C /* AccountDeleteView.swift in Sources */,
 				73EB77282F2885AB0058A81C /* CenterListView.swift in Sources */,

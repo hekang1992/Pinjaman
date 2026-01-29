@@ -71,6 +71,21 @@ class variousingModel: Codable {
     var fire: String?
     var zyg: String?
     var tonightture: [trachyifyModel]?
+    var wideious: String?
+    var spicly: String?
+    var requiresure: requiresureModel?
+    var mrsible: String?
+    var responsesive: String?
+    var identifyally: String?
+}
+
+class requiresureModel: Codable {
+    var densneverless: String?
+    var lowor: String?
+    var caud: String?
+    var memberaster: String?
+    var equinism: String?
+    var pageule: String?
 }
 
 class misceeerModel: Codable {

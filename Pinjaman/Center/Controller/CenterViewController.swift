@@ -46,22 +46,34 @@ class CenterViewController: BaseViewController {
         
         mineView.oneBlock = { [weak self] in
             guard let self = self else { return }
-            ToastManager.showLocal("1")
+            let listVc = OrderListViewController()
+            listVc.type = "4"
+            listVc.name = LStr("All")
+            self.navigationController?.pushViewController(listVc, animated: true)
         }
         
         mineView.twoBlock = { [weak self] in
             guard let self = self else { return }
-            ToastManager.showLocal("2")
+            let listVc = OrderListViewController()
+            listVc.type = "7"
+            listVc.name = LStr("In progress")
+            self.navigationController?.pushViewController(listVc, animated: true)
         }
         
         mineView.threeBlock = { [weak self] in
             guard let self = self else { return }
-            ToastManager.showLocal("3")
+            let listVc = OrderListViewController()
+            listVc.type = "6"
+            listVc.name = LStr("Repayment")
+            self.navigationController?.pushViewController(listVc, animated: true)
         }
         
         mineView.fourBlock = { [weak self] in
             guard let self = self else { return }
-            ToastManager.showLocal("4")
+            let listVc = OrderListViewController()
+            listVc.type = "5"
+            listVc.name = LStr("Finished")
+            self.navigationController?.pushViewController(listVc, animated: true)
         }
         
         mineView.listTapClick = { [weak self] pageUrl in

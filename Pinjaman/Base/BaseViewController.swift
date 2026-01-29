@@ -46,6 +46,19 @@ extension BaseViewController {
         }
     }
     
+    func toOrderListVc() {
+        guard let nav = navigationController else {
+            navigationController?.popToRootViewController(animated: true)
+            return
+        }
+        
+        if let orderListVC = nav.viewControllers.compactMap({ $0 as? OrderListViewController }).first {
+            nav.popToViewController(orderListVC, animated: true)
+        } else {
+            nav.popToRootViewController(animated: true)
+        }
+    }
+    
     func productdetilInfo(with productID: String, viewModel: ProductViewModel) async {
         let parameters = ["ideaical": productID]
         do {

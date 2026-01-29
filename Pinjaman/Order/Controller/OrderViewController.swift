@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import MJRefresh
 
 class OrderViewController: BaseViewController {
     
@@ -15,6 +16,8 @@ class OrderViewController: BaseViewController {
     private var selectedButton: UIButton?
     
     var type: String = "4"
+    
+    var modelArray: [variousingModel] = []
     
     lazy var emptyView: OrderEmptyView = {
         let emptyView = OrderEmptyView()
@@ -82,6 +85,24 @@ class OrderViewController: BaseViewController {
         return scrollView
     }()
     
+    lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        tableView.estimatedRowHeight = 80
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(OrderViewCell.self, forCellReuseIdentifier: "OrderViewCell")
+        tableView.register(OrderNorViewCell.self, forCellReuseIdentifier: "OrderNorViewCell")
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -139,9 +160,23 @@ class OrderViewController: BaseViewController {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
         
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.bottom).offset(10)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+        }
+        
         emptyView.clickBlock = { [weak self] in
             self?.changeRootVc()
         }
+        
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            guard let self = self else { return }
+            Task {
+                await self.orderlistInfo(with: self.type)
+            }
+        })
     }
     
     @objc private func buttonTapped(_ sender: UIButton) {
@@ -220,9 +255,57 @@ extension OrderViewController {
             if ["0", "00"].contains(taxant) {
                 let listArray = model.standee?.variousing ?? []
                 emptyView.isHidden = !listArray.isEmpty
+                tableView.isHidden = listArray.isEmpty
+                self.modelArray = listArray
+                self.tableView.reloadData()
+            }else {
+                ToastManager.showLocal(model.troubleably ?? "")
+            }
+            await MainActor.run {
+                self.tableView.mj_header?.endRefreshing()
             }
         } catch {
-            
+            await MainActor.run {
+                self.tableView.mj_header?.endRefreshing()
+            }
+        }
+    }
+    
+}
+
+extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.modelArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let model = self.modelArray[indexPath.row]
+        let applyName = model.requiresure?.equinism ?? ""
+        
+        if applyName.isEmpty {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OrderNorViewCell", for: indexPath) as! OrderNorViewCell
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            cell.model = model
+            return cell
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OrderViewCell", for: indexPath) as! OrderViewCell
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            cell.model = model
+            return cell
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = self.modelArray[indexPath.row]
+        let pageUrl = model.identifyally ?? ""
+        if pageUrl.hasPrefix(scheme_url) {
+            DeepLinkNavigator.navigate(to: pageUrl, from: self)
+        }else if pageUrl.hasPrefix("http") {
+            self.goContentWebVc(with: pageUrl)
         }
     }
     

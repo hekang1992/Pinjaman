@@ -129,6 +129,8 @@ extension ProductViewController {
                     }
                     self.productView.standeeModel = standeeModel
                 }
+            }else {
+                ToastManager.showLocal(model.troubleably ?? "")
             }
             await MainActor.run {
                 self.productView.tableView.mj_header?.endRefreshing()

@@ -63,7 +63,7 @@ class H5ContentController: BaseViewController {
         
         headView.backBlock = { [weak self] in
             guard let self = self else { return }
-            self.navigationController?.popToRootViewController(animated: true)
+            self.toOrderListVc()
         }
     }
     
