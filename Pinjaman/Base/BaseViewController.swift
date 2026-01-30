@@ -161,8 +161,6 @@ extension BaseViewController {
                                                        end: endeight)
                 }
                 
-                
-                
             }
         } catch {
             

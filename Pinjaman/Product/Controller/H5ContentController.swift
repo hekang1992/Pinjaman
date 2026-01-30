@@ -8,12 +8,17 @@
 import UIKit
 import SnapKit
 import WebKit
+import StoreKit
 import RxSwift
 import RxCocoa
 
 class H5ContentController: BaseViewController {
     
     var pageUrl: String = ""
+    
+    private let locationService = LocationService()
+    
+    private let viewModel = ProductViewModel()
     
     private lazy var webView: WKWebView = {
         let config = WKWebViewConfiguration()
@@ -103,30 +108,88 @@ class H5ContentController: BaseViewController {
 
 extension H5ContentController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("JS 调用了原生方法: \(message.name), 参数: \(message.body)")
         switch message.name {
         case "psammaneity":
-            // H5调用方法1
-            break
+            self.requestLocationInfo(message: message)
+            
         case "ethmownule":
-            // H5调用方法2
-            break
+            self.handleNavigation(message: message)
+            
         case "plosaneous":
-            // H5调用方法3
-            break
+            self.navigationController?.popViewController(animated: true)
+            
         case "petfier":
-            // H5调用方法4
-            break
+            self.changeRootVc()
+            
         case "nominiaudienceency":
-            // H5调用方法5
-            break
+            self.goEmail(message: message)
+            
         case "acerb":
-            // H5调用方法6
-            break
+            self.toAppStore()
+            
         default:
             break
         }
     }
+}
+
+extension H5ContentController {
+    
+    private func requestLocationInfo(message: WKScriptMessage) {
+        locationService.requestCurrentLocation { locationDict in }
+        let body = message.body as? [String] ?? []
+        let productID = body.first ?? ""
+        let orderID = body.last ?? ""
+        let start = String(Int(Date().timeIntervalSince1970))
+        Task {
+            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            await self.suddenlyalBeaconingInfo(with: viewModel,
+                                               productID: productID,
+                                               type: "9",
+                                               orderID: orderID,
+                                               start: start,
+                                               end: start)
+        }
+    }
+    
+    private func handleNavigation(message: WKScriptMessage) {
+        guard let pageUrl = message.body as? String, !pageUrl.isEmpty else {
+            return
+        }
+        
+        if pageUrl.hasPrefix(scheme_url) {
+            DeepLinkNavigator.navigate(to: pageUrl, from: self)
+        } else if pageUrl.hasPrefix("http") {
+            self.pageUrl = pageUrl
+            self.loadUrl()
+        }
+    }
+    
+    private func goEmail(message: WKScriptMessage) {
+        guard let email = message.body as? String, !email.isEmpty else {
+            return
+        }
+        
+        let phone = UserManager.shared.getPhone() ?? ""
+        let body = "Pinjam: \(phone)"
+        
+        guard let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let emailURL = URL(string: "mailto:\(email)?body=\(encodedBody)"),
+              UIApplication.shared.canOpenURL(emailURL) else {
+            return
+        }
+        
+        UIApplication.shared.open(emailURL)
+    }
+    
+    func toAppStore() {
+        guard #available(iOS 14.0, *),
+              let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return
+        }
+        SKStoreReviewController.requestReview(in: windowScene)
+    }
+    
 }
 
 extension H5ContentController: WKNavigationDelegate {
