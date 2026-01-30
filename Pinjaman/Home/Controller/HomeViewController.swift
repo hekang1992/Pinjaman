@@ -18,7 +18,7 @@ class HomeViewController: BaseViewController {
     private let productViewModel = ProductViewModel()
     
     private let locationService = LocationService()
-        
+    
     lazy var oneView: OneHomeView = {
         let view = OneHomeView()
         view.backgroundColor = UIColor(hexString: "#ECEEF0")
@@ -123,7 +123,7 @@ private extension HomeViewController {
             }
             
             let productID = String(model.allosion ?? 0)
-           
+            
             let status = CLLocationManager().authorizationStatus
             if LanguageManager.shared.currentType == .indonesian {
                 if status == .restricted || status == .denied {

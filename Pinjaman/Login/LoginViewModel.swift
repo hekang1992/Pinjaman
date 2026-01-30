@@ -26,7 +26,6 @@ class LoginViewModel {
         } catch {
             throw error
         }
-        
     }
     
     func loginInfo(with parameters: [String: String]) async throws -> BaseModel {
@@ -45,8 +44,11 @@ class LoginViewModel {
         } catch {
             throw error
         }
-        
     }
+    
+}
+
+extension LoginViewModel {
     
     func logoutInfo() async throws -> BaseModel {
         
@@ -64,7 +66,6 @@ class LoginViewModel {
         } catch {
             throw error
         }
-        
     }
     
     func deleteInfo() async throws -> BaseModel {
@@ -83,7 +84,6 @@ class LoginViewModel {
         } catch {
             throw error
         }
-        
     }
     
 }

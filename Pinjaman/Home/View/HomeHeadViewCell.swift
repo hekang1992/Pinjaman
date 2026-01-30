@@ -13,132 +13,138 @@ import RxCocoa
 
 class HomeHeadViewCell: UITableViewCell {
     
-    private let disposeBag = DisposeBag()
-    
-    var tapCellBlock: ((misceeerModel) -> Void)?
-    
     var model: misceeerModel? {
         didSet {
-            guard let model = model else { return }
-            nameLabel.text = model.wideious ?? ""
-            logoImageView.kf.setImage(with: URL(string: model.spicly ?? ""))
-            
-            limitLabel.text = model.nuchine ?? ""
-            numLabel.text = model.megfinishern ?? ""
-            
-            leftLabel.text = model.putitive ?? ""
-            rightLabel.text = model.morning ?? ""
-            
-            applyLabel.text = model.powerability ?? ""
+            configureCell()
         }
     }
     
-    lazy var oneImageView: UIImageView = {
-        let oneImageView = UIImageView()
-        oneImageView.image = UIImage(named: "two_hea_li_image")
-        oneImageView.contentMode = .scaleAspectFit
-        return oneImageView
+    var tapCellBlock: ((misceeerModel) -> Void)?
+    
+    private lazy var oneImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "two_hea_li_image")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
-    lazy var twoImageView: UIImageView = {
-        let twoImageView = UIImageView()
-        twoImageView.image = UIImage(named: "two_ac_li_image")
-        twoImageView.contentMode = .scaleAspectFit
-        return twoImageView
+    private lazy var twoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "two_ac_li_image")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
     private lazy var logoImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.layer.cornerRadius = 6
-        iv.layer.masksToBounds = true
-        return iv
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 6
+        imageView.layer.masksToBounds = true
+        return imageView
     }()
     
-    lazy var nameLabel: UILabel = {
-        let nameLabel = UILabel()
-        nameLabel.textAlignment = .left
-        nameLabel.textColor = UIColor.init(hexString: "#FFFFFF")
-        nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        return nameLabel
+    private lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.textColor = UIColor(hexString: "#FFFFFF")
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        return label
     }()
     
-    lazy var limitLabel: UILabel = {
-        let limitLabel = UILabel()
-        limitLabel.textAlignment = .center
-        limitLabel.textColor = UIColor.init(hexString: "#FFFFFF")
-        limitLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        return limitLabel
+    private lazy var limitLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = UIColor(hexString: "#FFFFFF")
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        return label
     }()
     
-    lazy var numLabel: UILabel = {
-        let numLabel = UILabel()
-        numLabel.textAlignment = .center
-        numLabel.textColor = UIColor.init(hexString: "#FFFFFF")
-        numLabel.font = UIFont.systemFont(ofSize: 47, weight: .bold)
-        return numLabel
+    private lazy var numLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = UIColor(hexString: "#FFFFFF")
+        label.font = UIFont.systemFont(ofSize: 47, weight: .bold)
+        return label
     }()
     
-    lazy var leftLabel: UILabel = {
-        let leftLabel = UILabel()
-        leftLabel.textAlignment = .center
-        leftLabel.textColor = UIColor.init(hexString: "#FFFFFF")
-        leftLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        leftLabel.layer.cornerRadius = 14
-        leftLabel.layer.masksToBounds = true
-        leftLabel.backgroundColor = UIColor.init(hexString: "#7F8594")
-        return leftLabel
+    private lazy var leftLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = UIColor(hexString: "#FFFFFF")
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.layer.cornerRadius = 14
+        label.layer.masksToBounds = true
+        label.backgroundColor = UIColor(hexString: "#7F8594")
+        return label
     }()
     
-    lazy var rightLabel: UILabel = {
-        let rightLabel = UILabel()
-        rightLabel.textAlignment = .center
-        rightLabel.textColor = UIColor.init(hexString: "#FFFFFF")
-        rightLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        rightLabel.layer.cornerRadius = 14
-        rightLabel.layer.masksToBounds = true
-        rightLabel.backgroundColor = UIColor.init(hexString: "#7F8594")
-        return rightLabel
+    private lazy var rightLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = UIColor(hexString: "#FFFFFF")
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.layer.cornerRadius = 14
+        label.layer.masksToBounds = true
+        label.backgroundColor = UIColor(hexString: "#7F8594")
+        return label
     }()
     
-    lazy var applyLabel: UILabel = {
-        let applyLabel = UILabel()
-        applyLabel.textAlignment = .center
-        applyLabel.backgroundColor = UIColor.init(hexString: "#4CA466")
-        applyLabel.textColor = UIColor.init(hexString: "#FFFFFF")
-        applyLabel.layer.cornerRadius = 12
-        applyLabel.layer.masksToBounds = true
-        applyLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        return applyLabel
+    private lazy var applyLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.backgroundColor = UIColor(hexString: "#4CA466")
+        label.textColor = UIColor(hexString: "#FFFFFF")
+        label.layer.cornerRadius = 12
+        label.layer.masksToBounds = true
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        return label
     }()
     
-    lazy var tapBtn: UIButton = {
-        let tapBtn = UIButton(type: .custom)
-        return tapBtn
+    private lazy var tapBtn: UIButton = {
+        let button = UIButton(type: .custom)
+        return button
     }()
-
+    
+    private let disposeBag = DisposeBag()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+        setupConstraints()
+        setupBindings()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupUI() {
         contentView.addSubview(oneImageView)
         contentView.addSubview(twoImageView)
         contentView.addSubview(tapBtn)
+        
+        oneImageView.addSubview(nameLabel)
+        oneImageView.addSubview(logoImageView)
+        oneImageView.addSubview(limitLabel)
+        oneImageView.addSubview(numLabel)
+        oneImageView.addSubview(leftLabel)
+        oneImageView.addSubview(rightLabel)
+        
+        twoImageView.addSubview(applyLabel)
+    }
+    
+    private func setupConstraints() {
         oneImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 347.pix(), height: 267.pix()))
         }
+        
         twoImageView.snp.makeConstraints { make in
             make.top.equalTo(oneImageView.snp.bottom).offset(-40.pix())
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 343.pix(), height: 89.pix()))
             make.bottom.equalToSuperview().offset(-10.pix())
         }
-        oneImageView.addSubview(nameLabel)
-        oneImageView.addSubview(logoImageView)
-        oneImageView.addSubview(limitLabel)
-        oneImageView.addSubview(numLabel)
-        
-        oneImageView.addSubview(leftLabel)
-        oneImageView.addSubview(rightLabel)
         
         nameLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview().offset(14)
@@ -148,7 +154,7 @@ class HomeHeadViewCell: UITableViewCell {
         
         logoImageView.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
-            make.right.equalTo(nameLabel.snp.left).offset(-5)
+            make.trailing.equalTo(nameLabel.snp.leading).offset(-5)
             make.width.height.equalTo(28)
         }
         
@@ -163,18 +169,19 @@ class HomeHeadViewCell: UITableViewCell {
             make.centerX.equalToSuperview()
             make.height.equalTo(55)
         }
+        
         leftLabel.snp.makeConstraints { make in
             make.top.equalTo(numLabel.snp.bottom).offset(13.pix())
-            make.left.equalToSuperview().offset(44.pix())
-            make.size.equalTo(CGSize(width: 120, height: 28))
-        }
-        rightLabel.snp.makeConstraints { make in
-            make.top.equalTo(numLabel.snp.bottom).offset(13.pix())
-            make.right.equalToSuperview().offset(-44.pix())
+            make.leading.equalToSuperview().offset(44.pix())
             make.size.equalTo(CGSize(width: 120, height: 28))
         }
         
-        twoImageView.addSubview(applyLabel)
+        rightLabel.snp.makeConstraints { make in
+            make.top.equalTo(numLabel.snp.bottom).offset(13.pix())
+            make.trailing.equalToSuperview().offset(-44.pix())
+            make.size.equalTo(CGSize(width: 120, height: 28))
+        }
+        
         applyLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 311.pix(), height: 50.pix()))
@@ -184,19 +191,32 @@ class HomeHeadViewCell: UITableViewCell {
         tapBtn.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+    }
+    
+    private func setupBindings() {
         tapBtn.rx.tap
             .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                guard let self = self, let model = model else { return }
+                guard let self = self, let model = self.model else { return }
                 self.tapCellBlock?(model)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func configureCell() {
+        guard let model = model else { return }
         
+        nameLabel.text = model.wideious ?? ""
+        
+        if let imageUrlString = model.spicly,
+           let imageUrl = URL(string: imageUrlString) {
+            logoImageView.kf.setImage(with: imageUrl)
+        }
+        
+        limitLabel.text = model.nuchine ?? ""
+        numLabel.text = model.megfinishern ?? ""
+        leftLabel.text = model.putitive ?? ""
+        rightLabel.text = model.morning ?? ""
+        applyLabel.text = model.powerability ?? ""
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }

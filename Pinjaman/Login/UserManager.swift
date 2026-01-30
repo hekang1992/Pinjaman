@@ -5,7 +5,6 @@
 //  Created by Daniel Thomas Miller on 2026/1/26.
 //
 
-
 import Foundation
 
 class UserManager {
@@ -13,6 +12,7 @@ class UserManager {
     static let shared = UserManager()
     
     private let phoneKey = "user_phone_key"
+    
     private let tokenKey = "user_token_key"
     
     private init() {}
@@ -49,4 +49,5 @@ class UserManager {
         UserDefaults.standard.removeObject(forKey: phoneKey)
         UserDefaults.standard.removeObject(forKey: tokenKey)
     }
+    
 }
