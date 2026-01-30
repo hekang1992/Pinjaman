@@ -213,15 +213,22 @@ class republicanModel: Codable {
     var wideious: String?
     var spicly: String?
     var powerability: String?
+    var allosion: String?
     var longade: longadeModel?
     
     enum CodingKeys: String, CodingKey {
-        case receivester, epish, willior, shouldarian, controwho
+        case receivester, epish, willior, shouldarian, controwho, allosion
         case wideious, spicly, powerability, longade
     }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        if let intValue = try? container.decode(Int.self, forKey: .allosion) {
+            allosion = String(intValue)
+        } else {
+            allosion = try? container.decode(String.self, forKey: .allosion)
+        }
         
         if let intValue = try? container.decode(Int.self, forKey: .receivester) {
             receivester = String(intValue)

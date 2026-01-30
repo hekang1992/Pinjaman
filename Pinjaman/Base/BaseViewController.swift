@@ -15,6 +15,8 @@ class BaseViewController: UIViewController {
     
     let languageCode = LanguageManager.shared.currentType
     
+    private var starteight: String = ""
+    
     lazy var headView: AppHeadView = {
         let headView = AppHeadView()
         return headView
@@ -110,6 +112,7 @@ extension BaseViewController {
             self.navigationController?.pushViewController(paysVc, animated: true)
             
         case "":
+            starteight = String(Int(Date().timeIntervalSince1970))
             Task {
                 if let republicanModel = republicanModel {
                     await self.orderToPage(with: republicanModel, viewModel: viewModel)
@@ -128,6 +131,8 @@ extension BaseViewController {
         let shouldarian = model.shouldarian ?? ""
         let necessary = model.wideious ?? ""
         
+        let productID = model.allosion ?? ""
+        
         let parameters = ["moneyetic": moneyetic,
                           "epish": epish,
                           "willior": willior,
@@ -144,6 +149,20 @@ extension BaseViewController {
                 }else if pageUrl.hasPrefix("http") {
                     self.goContentWebVc(with: pageUrl)
                 }
+                
+                Task {
+                    let endeight = String(Int(Date().timeIntervalSince1970))
+                    try? await Task.sleep(nanoseconds: 3_000_000_000)
+                    await self.suddenlyalBeaconingInfo(with: viewModel,
+                                                       productID: productID,
+                                                       type: "8",
+                                                       orderID: moneyetic,
+                                                       start: starteight,
+                                                       end: endeight)
+                }
+                
+                
+                
             }
         } catch {
             
