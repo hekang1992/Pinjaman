@@ -343,7 +343,7 @@
 		7391FFB52F2B256D004E2226 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				739A92052F27A77000D94E4A /* HomeViewController.swift */,
+				73C5010A2F2865840093242A /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -351,7 +351,7 @@
 		7391FFB62F2B2574004E2226 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				73C5010A2F2865840093242A /* HomeViewModel.swift */,
+				739A92052F27A77000D94E4A /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -539,9 +539,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pinjaman/Pods-Pinjaman-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pinjaman/Pods-Pinjaman-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

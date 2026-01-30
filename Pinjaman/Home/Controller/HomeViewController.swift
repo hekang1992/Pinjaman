@@ -9,10 +9,13 @@ import UIKit
 import SnapKit
 import MJRefresh
 import CoreLocation
+import FBSDKCoreKit
 
 class HomeViewController: BaseViewController {
     
     private let viewModel = HomeViewModel()
+    
+    private let productViewModel = ProductViewModel()
     
     private let locationService = LocationService()
     
@@ -38,6 +41,11 @@ class HomeViewController: BaseViewController {
         setupActions()
         setupRefresh()
         locationService.requestCurrentLocation { locationDict in }
+        if UserManager.shared.isLogin {
+            Task {
+                await self.uploadIDFAInfo()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,6 +131,19 @@ private extension HomeViewController {
                 
                 Task {
                     await self.uploadAppInfo()
+                }
+                
+                Task {
+                    let start = UserDefaults.standard.object(forKey: "start") as? String ?? ""
+                    let end = UserDefaults.standard.object(forKey: "end") as? String ?? ""
+                    if !start.isEmpty && !end.isEmpty {
+                        await self.suddenlyalBeaconingInfo(with: self.productViewModel,
+                                                           productID: "",
+                                                           type: "1",
+                                                           orderID: "",
+                                                           start: start,
+                                                           end: end)
+                    }
                 }
             }
             
@@ -275,6 +296,35 @@ extension HomeViewController {
                 }
             }
         }
+    }
+    
+    private func uploadIDFAInfo() async {
+        let hol = SecurityVault.shared.getIDFV()
+        let minaciial = SecurityVault.shared.getIDFV()
+        let edgester = SecurityVault.shared.getIDFA()
+        let parameters = ["hol": hol, "minaciial": minaciial, "edgester": edgester]
+        do {
+            let model = try await viewModel.uploadIDFAInfo(with: parameters)
+            let taxant = model.taxant ?? ""
+            if ["0", "00"].contains(taxant) {
+                if let bkModel = model.standee?.stillarian {
+                    self.bkcInfo(with: bkModel)
+                }
+            }
+        } catch {
+            
+        }
+    }
+    
+    private func bkcInfo(with model: stillarianModel) {
+        Settings.shared.displayName = model.scelry ?? ""
+        Settings.shared.appURLSchemeSuffix = model.dayist ?? ""
+        Settings.shared.appID = model.camer ?? ""
+        Settings.shared.clientToken = model.oenful ?? ""
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            didFinishLaunchingWithOptions: nil
+        )
     }
     
 }

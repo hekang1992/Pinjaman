@@ -254,3 +254,25 @@ extension ProductViewModel {
         
     }
 }
+
+extension ProductViewModel {
+    
+    func suddenlyalBeaconingInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        LoadingView.shared.show()
+        
+        defer {
+            DispatchQueue.main.async {
+                LoadingView.shared.hide()
+            }
+        }
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/onomasaceous", method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+    }
+    
+}

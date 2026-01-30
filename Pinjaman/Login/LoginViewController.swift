@@ -38,6 +38,8 @@ class LoginViewController: BaseViewController {
         
         loginView.codeBlock = { [weak self] in
             guard let self = self else { return }
+            let end = String(Int(Date().timeIntervalSince1970))
+            UserDefaults.standard.set(end, forKey: "end")
             let phone = loginView.phoneFiled.text ?? ""
             if phone.isEmpty {
                 ToastManager.showLocal("Enter your mobile phone number")
@@ -50,6 +52,8 @@ class LoginViewController: BaseViewController {
         
         loginView.loginBlock = { [weak self] in
             guard let self = self else { return }
+            let end = String(Int(Date().timeIntervalSince1970))
+            UserDefaults.standard.set(end, forKey: "end")
             let phone = loginView.phoneFiled.text ?? ""
             let code = loginView.codeFiled.text ?? ""
             if phone.isEmpty {
@@ -66,6 +70,9 @@ class LoginViewController: BaseViewController {
         }
         
         locationService.requestCurrentLocation { locationDict in }
+        
+        let start = String(Int(Date().timeIntervalSince1970))
+        UserDefaults.standard.set(start, forKey: "start")
     }
     
     override func viewDidAppear(_ animated: Bool) {

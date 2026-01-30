@@ -162,3 +162,38 @@ extension BaseViewController {
     }
     
 }
+
+extension BaseViewController {
+    
+    func suddenlyalBeaconingInfo(with viewModel: ProductViewModel,
+                                 productID: String,
+                                 type: String,
+                                 orderID: String,
+                                 start: String,
+                                 end: String) async {
+        if languageCode == .indonesian {
+            let parameters = ["thyresevenary": productID,
+                              "flect": type,
+                              "receivester": orderID,
+                              "munoain": SecurityVault.shared.getIDFV(),
+                              "lectity": SecurityVault.shared.getIDFA(),
+                              "pickics": LocationStorage.storedLongitude,
+                              "phaey": LocationStorage.storedLatitude,
+                              "catention": start,
+                              "noan": end
+            ]
+            do {
+                let model = try await viewModel.suddenlyalBeaconingInfo(with: parameters)
+                let taxant = model.taxant ?? ""
+                if ["0", "00"].contains(taxant) {
+                    if type == "1" {
+                        UserDefaults.standard.removeObject(forKey: "start")
+                        UserDefaults.standard.removeObject(forKey: "end")
+                    }
+                }
+            } catch {
+                
+            }
+        }
+    }
+}
