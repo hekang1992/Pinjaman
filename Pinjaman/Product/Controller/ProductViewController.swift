@@ -19,6 +19,8 @@ class ProductViewController: BaseViewController {
     
     var model: BaseModel?
     
+    private let locationService = LocationService()
+    
     lazy var productView: ProductView = {
         let productView = ProductView(frame: .zero)
         productView.backgroundColor = UIColor.init(hexString: "#ECEEF0")
@@ -102,6 +104,8 @@ class ProductViewController: BaseViewController {
                 await self.productPagedetilInfo()
             }
         })
+        
+        locationService.requestCurrentLocation { locationDict in }
         
     }
     

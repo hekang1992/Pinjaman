@@ -18,9 +18,7 @@ class HomeViewController: BaseViewController {
     private let productViewModel = ProductViewModel()
     
     private let locationService = LocationService()
-    
-    var locationParameters: [String: String] = [:]
-    
+        
     lazy var oneView: OneHomeView = {
         let view = OneHomeView()
         view.backgroundColor = UIColor(hexString: "#ECEEF0")
@@ -85,24 +83,34 @@ private extension HomeViewController {
             
             let productID = String(model.allosion ?? 0)
             
-            Task {
-                let status = CLLocationManager().authorizationStatus
-                if LanguageManager.shared.currentType == .indonesian {
-                    if status == .restricted || status == .denied {
-                        self.showSettingsAlert()
-                        return
-                    }
-                }
-                
-                Task {
-                    await self.clickProductInfo(with: productID)
-                }
-                
-                Task {
-                    await self.uploadAppInfo()
+            let status = CLLocationManager().authorizationStatus
+            if LanguageManager.shared.currentType == .indonesian {
+                if status == .restricted || status == .denied {
+                    self.showSettingsAlert()
+                    return
                 }
             }
             
+            Task {
+                await self.clickProductInfo(with: productID)
+            }
+            
+            Task {
+                await self.uploadAppInfo()
+            }
+            
+            Task {
+                let start = UserDefaults.standard.object(forKey: "start") as? String ?? ""
+                let end = UserDefaults.standard.object(forKey: "end") as? String ?? ""
+                if !start.isEmpty && !end.isEmpty {
+                    await self.suddenlyalBeaconingInfo(with: self.productViewModel,
+                                                       productID: "",
+                                                       type: "1",
+                                                       orderID: "",
+                                                       start: start,
+                                                       end: end)
+                }
+            }
             
         }
         
@@ -115,38 +123,35 @@ private extension HomeViewController {
             }
             
             let productID = String(model.allosion ?? 0)
-            
-            Task {
-                let status = CLLocationManager().authorizationStatus
-                if LanguageManager.shared.currentType == .indonesian {
-                    if status == .restricted || status == .denied {
-                        self.showSettingsAlert()
-                        return
-                    }
-                }
-                
-                Task {
-                    await self.clickProductInfo(with: productID)
-                }
-                
-                Task {
-                    await self.uploadAppInfo()
-                }
-                
-                Task {
-                    let start = UserDefaults.standard.object(forKey: "start") as? String ?? ""
-                    let end = UserDefaults.standard.object(forKey: "end") as? String ?? ""
-                    if !start.isEmpty && !end.isEmpty {
-                        await self.suddenlyalBeaconingInfo(with: self.productViewModel,
-                                                           productID: "",
-                                                           type: "1",
-                                                           orderID: "",
-                                                           start: start,
-                                                           end: end)
-                    }
+           
+            let status = CLLocationManager().authorizationStatus
+            if LanguageManager.shared.currentType == .indonesian {
+                if status == .restricted || status == .denied {
+                    self.showSettingsAlert()
+                    return
                 }
             }
             
+            Task {
+                await self.clickProductInfo(with: productID)
+            }
+            
+            Task {
+                await self.uploadAppInfo()
+            }
+            
+            Task {
+                let start = UserDefaults.standard.object(forKey: "start") as? String ?? ""
+                let end = UserDefaults.standard.object(forKey: "end") as? String ?? ""
+                if !start.isEmpty && !end.isEmpty {
+                    await self.suddenlyalBeaconingInfo(with: self.productViewModel,
+                                                       productID: "",
+                                                       type: "1",
+                                                       orderID: "",
+                                                       start: start,
+                                                       end: end)
+                }
+            }
         }
         
         twoView.tapBanBlock = { [weak self] model in

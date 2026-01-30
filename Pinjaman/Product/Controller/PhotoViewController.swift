@@ -27,6 +27,16 @@ class PhotoViewController: BaseViewController {
     
     private let cameraManager = CameraManager()
     
+    private let locationService = LocationService()
+    
+    private var photostart: String = ""
+    
+    private var photoend: String = ""
+    
+    private var facestart: String = ""
+    
+    private var faceend: String = ""
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = languageCode == .indonesian ? UIImage(named: "he_id_au_image") : UIImage(named: "he_eb_au_image")
@@ -149,6 +159,10 @@ class PhotoViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        locationService.requestCurrentLocation { locationDict in }
+        
+        photostart = String(Int(Date().timeIntervalSince1970))
+        
         Task {
             await self.photoInfo()
         }
@@ -167,6 +181,8 @@ extension PhotoViewController {
             return
         }
         if faceUrl.isEmpty {
+            locationService.requestCurrentLocation { locationDict in }
+            facestart = String(Int(Date().timeIntervalSince1970))
             self.popFacePageView()
             return
         }
@@ -235,6 +251,7 @@ extension PhotoViewController {
 extension PhotoViewController {
     
     private func sheetView(with model: standeeModel) {
+        photoend = String(Int(Date().timeIntervalSince1970))
         let popView = SavePhotoMessageView(frame: self.view.bounds)
         popView.model = model
         let alertVc = TYAlertController(alert: popView, preferredStyle: .actionSheet)
@@ -383,6 +400,7 @@ extension PhotoViewController {
     }
     
     private func uploadImageInfo(with data: Data, type: String) async {
+        faceend = String(Int(Date().timeIntervalSince1970))
         do {
             let parameters = ["histrieastlike": type,
                               "activityaneity": "2",
@@ -405,6 +423,15 @@ extension PhotoViewController {
                         try? await Task.sleep(nanoseconds: 250_000_000)
                         await self.productdetilInfo(with: productID, viewModel: viewModel)
                     }
+                    Task {
+                        try? await Task.sleep(nanoseconds: 3_000_000_000)
+                        await self.suddenlyalBeaconingInfo(with: viewModel,
+                                                           productID: productID,
+                                                           type: "3",
+                                                           orderID: self.republicanModel?.receivester ?? "",
+                                                           start: facestart,
+                                                           end: faceend)
+                    }
                 }
             }else {
                 ToastManager.showLocal(model.troubleably ?? "")
@@ -422,6 +449,15 @@ extension PhotoViewController {
                 self.dismiss(animated: true)
                 Task {
                     await self.photoInfo()
+                }
+                Task {
+                    try? await Task.sleep(nanoseconds: 3_000_000_000)
+                    await self.suddenlyalBeaconingInfo(with: viewModel,
+                                                       productID: productID,
+                                                       type: "2",
+                                                       orderID: self.republicanModel?.receivester ?? "",
+                                                       start: photostart,
+                                                       end: photoend)
                 }
             }else {
                 ToastManager.showLocal(model.troubleably ?? "")

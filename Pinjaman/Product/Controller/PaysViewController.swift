@@ -25,6 +25,12 @@ class PaysViewController: BaseViewController {
     
     private let viewModel = ProductViewModel()
     
+    private var start: String = ""
+    
+    private var end: String = ""
+    
+    private let locationService = LocationService()
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = languageCode == .indonesian ? UIImage(named: "he_id_au_image") : UIImage(named: "he_eb_au_image")
@@ -96,6 +102,10 @@ class PaysViewController: BaseViewController {
             make.bottom.equalTo(clickBtn.snp.top).offset(-10.pix())
         }
         
+        start = String(Int(Date().timeIntervalSince1970))
+        
+        locationService.requestCurrentLocation { locationDict in }
+        
         clickBtn.rx.tap
             .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
@@ -141,12 +151,22 @@ extension PaysViewController {
     }
     
     private func savepaysInfo(with parameters: [String: String]) async {
+        end = String(Int(Date().timeIntervalSince1970))
         do {
             let model = try await viewModel.savepaysInfo(with: parameters)
             let taxant = model.taxant ?? ""
             if ["0", "00"].contains(taxant) {
                 Task {
                     await self.productdetilInfo(with: productID, viewModel: viewModel)
+                }
+                Task {
+                    try? await Task.sleep(nanoseconds: 3_000_000_000)
+                    await self.suddenlyalBeaconingInfo(with: viewModel,
+                                                       productID: productID,
+                                                       type: "7",
+                                                       orderID: self.republicanModel?.receivester ?? "",
+                                                       start: start,
+                                                       end: end)
                 }
             }else {
                 ToastManager.showLocal(model.troubleably ?? "")
