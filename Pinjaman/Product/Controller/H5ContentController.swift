@@ -35,7 +35,7 @@ class H5ContentController: BaseViewController {
     private lazy var progressView: UIProgressView = {
         let progress = UIProgressView(progressViewStyle: .default)
         progress.trackTintColor = .clear
-        progress.progressTintColor = .systemPurple
+        progress.progressTintColor = UIColor.init(hexString: "#222A40")
         return progress
     }()
     
