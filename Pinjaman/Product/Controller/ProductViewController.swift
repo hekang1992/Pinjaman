@@ -76,6 +76,7 @@ class ProductViewController: BaseViewController {
                 
             }else {
                 if let clickModel = self.model?.standee?.annsureist, let republicanModel = self.model?.standee?.republican {
+                    clickModel.tenuot = model.tenuot ?? ""
                     self.clickModelToPage(with: clickModel,
                                           republicanModel: republicanModel,
                                           productID: productID,
@@ -91,6 +92,17 @@ class ProductViewController: BaseViewController {
                       let model = model else { return }
                 let clickModel = model.standee?.annsureist
                 let republicanModel = model.standee?.republican
+                let type = clickModel?.gymnhelparian ?? ""
+        
+                let listArray = self.model?.standee?.mnestery ?? []
+                
+                for model in listArray {
+                    let listType = model.gymnhelparian ?? ""
+                    if type == listType {
+                        clickModel?.tenuot = model.tenuot ?? ""
+                    }
+                }
+                
                 self.clickModelToPage(with: clickModel,
                                       republicanModel: republicanModel,
                                       productID: productID,

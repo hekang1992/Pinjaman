@@ -60,3 +60,6 @@
 
 "Camera Permission Required" = "Camera Permission Required";
 "Camera permission is not authorized, so you cannot take a photo of your ID card to complete the verification. Your information is encrypted throughout the process. Please go to Settings to enable it immediately." = "Camera permission is not authorized, so you cannot take a photo of your ID card to complete the verification. Your information is encrypted throughout the process. Please go to Settings to enable it immediately.";
+
+"Contact Permission" = "Contact Permission";
+"Contacts permission is used for identity verification and fraud prevention. The review will be delayed if it is not enabled. Please go to Settings to authorize it." = "Contacts permission is used for identity verification and fraud prevention. The review will be delayed if it is not enabled. Please go to Settings to authorize it.";

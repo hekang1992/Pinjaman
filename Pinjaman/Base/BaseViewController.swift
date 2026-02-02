@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import TYAlertController
 
 class BaseViewController: UIViewController {
     
@@ -35,6 +36,27 @@ extension BaseViewController {
         NotificationCenter.default.post(name: NSNotification.Name("changeRootVc"), object: nil, userInfo: ["tab": 0])
     }
     
+    func alertLeaveView() {
+       let popView = AuthPopLeaveView(frame: self.view.bounds)
+       let alertVc = TYAlertController(alert: popView, preferredStyle: .alert)
+       self.present(alertVc!, animated: true)
+       
+       popView.confirmAction
+           .subscribe(onNext: { [weak self] in
+               self?.dismiss(animated: true)
+           })
+           .disposed(by: disposeBag)
+       
+       popView.cancelAction
+           .subscribe(onNext: { [weak self] in
+               guard let self = self else { return }
+               self.dismiss(animated: true) {
+                   self.toProductDetailVc()
+               }
+           })
+           .disposed(by: disposeBag)
+   }
+    
     func toProductDetailVc() {
         guard let nav = navigationController else {
             navigationController?.popToRootViewController(animated: true)
@@ -61,6 +83,20 @@ extension BaseViewController {
         }
     }
     
+}
+
+extension BaseViewController {
+    
+    func goContentWebVc(with pageUrl: String) {
+        let contentVc = H5ContentController()
+        contentVc.pageUrl = pageUrl
+        self.navigationController?.pushViewController(contentVc, animated: true)
+    }
+    
+}
+
+extension BaseViewController {
+    
     func productdetilInfo(with productID: String, viewModel: ProductViewModel) async {
         let parameters = ["ideaical": productID]
         do {
@@ -69,6 +105,18 @@ extension BaseViewController {
             if ["0", "00"].contains(taxant) {
                 let mnesteryModel = model.standee?.annsureist
                 let republicanModel = model.standee?.republican
+                
+                let type = mnesteryModel?.gymnhelparian ?? ""
+                
+                let listArray = model.standee?.mnestery ?? []
+                
+                for model in listArray {
+                    let listType = model.gymnhelparian ?? ""
+                    if type == listType {
+                        mnesteryModel?.tenuot = model.tenuot ?? ""
+                    }
+                }
+                
                 self.clickModelToPage(with: mnesteryModel,
                                       republicanModel: republicanModel ?? nil,
                                       productID: productID,
@@ -80,7 +128,10 @@ extension BaseViewController {
         }
     }
     
-    func clickModelToPage(with model: mnesteryModel?, republicanModel: republicanModel?, productID: String, viewModel: ProductViewModel) {
+    func clickModelToPage(with model: mnesteryModel?,
+                          republicanModel: republicanModel?,
+                          productID: String,
+                          viewModel: ProductViewModel) {
         let type = model?.gymnhelparian ?? ""
         switch type {
         case "seraneous":
@@ -166,16 +217,6 @@ extension BaseViewController {
             
         }
         
-    }
-    
-}
-
-extension BaseViewController {
-    
-    func goContentWebVc(with pageUrl: String) {
-        let contentVc = H5ContentController()
-        contentVc.pageUrl = pageUrl
-        self.navigationController?.pushViewController(contentVc, animated: true)
     }
     
 }

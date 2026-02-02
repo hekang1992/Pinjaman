@@ -106,3 +106,17 @@ extension HomeViewModel {
     }
     
 }
+
+extension HomeViewModel {
+    
+    func getProvicesInfo() async throws -> BaseModel {
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/spatier")
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+}

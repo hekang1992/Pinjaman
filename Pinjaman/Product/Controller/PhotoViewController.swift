@@ -43,6 +43,21 @@ class PhotoViewController: BaseViewController {
         return bgImageView
     }()
     
+    lazy var bgView: UIView = {
+        let bgView = UIView()
+        bgView.backgroundColor = UIColor.init(hexString: "#FCD43E")
+        bgView.layer.cornerRadius = 35
+        bgView.layer.masksToBounds = true
+        bgView.layer.borderWidth = 4
+        bgView.layer.borderColor = UIColor.white.cgColor
+        return bgView
+    }()
+    
+    lazy var logoImageView: UIImageView = {
+        let logoImageView = UIImageView()
+        return logoImageView
+    }()
+    
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
@@ -86,7 +101,7 @@ class PhotoViewController: BaseViewController {
         }
         headView.backBlock = { [weak self] in
             guard let self = self else { return }
-            self.toProductDetailVc()
+            self.alertLeaveView()
         }
         
         view.addSubview(clickBtn)
@@ -98,7 +113,7 @@ class PhotoViewController: BaseViewController {
         
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(headView.snp.bottom).offset(13.pix())
+            make.top.equalTo(headView.snp.bottom)
             make.left.equalToSuperview()
             make.centerX.equalToSuperview()
             make.bottom.equalTo(clickBtn.snp.top).offset(-13.pix())
@@ -106,9 +121,22 @@ class PhotoViewController: BaseViewController {
         
         scrollView.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(21)
             make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 343.pix(), height: 85.pix()))
+            make.size.equalTo(CGSize(width: 333.pix(), height: 76.pix()))
+        }
+        
+        scrollView.addSubview(bgView)
+        bgView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(13)
+            make.width.height.equalTo(70)
+            make.left.equalToSuperview().offset(16)
+        }
+        
+        bgView.addSubview(logoImageView)
+        logoImageView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(50)
         }
         
         let nameLabel = UILabel()
@@ -162,6 +190,8 @@ class PhotoViewController: BaseViewController {
         locationService.requestCurrentLocation { locationDict in }
         
         photostart = String(Int(Date().timeIntervalSince1970))
+        
+        logoImageView.kf.setImage(with: URL(string: mnesteryModel?.tenuot ?? ""))
         
         Task {
             await self.photoInfo()

@@ -97,7 +97,7 @@ class ContactManager: NSObject {
             
         case .denied, .restricted:
             DispatchQueue.main.async {
-                self.showPermissionAlert()
+//                self.showPermissionAlert()
                 completion(false)
             }
             
@@ -106,37 +106,6 @@ class ContactManager: NSObject {
                 completion(false)
             }
         }
-    }
-    
-    private func showPermissionAlert() {
-        guard let rootVC = getTopViewController() else { return }
-        
-        let alert = UIAlertController(
-            title: "权限受限",
-            message: "请在设置中允许访问通讯录，以便选择联系人",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
-        alert.addAction(UIAlertAction(title: "去设置", style: .default) { _ in
-            if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(url)
-            }
-        })
-        
-        rootVC.present(alert, animated: true)
-    }
-    
-    private func getTopViewController() -> UIViewController? {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let rootVC = windowScene.windows.first?.rootViewController {
-            
-            var topVC = rootVC
-            while let presentedVC = topVC.presentedViewController {
-                topVC = presentedVC
-            }
-            return topVC
-        }
-        return nil
     }
 }
 

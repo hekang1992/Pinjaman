@@ -39,10 +39,11 @@ class HomeViewController: BaseViewController {
         setupActions()
         setupRefresh()
         locationService.requestCurrentLocation { locationDict in }
-        if UserManager.shared.isLogin {
-            Task {
-                await self.uploadIDFAInfo()
-            }
+        Task {
+            await self.uploadIDFAInfo()
+        }
+        Task {
+            await self.getProvicesInfo()
         }
     }
     
@@ -333,6 +334,18 @@ extension HomeViewController {
         )
     }
     
+    private func getProvicesInfo() async {
+        do {
+            let model = try await viewModel.getProvicesInfo()
+            let taxant = model.taxant ?? ""
+            if ["0", "00"].contains(taxant) {
+                ProvicesModelManager.shared.provicesModel = model.standee?.variousing ?? []
+            }
+        } catch {
+            
+        }
+    }
+    
 }
 
 private extension HomeViewController {
@@ -369,4 +382,10 @@ private extension HomeViewController {
             goContentWebVc(with: pageUrl)
         }
     }
+}
+
+class ProvicesModelManager {
+    static let shared = ProvicesModelManager()
+    private init() {}
+    var provicesModel: [variousingModel]?
 }

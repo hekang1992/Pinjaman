@@ -37,6 +37,21 @@ class PaysViewController: BaseViewController {
         return bgImageView
     }()
     
+    lazy var bgView: UIView = {
+        let bgView = UIView()
+        bgView.backgroundColor = UIColor.init(hexString: "#FCD43E")
+        bgView.layer.cornerRadius = 35
+        bgView.layer.masksToBounds = true
+        bgView.layer.borderWidth = 4
+        bgView.layer.borderColor = UIColor.white.cgColor
+        return bgView
+    }()
+    
+    lazy var logoImageView: UIImageView = {
+        let logoImageView = UIImageView()
+        return logoImageView
+    }()
+    
     lazy var clickBtn: UIButton = {
         let clickBtn = UIButton(type: .custom)
         clickBtn.setTitleColor(.white, for: .normal)
@@ -78,15 +93,30 @@ class PaysViewController: BaseViewController {
         }
         headView.backBlock = { [weak self] in
             guard let self = self else { return }
-            self.toProductDetailVc()
+            self.alertLeaveView()
         }
         
         view.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { make in
-            make.top.equalTo(headView.snp.bottom).offset(13)
+            make.top.equalTo(headView.snp.bottom).offset(21)
             make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 343.pix(), height: 85.pix()))
+            make.size.equalTo(CGSize(width: 333.pix(), height: 76.pix()))
         }
+        
+        view.addSubview(bgView)
+        bgView.snp.makeConstraints { make in
+            make.top.equalTo(headView.snp.bottom).offset(13)
+            make.width.height.equalTo(70)
+            make.left.equalToSuperview().offset(16)
+        }
+        
+        bgView.addSubview(logoImageView)
+        logoImageView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(54)
+        }
+        
+        logoImageView.kf.setImage(with: URL(string: mnesteryModel?.tenuot ?? ""))
         
         view.addSubview(clickBtn)
         clickBtn.snp.makeConstraints { make in

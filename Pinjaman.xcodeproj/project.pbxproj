@@ -76,6 +76,7 @@
 		73F177292F2905000066A6AE /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F177282F2904FE0066A6AE /* ProductViewModel.swift */; };
 		73F1772B2F2908ED0066A6AE /* ProductViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1772A2F2908ED0066A6AE /* ProductViewCell.swift */; };
 		73FB873B2F307CB6000118C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73FB87392F307CB6000118C1 /* InfoPlist.strings */; };
+		73FB873E2F308802000118C1 /* AuthPopLeaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB873D2F308802000118C1 /* AuthPopLeaveView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,6 +156,7 @@
 		73F1772A2F2908ED0066A6AE /* ProductViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewCell.swift; sourceTree = "<group>"; };
 		73FB873A2F307CB6000118C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		73FB873C2F307CBC000118C1 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		73FB873D2F308802000118C1 /* AuthPopLeaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPopLeaveView.swift; sourceTree = "<group>"; };
 		D095250D029524EE4447247C /* Pods_Pinjaman.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinjaman.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -386,6 +388,7 @@
 				737DE11A2F2A316400CF7941 /* PopAutnEnumView.swift */,
 				737DE11C2F2A334700CF7941 /* AuthListViewCell.swift */,
 				737DE1202F2A452100CF7941 /* AuthPhonesViewCell.swift */,
+				73FB873D2F308802000118C1 /* AuthPopLeaveView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				73185B1A2F274617009C994E /* StartViewController.swift in Sources */,
 				73AD85212F29F1DD00090E11 /* OvaViewCell.swift in Sources */,
 				73185B1C2F274DBF009C994E /* NetworkMonitor.swift in Sources */,
+				73FB873E2F308802000118C1 /* AuthPopLeaveView.swift in Sources */,
 				7391FFAC2F2B0611004E2226 /* OrderNorViewCell.swift in Sources */,
 				739A921D2F27AE8C00D94E4A /* ToastManager.swift in Sources */,
 				73EB772A2F2890F30058A81C /* CenterClickListView.swift in Sources */,

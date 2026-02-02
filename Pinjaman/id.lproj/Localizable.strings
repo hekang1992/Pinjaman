@@ -61,3 +61,6 @@
 
 "Camera Permission Required" = "Perlu Izin Akses Kamera";
 "Camera permission is not authorized, so you cannot take a photo of your ID card to complete the verification. Your information is encrypted throughout the process. Please go to Settings to enable it immediately." = "Izin kamera tidak diotorisasi, sehingga Anda tidak dapat mengambil foto kartu identitas untuk menyelesaikan verifikasi. Informasi Anda dienkripsi sepanjang proses. Silakan pergi ke Pengaturan untuk mengaktifkannya segera.";
+
+"Contact Permission" = "Izin Kontak";
+"Contacts permission is used for identity verification and fraud prevention. The review will be delayed if it is not enabled. Please go to Settings to authorize it." = "Izin kontak digunakan untuk verifikasi identitas dan pencegahan penipuan. Tinjauan akan tertunda jika tidak diaktifkan. Silakan pergi ke Pengaturan untuk memberikan otorisasi.";
