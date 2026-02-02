@@ -242,7 +242,7 @@ extension PersonalViewController: UITableViewDelegate, UITableViewDataSource {
                 if colfy == "reasonee" {
                     self.tapClickCell(with: cell, model: model)
                 }else {
-                    
+                    self.tapProviceCell(with: cell, model: model)
                 }
             }
             return cell
@@ -279,5 +279,52 @@ extension PersonalViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    private func tapProviceCell(with cell: CpoViewCell, model: individualsterModel) {
+        
+        guard
+            let cityModelArray = ProvicesModelManager.shared.provicesModel,
+            !cityModelArray.isEmpty
+        else {
+            return
+        }
+        
+        let listArray = ProvicesDecodeModel.getAddressModelArray(
+            dataSourceArr: cityModelArray
+        )
+        
+        let pickerView = BRTextPickerView()
+        pickerView.pickerMode = .componentCascade
+        pickerView.title = model.asform ?? ""
+        pickerView.dataSourceArr = listArray
+        pickerView.pickerStyle = createPickerStyle()
+        
+        pickerView.multiResultBlock = { models, _ in
+            guard let models = models else { return }
+            
+            let selectText = models
+                .compactMap { $0.text }
+                .joined(separator: "-")
+            
+            cell.oneFiled.text = selectText
+            model.windowfication = selectText
+            model.histrieastlike = selectText
+        }
+        
+        pickerView.show()
+        
+    }
+    
+    private func createPickerStyle() -> BRPickerStyle {
+        let style = BRPickerStyle()
+        style.rowHeight = 45
+        style.language = "en"
+        style.doneBtnTitle = languageCode == .indonesian ? "OKE" : "OK"
+        style.cancelBtnTitle = languageCode == .indonesian ? "Batal" : "Cancel"
+        style.doneTextColor = UIColor(hexString: "#333333")
+        style.selectRowTextColor = UIColor(hexString: "#333333")
+        style.pickerTextFont = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
+        style.selectRowTextFont = UIFont.systemFont(ofSize: 16.pix(), weight: .bold)
+        return style
+    }
     
 }

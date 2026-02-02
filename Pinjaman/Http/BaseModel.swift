@@ -85,6 +85,7 @@ class variousingModel: Codable {
     var mrsible: String?
     var responsesive: String?
     var identifyally: String?
+    var taxant: String?
     var teleoyourselfful: [variousingModel]?
 }
 

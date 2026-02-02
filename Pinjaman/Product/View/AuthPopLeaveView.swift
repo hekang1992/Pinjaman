@@ -2,7 +2,7 @@
 //  AuthPopLeaveView.swift
 //  Pinjaman
 //
-//  Created by hekang on 2026/2/2.
+//  Created by Daniel Thomas Miller on 2026/2/2.
 //
 
 import UIKit

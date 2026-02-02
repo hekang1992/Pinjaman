@@ -383,9 +383,3 @@ private extension HomeViewController {
         }
     }
 }
-
-class ProvicesModelManager {
-    static let shared = ProvicesModelManager()
-    private init() {}
-    var provicesModel: [variousingModel]?
-}
