@@ -144,7 +144,7 @@ class AuthPhonesViewCell: UITableViewCell {
             make.centerX.equalToSuperview()
             make.left.equalToSuperview()
             make.height.equalTo(250)
-            make.bottom.equalToSuperview().offset(-30.pix())
+            make.bottom.equalToSuperview().offset(-10.pix())
         }
         
         nameLabel.snp.makeConstraints { make in
