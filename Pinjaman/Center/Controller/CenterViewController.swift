@@ -36,12 +36,14 @@ class CenterViewController: BaseViewController {
         
         mineView.leftBlock = { [weak self] in
             guard let self = self else { return }
-            ToastManager.showLocal("left")
+            let pageUrl = h5_base_url + "/vellidea"
+            self.goContentWebVc(with: pageUrl)
         }
         
         mineView.rightBlock = { [weak self] in
             guard let self = self else { return }
-            ToastManager.showLocal("right")
+            let pageUrl = h5_base_url + "/forery"
+            self.goContentWebVc(with: pageUrl)
         }
         
         mineView.oneBlock = { [weak self] in

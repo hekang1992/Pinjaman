@@ -5,7 +5,6 @@
 //  Created by Daniel Thomas Miller on 2026/1/28.
 //
 
-
 import UIKit
 import AVFoundation
 
@@ -29,6 +28,8 @@ class CameraManager: NSObject {
                 DispatchQueue.main.async {
                     if granted {
                         self?.showImagePicker(from: viewController, device: device)
+                    }else {
+                        self?.showSettingsAlert(on: viewController)
                     }
                 }
             }
@@ -51,15 +52,20 @@ class CameraManager: NSObject {
         picker.delegate = self
         picker.allowsEditing = false
         vc.present(picker, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            if device == .front {
+                self.hidePickerView(pickerView: picker.view)
+            }
+        }
     }
     
     private func showSettingsAlert(on vc: UIViewController) {
-        let alert = UIAlertController(title: "需要相机权限",
-                                      message: "您已禁用相机权限，请前往设置开启，以便正常拍照。",
+        let alert = UIAlertController(title: LStr("Camera Permission Required"),
+                                      message: LStr("Camera permission is not authorized, so you cannot take a photo of your ID card to complete the verification. Your information is encrypted throughout the process. Please go to Settings to enable it immediately."),
                                       preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
-        alert.addAction(UIAlertAction(title: "去设置", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: LStr("Cancel"), style: .cancel))
+        alert.addAction(UIAlertAction(title: LStr("Settings"), style: .default) { _ in
             if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
                 if UIApplication.shared.canOpenURL(settingsUrl) {
                     UIApplication.shared.open(settingsUrl)
@@ -69,14 +75,8 @@ class CameraManager: NSObject {
         vc.present(alert, animated: true)
     }
     
-    private func showAlert(on vc: UIViewController, title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "确定", style: .default))
-        vc.present(alert, animated: true)
-    }
-    
     private func compressImage(_ image: UIImage) -> Data? {
-        var compression: CGFloat = 0.9
+        var compression: CGFloat = 0.8
         let minCompression: CGFloat = 0.1
         
         guard var imageData = image.jpegData(compressionQuality: compression) else { return nil }
@@ -99,14 +99,15 @@ extension CameraManager: UIImagePickerControllerDelegate, UINavigationController
         
         let originalImage = info[.originalImage] as? UIImage
         
-        picker.dismiss(animated: true) { [weak self] in
-            guard let self = self, let capturedImage = originalImage else { return }
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                let compressedData = self.compressImage(capturedImage)
-                DispatchQueue.main.async {
+        guard let capturedImage = originalImage else { return }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let compressedData = self.compressImage(capturedImage)
+            DispatchQueue.main.async {
+                picker.dismiss(animated: true) {
                     self.onImageCaptured?(compressedData)
                 }
+                
             }
         }
     }
@@ -114,4 +115,36 @@ extension CameraManager: UIImagePickerControllerDelegate, UINavigationController
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+}
+
+extension CameraManager {
+    
+    private func hidePickerView(pickerView: UIView) {
+        if #available(iOS 26, *) {
+            let name = "SwiftUI._UIGraphicsView"
+            if let cls = NSClassFromString(name) {
+                for view in pickerView.subviews {
+                    if view.isKind(of: cls) {
+                        if view.bounds.width == 48 && view.bounds.height == 48 {
+                            if view.frame.minX > UIScreen.main.bounds.width / 2.0 {
+                                view.isHidden = true
+                                return
+                            }
+                        }
+                    }
+                    hidePickerView(pickerView: view)
+                }
+            }
+        }else {
+            let name = "CAMFlipButton"
+            for bbview in pickerView.subviews {
+                if bbview.description.contains(name) {
+                    bbview.isHidden = true
+                    return
+                }
+                hidePickerView(pickerView: bbview)
+            }
+        }
+    }
+    
 }

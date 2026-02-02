@@ -11,8 +11,9 @@
 "Verification code" = "Verification code";
 "Send code" = "Send code";
 "Log in" = "Log in";
-"Thank you for choosing us. Continuing with the operation means that you have confirmed the " = "Thank you for choosing us. Continuing with the operation means that you have confirmed the ";
-"privacy policy." = "privacy policy.";
+"Thank you for choosing us.Continuing with the operation means that you have confirmed the" = "Thank you for choosing us.Continuing with the operation means that you have confirmed the";
+" privacy policy." = " privacy policy.";
+"Please read and agree to the privacy agreement" = "Please read and agree to the privacy agreement";
 
 
 "Interest is transparent, and the borrowing is clear." = "Interest is transparent, and the borrowing is clear.";
@@ -54,5 +55,8 @@
 
 
 "Location Services Disabled" = "Location Services Disabled";
-"Please enable location services in Settings to allow the app to determine your location." = "Please enable location services in Settings to allow the app to determine your location.";
+"Location permission is a necessary requirement for identity verification. It is only used for this verification, and the process cannot continue if it is not enabled. Please go to Settings to authorize it." = "Location permission is a necessary requirement for identity verification. It is only used for this verification, and the process cannot continue if it is not enabled. Please go to Settings to authorize it.";
 "Cancel" = "Cancel";
+
+"Camera Permission Required" = "Camera Permission Required";
+"Camera permission is not authorized, so you cannot take a photo of your ID card to complete the verification. Your information is encrypted throughout the process. Please go to Settings to enable it immediately." = "Camera permission is not authorized, so you cannot take a photo of your ID card to complete the verification. Your information is encrypted throughout the process. Please go to Settings to enable it immediately.";

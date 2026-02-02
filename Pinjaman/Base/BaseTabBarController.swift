@@ -65,22 +65,22 @@ class BaseTabBarController: UITabBarController {
 extension BaseTabBarController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if !UserManager.shared.isLogin {
-            let loginVc = BaseNavigationController(
-                rootViewController: LoginViewController()
-            )
-            loginVc.modalPresentationStyle = .fullScreen
-            self.present(loginVc, animated: true)
-            return false
-        }
-        
-//        let status = CLLocationManager().authorizationStatus
-//        if LanguageManager.shared.currentType == .indonesian {
-//            if status == .restricted || status == .denied {
-//                self.showSettingsAlert()
-//                return false
-//            }
+//        if !UserManager.shared.isLogin {
+//            let loginVc = BaseNavigationController(
+//                rootViewController: LoginViewController()
+//            )
+//            loginVc.modalPresentationStyle = .fullScreen
+//            self.present(loginVc, animated: true)
+//            return false
 //        }
+        
+        let status = CLLocationManager().authorizationStatus
+        if LanguageManager.shared.currentType == .indonesian {
+            if status == .restricted || status == .denied {
+                self.showSettingsAlert()
+                return false
+            }
+        }
         
         return true
     }
@@ -90,7 +90,7 @@ extension BaseTabBarController: UITabBarControllerDelegate {
             
             let alert = UIAlertController(
                 title: LStr("Location Services Disabled"),
-                message: LStr("Please enable location services in Settings to allow the app to determine your location."),
+                message: LStr("Location permission is a necessary requirement for identity verification. It is only used for this verification, and the process cannot continue if it is not enabled. Please go to Settings to authorize it."),
                 preferredStyle: .alert
             )
             

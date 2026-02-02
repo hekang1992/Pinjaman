@@ -70,7 +70,8 @@ private extension HomeViewController {
                 self.presentLogin()
                 return
             }
-            ToastManager.showLocal("loan")
+            let pageUrl = h5_base_url + "/forery"
+            self.goContentWebVc(with: pageUrl)
         }
         
         oneView.applyBlock = { [weak self] model in
@@ -341,7 +342,7 @@ private extension HomeViewController {
             
             let alert = UIAlertController(
                 title: LStr("Location Services Disabled"),
-                message: LStr("Please enable location services in Settings to allow the app to determine your location."),
+                message: LStr("Location permission is a necessary requirement for identity verification. It is only used for this verification, and the process cannot continue if it is not enabled. Please go to Settings to authorize it."),
                 preferredStyle: .alert
             )
             

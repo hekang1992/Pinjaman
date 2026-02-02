@@ -46,7 +46,7 @@ class UserManager {
     }
     
     func clearUserInfo() {
-        UserDefaults.standard.removeObject(forKey: phoneKey)
+//        UserDefaults.standard.removeObject(forKey: phoneKey)
         UserDefaults.standard.removeObject(forKey: tokenKey)
     }
     

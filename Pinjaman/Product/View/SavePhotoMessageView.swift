@@ -153,7 +153,7 @@ class SavePhotoMessageView: BaseView {
     
     lazy var rightImageView: UIImageView = {
         let rightImageView = UIImageView()
-        rightImageView.image = UIImage(named: "cpo_lis_l_r_image")
+        rightImageView.image = UIImage(named: "gray_a_icon_image")
         return rightImageView
     }()
     

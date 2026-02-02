@@ -75,6 +75,7 @@
 		73F177272F2902F00066A6AE /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F177262F2902F00066A6AE /* ProductView.swift */; };
 		73F177292F2905000066A6AE /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F177282F2904FE0066A6AE /* ProductViewModel.swift */; };
 		73F1772B2F2908ED0066A6AE /* ProductViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1772A2F2908ED0066A6AE /* ProductViewCell.swift */; };
+		73FB873B2F307CB6000118C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73FB87392F307CB6000118C1 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -152,6 +153,8 @@
 		73F177262F2902F00066A6AE /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
 		73F177282F2904FE0066A6AE /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
 		73F1772A2F2908ED0066A6AE /* ProductViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewCell.swift; sourceTree = "<group>"; };
+		73FB873A2F307CB6000118C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		73FB873C2F307CBC000118C1 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D095250D029524EE4447247C /* Pods_Pinjaman.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinjaman.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -209,6 +212,7 @@
 				73185AFB2F2744C8009C994E /* Info.plist */,
 				73185AFA2F2744C8009C994E /* Assets.xcassets */,
 				73185AF92F2744C8009C994E /* AppDelegate.swift */,
+				73FB87392F307CB6000118C1 /* InfoPlist.strings */,
 				739A92132F27ACD700D94E4A /* Localizable.strings */,
 				73185AFD2F2744C8009C994E /* LaunchScreen.storyboard */,
 				73185B112F27456A009C994E /* Other */,
@@ -501,6 +505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73185B062F2744C8009C994E /* Assets.xcassets in Resources */,
+				73FB873B2F307CB6000118C1 /* InfoPlist.strings in Resources */,
 				739A92152F27ACD700D94E4A /* Localizable.strings in Resources */,
 				73185B082F2744C8009C994E /* LaunchScreen.storyboard in Resources */,
 			);
@@ -647,6 +652,15 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		73FB87392F307CB6000118C1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73FB873A2F307CB6000118C1 /* en */,
+				73FB873C2F307CBC000118C1 /* id */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -657,7 +671,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Pinjaman/Pinjaman.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -666,10 +680,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pinjaman/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Pinjaman;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSContactsUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To efficiently complete identity verification in key business links, pinjaman needs to request camera permission to take photos of ID cards and portraits.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "To complete identity verification and screen for potential risks, pinjaman needs to request contact list permission. This is to verify the authenticity of your identity, help you complete the authentication process quickly, and assist you in passing the loan application.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To achieve precise matching of services and needs, pinjaman needs to request location permission to identify your region and provide you with more suitable loan products and services.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "To push customized exclusive services to you, pinjaman needs to request IDFA permission. The platform will use this permission to achieve precise delivery of content, and at the same time, encrypt user information with high intensity to protect your privacy and security in all aspects.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -681,10 +695,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = www.ksp1017;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = www.ksp1017;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = hkdevpro;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -706,7 +720,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Pinjaman/Pinjaman.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -715,10 +729,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pinjaman/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Pinjaman;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSContactsUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To efficiently complete identity verification in key business links, pinjaman needs to request camera permission to take photos of ID cards and portraits.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "To complete identity verification and screen for potential risks, pinjaman needs to request contact list permission. This is to verify the authenticity of your identity, help you complete the authentication process quickly, and assist you in passing the loan application.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To achieve precise matching of services and needs, pinjaman needs to request location permission to identify your region and provide you with more suitable loan products and services.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "To push customized exclusive services to you, pinjaman needs to request IDFA permission. The platform will use this permission to achieve precise delivery of content, and at the same time, encrypt user information with high intensity to protect your privacy and security in all aspects.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -730,10 +744,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = www.ksp1017;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = www.ksp1017;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = hkdevpro;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

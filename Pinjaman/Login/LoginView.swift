@@ -18,6 +18,10 @@ class LoginView: BaseView {
     
     var loginBlock: (() -> Void)?
     
+    var sureBlock: ((UIButton) -> Void)?
+    
+    var airBlock: (() -> Void)?
+    
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "login_bg_image")
@@ -28,6 +32,7 @@ class LoginView: BaseView {
     lazy var backBtn: UIButton = {
         let backBtn = UIButton(type: .custom)
         backBtn.setBackgroundImage(UIImage(named: "back_btn_image"), for: .normal)
+        backBtn.isHidden = true
         return backBtn
     }()
     
@@ -72,6 +77,7 @@ class LoginView: BaseView {
         phoneFiled.attributedPlaceholder = attrString
         phoneFiled.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         phoneFiled.textColor = UIColor.init(hexString: "#333333")
+        phoneFiled.text = UserManager.shared.getPhone() ?? ""
         return phoneFiled
     }()
     
@@ -131,8 +137,8 @@ class LoginView: BaseView {
         label.textAlignment = .center
         label.isUserInteractionEnabled = true
         
-        let part1 = LStr("Thank you for choosing us.Continuing with the operation means that you have confirmed the ")
-        let part2 = LStr("privacy policy.")
+        let part1 = LStr("Thank you for choosing us.Continuing with the operation means that you have confirmed the")
+        let part2 = LStr(" privacy policy.")
         let fullText = "\(part1)\(part2)"
         
         let paragraphStyle = NSMutableParagraphStyle()
@@ -278,6 +284,13 @@ class LoginView: BaseView {
             })
             .disposed(by: disposeBag)
         
+        sureBtn.rx.tap
+            .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.sureBlock?(self?.sureBtn ?? UIButton())
+            })
+            .disposed(by: disposeBag)
+        
         codeBtn.rx.tap
             .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
@@ -302,7 +315,7 @@ class LoginView: BaseView {
 extension LoginView {
     
     @objc private func handleTapOnLabel(_ gesture: UITapGestureRecognizer) {
-        ToastManager.showLocal("1")
+        self.airBlock?()
     }
     
 }

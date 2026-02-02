@@ -87,3 +87,18 @@ extension LoginViewModel {
     }
     
 }
+
+extension LoginViewModel {
+ 
+    func uploadIDFAInfo(with parameters: [String: String]) async throws -> BaseModel {
+        
+        do {
+            let model: BaseModel = try await NetworkManager.shared.request("/suddenlyal/megfinishern", method: .post, parameters: parameters)
+            return model
+        } catch {
+            throw error
+        }
+        
+    }
+    
+}

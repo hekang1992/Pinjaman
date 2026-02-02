@@ -8,12 +8,12 @@
 import Foundation
 import Alamofire
 
+let base_url = "http://8.215.86.57:9803/trixoon"
+let h5_base_url = "http://8.215.86.57:9803"
 class NetworkManager {
     static let shared = NetworkManager()
     
     private init() {}
-    
-    private let base_url = "http://8.215.86.57:9803/trixoon"
     
     func request<T: Codable>(
         _ url: String,

@@ -77,7 +77,7 @@ class OneHomeView: BaseView {
     
     private lazy var threeImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "en_rac_image")
+        iv.image = languageCode == .indonesian ? UIImage(named: "idn_a_home_image") : UIImage(named: "en_rac_image")
         iv.isUserInteractionEnabled = true
         return iv
     }()
@@ -181,7 +181,7 @@ class OneHomeView: BaseView {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapOnLabel(_:)))
         label.addGestureRecognizer(tap)
-        
+        label.isHidden = languageCode == .indonesian ? true : false
         return label
     }()
     
@@ -287,7 +287,11 @@ class OneHomeView: BaseView {
         threeImageView.snp.makeConstraints { make in
             make.top.equalTo(twoImageView.snp.top).offset(195)
             make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 343, height: 189))
+            if languageCode == .indonesian {
+                make.size.equalTo(CGSize(width: 343, height: 159))
+            }else {
+                make.size.equalTo(CGSize(width: 343, height: 189))
+            }
         }
         
         oneRateView.snp.makeConstraints { make in
@@ -318,9 +322,13 @@ class OneHomeView: BaseView {
         
         applyBtn.snp.makeConstraints { make in
             make.top.equalTo(twoImageView)
-            make.bottom.equalTo(threeImageView).offset(-52.pix())
             make.centerX.equalToSuperview()
             make.width.equalTo(335.pix())
+            if languageCode == .indonesian {
+                make.bottom.equalTo(threeImageView)
+            }else {
+                make.bottom.equalTo(threeImageView).offset(-52.pix())
+            }
         }
         
         fourImageView.snp.makeConstraints { make in

@@ -71,7 +71,7 @@ class HomeBnViewCell: UITableViewCell {
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 343.pix(), height: 58.pix()))
-            make.bottom.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview()
         }
         
         arrowImageView.snp.makeConstraints { make in

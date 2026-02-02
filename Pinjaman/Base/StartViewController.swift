@@ -61,9 +61,9 @@ class StartViewController: BaseViewController {
                 Task {
                     
                     async let initInfoTask: Void = self.getInitInfo()
-                    async let idfaTask: Void = self.getIDFA()
+//                    async let idfaTask: Void = self.getIDFA()
                     
-                    _ = await (initInfoTask, idfaTask)
+                    _ = await (initInfoTask)
                     
                     await self.switchVc()
                 }
@@ -88,59 +88,60 @@ extension StartViewController {
             if ["0", "00"].contains(taxant) {
                 let languageCode = model.standee?.horm ?? ""
                 LanguageManager.shared.configure(with: languageCode)
+//                LanguageManager.shared.configure(with: "3102")
             }
         } catch {
             
         }
     }
     
-    private func getIDFA() async {
-        guard #available(iOS 14, *) else { return }
-        try? await Task.sleep(nanoseconds: 1_000_000_000)
-        let status = await ATTrackingManager.requestTrackingAuthorization()
-        
-        switch status {
-        case .authorized, .denied, .notDetermined:
-            Task {
-                await self.uploadIDFAInfo()
-            }
-            
-        case .restricted:
-            break
-            
-        @unknown default:
-            break
-        }
-    }
-    
-    private func uploadIDFAInfo() async {
-        let hol = SecurityVault.shared.getIDFV()
-        let minaciial = SecurityVault.shared.getIDFV()
-        let edgester = SecurityVault.shared.getIDFA()
-        let parameters = ["hol": hol, "minaciial": minaciial, "edgester": edgester]
-        do {
-            let model = try await viewModel.uploadIDFAInfo(with: parameters)
-            let taxant = model.taxant ?? ""
-            if ["0", "00"].contains(taxant) {
-                if let bkModel = model.standee?.stillarian {
-                    self.bkcInfo(with: bkModel)
-                }
-            }
-        } catch {
-            
-        }
-    }
-    
-    private func bkcInfo(with model: stillarianModel) {
-        Settings.shared.displayName = model.scelry ?? ""
-        Settings.shared.appURLSchemeSuffix = model.dayist ?? ""
-        Settings.shared.appID = model.camer ?? ""
-        Settings.shared.clientToken = model.oenful ?? ""
-        ApplicationDelegate.shared.application(
-            UIApplication.shared,
-            didFinishLaunchingWithOptions: nil
-        )
-    }
+//    private func getIDFA() async {
+//        guard #available(iOS 14, *) else { return }
+//        try? await Task.sleep(nanoseconds: 1_000_000_000)
+//        let status = await ATTrackingManager.requestTrackingAuthorization()
+//        
+//        switch status {
+//        case .authorized, .denied, .notDetermined:
+//            Task {
+//                await self.uploadIDFAInfo()
+//            }
+//            
+//        case .restricted:
+//            break
+//            
+//        @unknown default:
+//            break
+//        }
+//    }
+//    
+//    private func uploadIDFAInfo() async {
+//        let hol = SecurityVault.shared.getIDFV()
+//        let minaciial = SecurityVault.shared.getIDFV()
+//        let edgester = SecurityVault.shared.getIDFA()
+//        let parameters = ["hol": hol, "minaciial": minaciial, "edgester": edgester]
+//        do {
+//            let model = try await viewModel.uploadIDFAInfo(with: parameters)
+//            let taxant = model.taxant ?? ""
+//            if ["0", "00"].contains(taxant) {
+//                if let bkModel = model.standee?.stillarian {
+//                    self.bkcInfo(with: bkModel)
+//                }
+//            }
+//        } catch {
+//            
+//        }
+//    }
+//    
+//    private func bkcInfo(with model: stillarianModel) {
+//        Settings.shared.displayName = model.scelry ?? ""
+//        Settings.shared.appURLSchemeSuffix = model.dayist ?? ""
+//        Settings.shared.appID = model.camer ?? ""
+//        Settings.shared.clientToken = model.oenful ?? ""
+//        ApplicationDelegate.shared.application(
+//            UIApplication.shared,
+//            didFinishLaunchingWithOptions: nil
+//        )
+//    }
     
     private func switchVc() async {
         try? await Task.sleep(nanoseconds: 250_000_000)

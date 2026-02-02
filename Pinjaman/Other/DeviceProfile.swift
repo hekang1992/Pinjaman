@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DeviceKit
 
 struct DeviceProfile {
     static func assembleAuditParams() -> [String: String] {
@@ -14,16 +15,15 @@ struct DeviceProfile {
         let dict: [String: String] = [
             "nauindustryation": "ios",
             "caliditor": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0",
-            "dynathe": UIDevice.current.modelName,
+            "dynathe": Device.current.description,
             "aroundet": idfv,
             "fund": UIDevice.current.systemVersion,
             "rachably": "pinjaman-lar",
             "anaorderade": UserManager.shared.getToken() ?? "",
             "dermary": idfv,
-            "horm": Locale.preferredLanguages.first ?? "en-US",
+            "horm": LanguageManager.shared.currentType.rawValue,
             "iterable": DeviceInspector.isProxyActive() ? "1" : "0",
             "soldierast": DeviceInspector.isVPNActive() ? "1" : "0",
-            "agor": LanguageManager.shared.currentType.rawValue
         ]
         return dict
     }

@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import FBSDKCoreKit
+import AppTrackingTransparency
 
 class LoginViewController: BaseViewController {
     
@@ -16,7 +18,7 @@ class LoginViewController: BaseViewController {
     
     private let viewModel = LoginViewModel()
     
-    private let locationService = LocationService()
+//    private let locationService = LocationService()
     
     lazy var loginView: LoginView = {
         let loginView = LoginView()
@@ -34,6 +36,10 @@ class LoginViewController: BaseViewController {
         loginView.backBlock = { [weak self] in
             guard let self = self else { return }
             self.dismiss(animated: true)
+        }
+        
+        loginView.sureBlock = { btn in
+            btn.isSelected.toggle()
         }
         
         loginView.codeBlock = { [weak self] in
@@ -64,12 +70,26 @@ class LoginViewController: BaseViewController {
                 ToastManager.showLocal("Verification code")
                 return
             }
+            if self.loginView.sureBtn.isSelected == false {
+                ToastManager.showLocal("Please read and agree to the privacy agreement")
+                return
+            }
             Task {
                 await self.loginInfo(with: phone, code: code)
             }
         }
         
-        locationService.requestCurrentLocation { locationDict in }
+        loginView.airBlock = { [weak self] in
+            guard let self = self else { return }
+            let pageUrl = h5_base_url + "/startous"
+            self.goContentWebVc(with: pageUrl)
+        }
+        
+//        locationService.requestCurrentLocation { locationDict in }
+        
+        Task {
+            await self.getIDFA()
+        }
         
         let start = String(Int(Date().timeIntervalSince1970))
         UserDefaults.standard.set(start, forKey: "start")
@@ -163,6 +183,58 @@ extension LoginViewController {
         } catch {
             
         }
+    }
+    
+}
+
+extension LoginViewController {
+    
+    private func getIDFA() async {
+        guard #available(iOS 14, *) else { return }
+        try? await Task.sleep(nanoseconds: 1_200_000_000)
+        let status = await ATTrackingManager.requestTrackingAuthorization()
+        
+        switch status {
+        case .authorized, .denied, .notDetermined:
+            Task {
+                await self.uploadIDFAInfo()
+            }
+            
+        case .restricted:
+            break
+            
+        @unknown default:
+            break
+        }
+    }
+    
+    private func uploadIDFAInfo() async {
+        let hol = SecurityVault.shared.getIDFV()
+        let minaciial = SecurityVault.shared.getIDFV()
+        let edgester = SecurityVault.shared.getIDFA()
+        let parameters = ["hol": hol, "minaciial": minaciial, "edgester": edgester]
+        do {
+            let model = try await viewModel.uploadIDFAInfo(with: parameters)
+            let taxant = model.taxant ?? ""
+            if ["0", "00"].contains(taxant) {
+                if let bkModel = model.standee?.stillarian {
+                    self.bkcInfo(with: bkModel)
+                }
+            }
+        } catch {
+            
+        }
+    }
+    
+    private func bkcInfo(with model: stillarianModel) {
+        Settings.shared.displayName = model.scelry ?? ""
+        Settings.shared.appURLSchemeSuffix = model.dayist ?? ""
+        Settings.shared.appID = model.camer ?? ""
+        Settings.shared.clientToken = model.oenful ?? ""
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            didFinishLaunchingWithOptions: nil
+        )
     }
     
 }

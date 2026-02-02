@@ -1,0 +1,15 @@
+/* 
+  InfoPlist.strings
+  Pinjaman
+
+  Created by hekang on 2026/2/2.
+  
+*/
+
+"NSLocationWhenInUseUsageDescription" = "Untuk mewujudkan pencocokan akurat antara layanan dan kebutuhan, pinjaman perlu meminta izin lokasi untuk mengidentifikasi wilayah Anda dan menyediakan produk serta layanan pinjaman yang lebih sesuai untuk Anda.";
+
+"NSCameraUsageDescription" = "Untuk menyelesaikan verifikasi identitas secara efisien di tahapan kunci bisnis, pinjaman perlu meminta izin kamera untuk mengambil foto kartu identitas dan potret wajah.";
+
+"NSUserTrackingUsageDescription" = "Untuk mengirimkan layanan eksklusif yang disesuaikan ke Anda, pinjaman perlu meminta izin IDFA. Platform akan menggunakan izin ini untuk mewujudkan penyampaian konten yang akurat, dan pada saat yang sama, mengenkripsi informasi pengguna dengan tingkat keamanan tinggi untuk melindungi privasi dan keamanan Anda dari segala aspek.";
+
+"NSContactsUsageDescription" = "Untuk menyelesaikan verifikasi identitas dan memeriksa risiko potensial, pinjaman perlu meminta izin daftar kontak. Hal ini bertujuan untuk memverifikasi keaslian identitas Anda, membantu Anda menyelesaikan proses otentikasi dengan cepat, dan mendukung Anda dalam menyelesaikan aplikasi pinjaman.";

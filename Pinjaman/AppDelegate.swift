@@ -31,10 +31,14 @@ extension AppDelegate {
     }
     
     @objc func changeRootVc(_ noti: Notification) {
-        let userInfo = noti.userInfo as? [String: Int]
-        let tabBar = BaseTabBarController()
-        tabBar.selectedIndex = userInfo?["tab"] ?? 0
-        window?.rootViewController = tabBar
+        if UserManager.shared.isLogin {
+            let userInfo = noti.userInfo as? [String: Int]
+            let tabBar = BaseTabBarController()
+            tabBar.selectedIndex = userInfo?["tab"] ?? 0
+            window?.rootViewController = tabBar
+        }else {
+            window?.rootViewController = BaseNavigationController(rootViewController: LoginViewController())
+        }
     }
     
 }

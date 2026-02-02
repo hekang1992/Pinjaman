@@ -53,7 +53,6 @@ class ProductViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 5
         imageView.layer.masksToBounds = true
-        imageView.backgroundColor = .red
         return imageView
     }()
         

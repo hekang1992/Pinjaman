@@ -82,6 +82,35 @@ extension TwoHomeView: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let count = modelArry?.count ?? 0
+        if section == count - 1 {
+            return 40
+        }else {
+            return 0.01
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let count = modelArry?.count ?? 0
+        if section == count - 1 {
+            let headView = UIView()
+            let label = UILabel()
+            label.text = "Daftar Produk";
+            label.textColor = UIColor.init(hexString: "#333333")
+            label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+            headView.addSubview(label)
+            label.snp.makeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.left.equalToSuperview().offset(16)
+                make.height.equalTo(20)
+            }
+            return headView
+        }else {
+            return nil
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let bigmodel = modelArry?[indexPath.section]
         let type = bigmodel?.histrieastlike ?? ""

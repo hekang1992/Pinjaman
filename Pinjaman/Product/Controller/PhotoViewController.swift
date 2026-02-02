@@ -360,17 +360,18 @@ extension PhotoViewController {
                     oneListView.layer.borderWidth = 1
                     oneListView.layer.borderColor = UIColor.white.cgColor
                     oneListView.trptImageView.isHidden = false
-                    oneListView.peopleImageView.kf.setImage(with: URL(string: idUrl)) { result in
-                        switch result {
-                        case .success(_):
-                            DispatchQueue.main.async {
-                                self.oneListView.peopleImageView.layer.cornerRadius = 16
-                                self.oneListView.peopleImageView.layer.masksToBounds = true
-                            }
-                        case .failure(let error):
-                            print("error: \(error)")
-                        }
-                    }
+                    oneListView.peopleImageView.image = UIImage(named: "phoc_place_image")
+//                    oneListView.peopleImageView.kf.setImage(with: URL(string: idUrl)) { result in
+//                        switch result {
+//                        case .success(_):
+//                            DispatchQueue.main.async {
+//                                self.oneListView.peopleImageView.layer.cornerRadius = 16
+//                                self.oneListView.peopleImageView.layer.masksToBounds = true
+//                            }
+//                        case .failure(let error):
+//                            print("error: \(error)")
+//                        }
+//                    }
                     
                 }
                 
@@ -380,17 +381,18 @@ extension PhotoViewController {
                     twoListView.layer.borderWidth = 1
                     twoListView.layer.borderColor = UIColor.white.cgColor
                     twoListView.trptImageView.isHidden = false
-                    twoListView.peopleImageView.kf.setImage(with: URL(string: faceUrl)) { result in
-                        switch result {
-                        case .success(_):
-                            DispatchQueue.main.async {
-                                self.twoListView.peopleImageView.layer.cornerRadius = 16
-                                self.twoListView.peopleImageView.layer.masksToBounds = true
-                            }
-                        case .failure(let error):
-                            print("error: \(error)")
-                        }
-                    }
+                    twoListView.peopleImageView.image = UIImage(named: "fac_place_image")
+//                    twoListView.peopleImageView.kf.setImage(with: URL(string: faceUrl)) { result in
+//                        switch result {
+//                        case .success(_):
+//                            DispatchQueue.main.async {
+//                                self.twoListView.peopleImageView.layer.cornerRadius = 16
+//                                self.twoListView.peopleImageView.layer.masksToBounds = true
+//                            }
+//                        case .failure(let error):
+//                            print("error: \(error)")
+//                        }
+//                    }
                     
                 }
             }
