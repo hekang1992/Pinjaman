@@ -16,6 +16,7 @@
 		73185B182F2745FC009C994E /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73185B172F2745FC009C994E /* BaseNavigationController.swift */; };
 		73185B1A2F274617009C994E /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73185B192F274617009C994E /* StartViewController.swift */; };
 		73185B1C2F274DBF009C994E /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73185B1B2F274DBF009C994E /* NetworkMonitor.swift */; };
+		7358E1142F319C9600A2DB8D /* DescLaonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7358E1132F319C9600A2DB8D /* DescLaonViewController.swift */; };
 		737DE11B2F2A316400CF7941 /* PopAutnEnumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE11A2F2A316400CF7941 /* PopAutnEnumView.swift */; };
 		737DE11D2F2A334700CF7941 /* AuthListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE11C2F2A334700CF7941 /* AuthListViewCell.swift */; };
 		737DE11F2F2A43CA00CF7941 /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737DE11E2F2A43CA00CF7941 /* ContactManager.swift */; };
@@ -93,6 +94,7 @@
 		73185B172F2745FC009C994E /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		73185B192F274617009C994E /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		73185B1B2F274DBF009C994E /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		7358E1132F319C9600A2DB8D /* DescLaonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescLaonViewController.swift; sourceTree = "<group>"; };
 		737DE11A2F2A316400CF7941 /* PopAutnEnumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAutnEnumView.swift; sourceTree = "<group>"; };
 		737DE11C2F2A334700CF7941 /* AuthListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthListViewCell.swift; sourceTree = "<group>"; };
 		737DE11E2F2A43CA00CF7941 /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				739A92052F27A77000D94E4A /* HomeViewController.swift */,
+				7358E1132F319C9600A2DB8D /* DescLaonViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				73FB873E2F308802000118C1 /* AuthPopLeaveView.swift in Sources */,
 				7391FFAC2F2B0611004E2226 /* OrderNorViewCell.swift in Sources */,
 				739A921D2F27AE8C00D94E4A /* ToastManager.swift in Sources */,
+				7358E1142F319C9600A2DB8D /* DescLaonViewController.swift in Sources */,
 				73EB772A2F2890F30058A81C /* CenterClickListView.swift in Sources */,
 				73AD85232F29F1E700090E11 /* CpoViewCell.swift in Sources */,
 				73AD851A2F29D17E00090E11 /* PopAlertPhotoView.swift in Sources */,

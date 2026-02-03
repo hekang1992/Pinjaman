@@ -88,6 +88,7 @@ extension StartViewController {
             if ["0", "00"].contains(taxant) {
                 let languageCode = model.standee?.horm ?? ""
                 LanguageManager.shared.configure(with: languageCode)
+//                LanguageManager.shared.configure(with: "3100")
 //                LanguageManager.shared.configure(with: "3102")
             }
         } catch {

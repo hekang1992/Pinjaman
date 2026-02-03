@@ -294,6 +294,8 @@ extension PhotoViewController {
         
         popView.timeBlock = { [weak self] tx in
             guard let self = self else { return }
+            popView.oneFiled.resignFirstResponder()
+            popView.twoFiled.resignFirstResponder()
             self.tapTimeClick(dateTx: tx)
         }
         

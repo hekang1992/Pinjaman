@@ -36,6 +36,8 @@ class OneHomeView: BaseView {
     
     var loanBlock: (() -> Void)?
     
+    var descBlock: (() -> Void)?
+    
     private lazy var bgImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "one_home_head_image")
@@ -101,6 +103,9 @@ class OneHomeView: BaseView {
     private lazy var fiveImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "en_quc_home_image")
+        iv.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleFiveImageTap))
+        iv.addGestureRecognizer(tapGesture)
         return iv
     }()
     
@@ -374,4 +379,7 @@ extension OneHomeView {
         self.loanBlock?()
     }
     
+    @objc private func handleFiveImageTap() {
+        self.descBlock?()
+    }
 }

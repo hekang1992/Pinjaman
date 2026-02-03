@@ -139,8 +139,8 @@ extension ProductView: UITableViewDelegate, UITableViewDataSource {
         }
         
         logoImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(nameLabel)
-            make.right.equalTo(nameLabel.snp.left).offset(-5)
+            make.centerY.equalTo(productLabel)
+            make.right.equalTo(productLabel.snp.left).offset(-5)
             make.width.height.equalTo(28)
         }
         

@@ -75,6 +75,12 @@ private extension HomeViewController {
             self.goContentWebVc(with: pageUrl)
         }
         
+        oneView.descBlock = { [weak self] in
+            guard let self = self else { return }
+            let descVc = DescLaonViewController()
+            self.navigationController?.pushViewController(descVc, animated: true)
+        }
+        
         oneView.applyBlock = { [weak self] model in
             guard let self = self else { return }
             

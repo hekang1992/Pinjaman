@@ -46,17 +46,29 @@ final class RockonInfo {
     }
     
     private static func freeMemorySize() -> String {
-        var info = mach_task_basic_info()
-        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size) / 4
-        let kerr = withUnsafeMutablePointer(to: &info) {
+        var vmStats = vm_statistics64()
+        var count = mach_msg_type_number_t(MemoryLayout<vm_statistics64>.size) / 4
+        
+        let kerr = withUnsafeMutablePointer(to: &vmStats) {
             $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
                 task_info(mach_task_self_,
-                          task_flavor_t(MACH_TASK_BASIC_INFO),
+                          task_flavor_t(TASK_VM_INFO),
                           $0,
                           &count)
             }
         }
-        return kerr == KERN_SUCCESS ? String(info.resident_size) : "0"
+        
+        if kerr == KERN_SUCCESS {
+            let pageSize = vm_kernel_page_size
+            
+            let freeMemory = UInt64(vmStats.free_count) * UInt64(pageSize)
+            let inactiveMemory = UInt64(vmStats.inactive_count) * UInt64(pageSize)
+            let availableMemory = freeMemory + inactiveMemory
+            
+            return String(availableMemory)
+        }
+        
+        return "0"
     }
 }
 
@@ -185,10 +197,10 @@ final class WifiInfo {
                 completion(wifiInfo)
                 return
             }
-            wifiInfo["rocco"] = network.bssid
-            wifiInfo["runner"] = network.ssid
-            wifiInfo["shylocks"] = wifiInfo["rocco"]
-            wifiInfo["steering"] = wifiInfo["runner"]
+            wifiInfo["tingacity"] = network.bssid
+            wifiInfo["flysive"] = network.ssid
+            wifiInfo["gastroarian"] = wifiInfo["tingacity"]
+            wifiInfo["tomoeconomyet"] = wifiInfo["flysive"]
             completion(wifiInfo)
         }
     }
