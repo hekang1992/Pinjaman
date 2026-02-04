@@ -46,30 +46,31 @@ final class RockonInfo {
     }
     
     private static func freeMemorySize() -> String {
-        var vmStats = vm_statistics64()
-        var count = mach_msg_type_number_t(MemoryLayout<vm_statistics64>.size) / 4
+        var pageSize: vm_size_t = 0
+        var stats = vm_statistics64()
+        var count = UInt32(MemoryLayout.size(ofValue: stats) / MemoryLayout<UInt32>.size)
         
-        let kerr = withUnsafeMutablePointer(to: &vmStats) {
-            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
-                task_info(mach_task_self_,
-                          task_flavor_t(TASK_VM_INFO),
-                          $0,
-                          &count)
+        let host = mach_host_self()
+        
+        host_page_size(host, &pageSize)
+        
+        let result = withUnsafeMutablePointer(to: &stats) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: Int(count)) {
+                host_statistics64(host, HOST_VM_INFO64, $0, &count)
             }
         }
         
-        if kerr == KERN_SUCCESS {
-            let pageSize = vm_kernel_page_size
-            
-            let freeMemory = UInt64(vmStats.free_count) * UInt64(pageSize)
-            let inactiveMemory = UInt64(vmStats.inactive_count) * UInt64(pageSize)
-            let availableMemory = freeMemory + inactiveMemory
-            
-            return String(availableMemory)
+        guard result == KERN_SUCCESS else {
+            return "0"
         }
         
-        return "0"
+        let freeMemory = UInt64(stats.free_count) * UInt64(pageSize)
+        let inactiveMemory = UInt64(stats.inactive_count) * UInt64(pageSize)
+        let availableMemory = freeMemory + inactiveMemory
+        
+        return "\(availableMemory)"
     }
+    
 }
 
 final class FactorainInfo {
@@ -223,7 +224,7 @@ final class DeviceCollector {
                     "federal": "0",
                     "pangwise": "0"
                 ],
-                "experienceth": ExperiencethInfo.fetch(with: wifiList["rocco"] ?? ""),
+                "experienceth": ExperiencethInfo.fetch(with: wifiList["gastroarian"] ?? ""),
                 "condition": [
                     "naissot": [wifiList]
                 ]
