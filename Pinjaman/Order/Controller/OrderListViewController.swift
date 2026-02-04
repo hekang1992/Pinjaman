@@ -64,6 +64,10 @@ class OrderListViewController: BaseViewController {
             make.left.right.bottom.equalToSuperview()
         }
         
+        emptyView.clickBlock = { [weak self] in
+            self?.changeRootVc()
+        }
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(headView.snp.bottom).offset(10)
