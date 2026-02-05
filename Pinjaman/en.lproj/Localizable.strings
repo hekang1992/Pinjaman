@@ -63,3 +63,5 @@
 
 "Contact Permission" = "Contact Permission";
 "Contacts permission is used for identity verification and fraud prevention. The review will be delayed if it is not enabled. Please go to Settings to authorize it." = "Contacts permission is used for identity verification and fraud prevention. The review will be delayed if it is not enabled. Please go to Settings to authorize it.";
+
+"Please select a date." = "Please select a date.";

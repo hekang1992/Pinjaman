@@ -64,3 +64,5 @@
 
 "Contact Permission" = "Izin Kontak";
 "Contacts permission is used for identity verification and fraud prevention. The review will be delayed if it is not enabled. Please go to Settings to authorize it." = "Izin kontak digunakan untuk verifikasi identitas dan pencegahan penipuan. Tinjauan akan tertunda jika tidak diaktifkan. Silakan pergi ke Pengaturan untuk memberikan otorisasi.";
+
+"Please select a date." = "Silakan pilih tanggal.";

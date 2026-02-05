@@ -87,8 +87,12 @@ class LoginViewController: BaseViewController {
         
 //        locationService.requestCurrentLocation { locationDict in }
         
-        Task {
-            await self.getIDFA()
+        let phone = UserManager.shared.getPhone() ?? ""
+        
+        if phone.isEmpty {
+            Task {
+                await self.getIDFA()
+            }
         }
         
         let start = String(Int(Date().timeIntervalSince1970))

@@ -39,9 +39,15 @@ class HomeViewController: BaseViewController {
         setupActions()
         setupRefresh()
         locationService.requestCurrentLocation { locationDict in }
-        Task {
-            await self.uploadIDFAInfo()
+        
+        let type = UserDefaults.standard.object(forKey: "upload_IDFA_Info") as? String ?? ""
+        
+        if type != "1" {
+            Task {
+                await self.uploadIDFAInfo()
+            }
         }
+        
         Task {
             await self.getProvicesInfo()
         }
@@ -320,6 +326,8 @@ extension HomeViewController {
             let model = try await viewModel.uploadIDFAInfo(with: parameters)
             let taxant = model.taxant ?? ""
             if ["0", "00"].contains(taxant) {
+                UserDefaults.standard.set("1", forKey: "upload_IDFA_Info")
+                UserDefaults.standard.synchronize()
                 if let bkModel = model.standee?.stillarian {
                     self.bkcInfo(with: bkModel)
                 }

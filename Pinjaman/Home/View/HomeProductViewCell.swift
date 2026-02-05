@@ -60,15 +60,16 @@ class HomeProductViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var applyLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.backgroundColor = UIColor(hexString: "#4CA466")
-        label.textColor = UIColor(hexString: "#FFFFFF")
-        label.layer.cornerRadius = 16
-        label.layer.masksToBounds = true
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        return label
+    private lazy var applyButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setTitleColor(UIColor(hexString: "#FFFFFF"), for: .normal)
+        button.backgroundColor = UIColor(hexString: "#4CA466")
+        button.layer.cornerRadius = 16
+        button.layer.masksToBounds = true
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        button.isUserInteractionEnabled = false
+        return button
     }()
     
     private lazy var tapBtn: UIButton = {
@@ -95,7 +96,7 @@ class HomeProductViewCell: UITableViewCell {
         bgView.addSubview(nameLabel)
         bgView.addSubview(limitLabel)
         bgView.addSubview(numLabel)
-        bgView.addSubview(applyLabel)
+        bgView.addSubview(applyButton)
         bgView.addSubview(tapBtn)
     }
     
@@ -125,7 +126,7 @@ class HomeProductViewCell: UITableViewCell {
             make.height.equalTo(17)
         }
         
-        applyLabel.snp.makeConstraints { make in
+        applyButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalTo(logoImageView)
             make.height.equalTo(32)
@@ -165,6 +166,6 @@ class HomeProductViewCell: UITableViewCell {
         
         limitLabel.text = model.nuchine ?? ""
         numLabel.text = model.megfinishern ?? ""
-        applyLabel.text = model.powerability ?? ""
+        applyButton.setTitle(model.powerability ?? "", for: .normal)
     }
 }

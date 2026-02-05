@@ -304,6 +304,10 @@ extension PhotoViewController {
             let name = popView.oneFiled.text ?? ""
             let idnum = popView.twoFiled.text ?? ""
             let dateTime = popView.threeFiled.text ?? ""
+            if dateTime.isEmpty {
+                ToastManager.showLocal("Please select a date.")
+                return
+            }
             Task {
                 let parameters = ["pentecostate": dateTime,
                                   "neverful": idnum,
@@ -349,7 +353,7 @@ extension PhotoViewController {
     private func defaultDate() -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        return dateFormatter.date(from: "30/12/1992") ?? Date()
+        return dateFormatter.date(from: "01/01/1990") ?? Date()
     }
     
     private func createPickerStyle() -> BRPickerStyle {
