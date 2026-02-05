@@ -22,6 +22,8 @@ class NetworkManager {
         multipartData: [String: Data]? = nil
     ) async throws -> T {
         
+        let imageKey = generateRandomString()
+        
         let timeout: TimeInterval = (method == .get) ? 20.0 : 30.0
         
         let dataTask: DataTask<T>
@@ -45,7 +47,7 @@ class NetworkManager {
                         }
                     }
                     multipartData?.forEach { key, data in
-                        multipart.append(data, withName: key, fileName: "\(key).jpg", mimeType: "image/jpeg")
+                        multipart.append(data, withName: key, fileName: "\(imageKey).jpg", mimeType: "image/jpeg")
                     }
                 },
                 to: apiUrl,
@@ -64,4 +66,23 @@ class NetworkManager {
             throw error
         }
     }
+}
+
+extension NetworkManager {
+    
+    func generateRandomString() -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        let alphanumeric = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        
+        let firstChar = String(letters.randomElement()!)
+        
+        let middleChars = (0..<14).map { _ in
+            String(alphanumeric.randomElement()!)
+        }.joined()
+        
+        let lastChar = String(letters.randomElement()!)
+        
+        return firstChar + middleChars + lastChar
+    }
+    
 }

@@ -12,7 +12,7 @@ class CameraManager: NSObject {
     
     var onImageCaptured: ((Data?) -> Void)?
     
-    private let maxByteSize = 800 * 1024
+    private let maxByteSize = 500 * 1024
     
     func presentCamera(from viewController: UIViewController, device: UIImagePickerController.CameraDevice = .rear) {
         
