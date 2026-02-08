@@ -13,29 +13,43 @@ import AppTrackingTransparency
 class LoginViewController: BaseViewController {
     
     private var timer: Timer?
-    
     private var countdownTime = 60
-    
     private let viewModel = LoginViewModel()
     
-//    private let locationService = LocationService()
-    
-    lazy var loginView: LoginView = {
-        let loginView = LoginView()
-        return loginView
+    private lazy var loginView: LoginView = {
+        return LoginView()
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupUI()
+        setupBindings()
+        setupInitialData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loginView.phoneFiled.becomeFirstResponder()
+    }
+    
+    @MainActor
+    deinit {
+        stopCountdown()
+    }
+}
+
+private extension LoginViewController {
+    
+    func setupUI() {
         view.addSubview(loginView)
         loginView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+    }
+    
+    func setupBindings() {
         loginView.backBlock = { [weak self] in
-            guard let self = self else { return }
-            self.dismiss(animated: true)
+            self?.dismiss(animated: true)
         }
         
         loginView.sureBlock = { btn in
@@ -43,52 +57,20 @@ class LoginViewController: BaseViewController {
         }
         
         loginView.codeBlock = { [weak self] in
-            guard let self = self else { return }
-            let end = String(Int(Date().timeIntervalSince1970))
-            UserDefaults.standard.set(end, forKey: "end")
-            let phone = loginView.phoneFiled.text ?? ""
-            if phone.isEmpty {
-                ToastManager.showLocal("Enter your mobile phone number")
-                return
-            }
-            Task {
-                await self.codeInfo(with: phone)
-            }
+            self?.handleCodeButtonTap()
         }
         
         loginView.loginBlock = { [weak self] in
-            guard let self = self else { return }
-            let end = String(Int(Date().timeIntervalSince1970))
-            UserDefaults.standard.set(end, forKey: "end")
-            let phone = loginView.phoneFiled.text ?? ""
-            let code = loginView.codeFiled.text ?? ""
-            if phone.isEmpty {
-                ToastManager.showLocal("Enter your mobile phone number")
-                return
-            }
-            if code.isEmpty {
-                ToastManager.showLocal("Verification code")
-                return
-            }
-            if self.loginView.sureBtn.isSelected == false {
-                ToastManager.showLocal("Please read and agree to the privacy agreement")
-                return
-            }
-            Task {
-                await self.loginInfo(with: phone, code: code)
-            }
+            self?.handleLoginButtonTap()
         }
         
         loginView.airBlock = { [weak self] in
-            guard let self = self else { return }
-            let pageUrl = h5_base_url + "/startous"
-            self.goContentWebVc(with: pageUrl)
+            self?.handleAirButtonTap()
         }
-        
-//        locationService.requestCurrentLocation { locationDict in }
-        
+    }
+    
+    func setupInitialData() {
         let phone = UserManager.shared.getPhone() ?? ""
-        
         if phone.isEmpty {
             Task {
                 await self.getIDFA()
@@ -98,26 +80,76 @@ class LoginViewController: BaseViewController {
         let start = String(Int(Date().timeIntervalSince1970))
         UserDefaults.standard.set(start, forKey: "start")
     }
+}
+
+private extension LoginViewController {
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.loginView.phoneFiled.becomeFirstResponder()
+    func handleCodeButtonTap() {
+        saveEndTimestamp()
+        let phone = loginView.phoneFiled.text ?? ""
+        
+        guard !phone.isEmpty else {
+            ToastManager.showLocal("Enter your mobile phone number")
+            return
+        }
+        
+        Task {
+            await codeInfo(with: phone)
+        }
     }
     
-    @MainActor
-    deinit {
-        stopCountdown()
+    func handleLoginButtonTap() {
+        saveEndTimestamp()
+        let phone = loginView.phoneFiled.text ?? ""
+        let code = loginView.codeFiled.text ?? ""
+        
+        guard validateLoginInput(phone: phone, code: code) else { return }
+        
+        Task {
+            await loginInfo(with: phone, code: code)
+        }
+    }
+    
+    func handleAirButtonTap() {
+        let pageUrl = h5_base_url + "/startous"
+        goContentWebVc(with: pageUrl)
+    }
+    
+    func saveEndTimestamp() {
+        let end = String(Int(Date().timeIntervalSince1970))
+        UserDefaults.standard.set(end, forKey: "end")
     }
 }
 
-extension LoginViewController {
+private extension LoginViewController {
     
-    private func startCountdown() {
+    func validateLoginInput(phone: String, code: String) -> Bool {
+        guard !phone.isEmpty else {
+            ToastManager.showLocal("Enter your mobile phone number")
+            return false
+        }
+        
+        guard !code.isEmpty else {
+            ToastManager.showLocal("Verification code")
+            return false
+        }
+        
+        guard loginView.sureBtn.isSelected else {
+            ToastManager.showLocal("Please read and agree to the privacy agreement")
+            return false
+        }
+        
+        return true
+    }
+}
+
+private extension LoginViewController {
+    
+    func startCountdown() {
         stopCountdown()
         
         countdownTime = 60
         loginView.codeBtn.isEnabled = false
-        
         loginView.codeBtn.setTitle("\(countdownTime)s", for: .disabled)
         
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
@@ -132,39 +164,45 @@ extension LoginViewController {
         }
     }
     
-    private func stopCountdown() {
+    func stopCountdown() {
         timer?.invalidate()
         timer = nil
         loginView.codeBtn.isEnabled = true
         loginView.codeBtn.setTitle(LStr("Send code"), for: .normal)
     }
-    
 }
 
-extension LoginViewController {
+private extension LoginViewController {
     
-    private func codeInfo(with phone: String) async {
+    func codeInfo(with phone: String) async {
         do {
             let model = try await viewModel.codeInfo(with: ["tellard": phone])
             let taxant = model.taxant ?? ""
+            
             if ["0", "00"].contains(taxant) {
-                self.loginView.codeFiled.becomeFirstResponder()
-                self.startCountdown()
+                await MainActor.run {
+                    self.loginView.codeFiled.becomeFirstResponder()
+                    self.startCountdown()
+                }
             }
+            
             ToastManager.showLocal(model.troubleably ?? "")
         } catch {
-            
+            print("Code info error: \(error)")
         }
     }
     
-    private func loginInfo(with phone: String, code: String) async {
+    func loginInfo(with phone: String, code: String) async {
         await MainActor.run {
             self.loginView.phoneFiled.resignFirstResponder()
             self.loginView.codeFiled.resignFirstResponder()
         }
         
         do {
-            let model = try await viewModel.loginInfo(with: ["angumedicalwise": phone, "readify": code])
+            let model = try await viewModel.loginInfo(with: [
+                "angumedicalwise": phone,
+                "readify": code
+            ])
             
             let taxant = model.taxant ?? ""
             
@@ -173,7 +211,6 @@ extension LoginViewController {
             }
             
             if ["0", "00"].contains(taxant) {
-                
                 let phone = model.standee?.angumedicalwise ?? ""
                 let token = model.standee?.anaorderade ?? ""
                 
@@ -185,60 +222,58 @@ extension LoginViewController {
                 }
             }
         } catch {
-            
+            print("Login info error: \(error)")
         }
     }
-    
 }
 
-extension LoginViewController {
+private extension LoginViewController {
     
-    private func getIDFA() async {
+    func getIDFA() async {
         guard #available(iOS 14, *) else { return }
+        
         try? await Task.sleep(nanoseconds: 1_200_000_000)
         let status = await ATTrackingManager.requestTrackingAuthorization()
         
         switch status {
         case .authorized, .denied, .notDetermined:
-            Task {
-                await self.uploadIDFAInfo()
-            }
-            
+            await uploadIDFAInfo()
         case .restricted:
             break
-            
         @unknown default:
             break
         }
     }
     
-    private func uploadIDFAInfo() async {
-        let hol = SecurityVault.shared.getIDFV()
-        let minaciial = SecurityVault.shared.getIDFV()
-        let edgester = SecurityVault.shared.getIDFA()
-        let parameters = ["hol": hol, "minaciial": minaciial, "edgester": edgester]
+    func uploadIDFAInfo() async {
+        let parameters = [
+            "hol": SecurityVault.shared.getIDFV(),
+            "minaciial": SecurityVault.shared.getIDFV(),
+            "edgester": SecurityVault.shared.getIDFA()
+        ]
+        
         do {
             let model = try await viewModel.uploadIDFAInfo(with: parameters)
             let taxant = model.taxant ?? ""
-            if ["0", "00"].contains(taxant) {
-                if let bkModel = model.standee?.stillarian {
-                    self.bkcInfo(with: bkModel)
-                }
+            
+            if ["0", "00"].contains(taxant),
+               let bkModel = model.standee?.stillarian {
+                configureFacebookSDK(with: bkModel)
             }
         } catch {
-            
+            print("Upload IDFA error: \(error)")
         }
     }
     
-    private func bkcInfo(with model: stillarianModel) {
+    func configureFacebookSDK(with model: stillarianModel) {
         Settings.shared.displayName = model.scelry ?? ""
         Settings.shared.appURLSchemeSuffix = model.dayist ?? ""
         Settings.shared.appID = model.camer ?? ""
         Settings.shared.clientToken = model.oenful ?? ""
+        
         ApplicationDelegate.shared.application(
             UIApplication.shared,
             didFinishLaunchingWithOptions: nil
         )
     }
-    
 }
