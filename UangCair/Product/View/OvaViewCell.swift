@@ -1,0 +1,102 @@
+//
+//  OvaViewCell.swift
+//  UangCair
+//
+//  Created by Daniel Thomas Miller on 2026/1/28.
+//
+
+import UIKit
+import SnapKit
+
+class OvaViewCell: UITableViewCell {
+    
+    var model: individualsterModel? {
+        didSet {
+            guard let model = model else { return }
+            oneLabel.text = model.asform ?? ""
+            oneFiled.placeholder = model.betterern ?? ""
+            
+            let enough = model.enough ?? ""
+            oneFiled.keyboardType = enough == "1" ? .numberPad : .default
+            
+            let windowfication = model.windowfication ?? ""
+            oneFiled.text = windowfication
+        }
+    }
+    
+    var textChangeBlock: ((String) -> Void)?
+    
+    lazy var oneLabel: UILabel = {
+        let oneLabel = UILabel()
+        oneLabel.textAlignment = .left
+        oneLabel.textColor = UIColor.init(hexString: "#333333")
+        oneLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        return oneLabel
+    }()
+    
+    lazy var oneView: UIView = {
+        let oneView = UIView()
+        oneView.layer.cornerRadius = 16
+        oneView.layer.masksToBounds = true
+        oneView.backgroundColor = UIColor.init(hexString: "#F9F9F9")
+        return oneView
+    }()
+    
+    lazy var oneFiled: UITextField = {
+        let oneFiled = UITextField()
+        oneFiled.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        oneFiled.textColor = UIColor.init(hexString: "#333333")
+        oneFiled.addTarget(self, action: #selector(oneFiledChange(_:)), for: .editingChanged)
+        return oneFiled
+    }()
+    
+    lazy var bgView: UIView = {
+        let bgView = UIView()
+        return bgView
+    }()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .clear
+        selectionStyle = .none
+        contentView.addSubview(bgView)
+        bgView.addSubview(oneLabel)
+        bgView.addSubview(oneView)
+        oneView.addSubview(oneFiled)
+        
+        bgView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.left.equalToSuperview()
+            make.height.equalTo(83)
+            make.bottom.equalToSuperview().offset(-15.pix())
+        }
+        
+        oneLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview().offset(17)
+            make.height.equalTo(20)
+        }
+        oneView.snp.makeConstraints { make in
+            make.top.equalTo(oneLabel.snp.bottom).offset(8)
+            make.left.equalTo(oneLabel)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(54)
+        }
+        oneFiled.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(12)
+            make.top.bottom.equalToSuperview()
+            make.right.equalToSuperview().offset(-5)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func oneFiledChange(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        self.textChangeBlock?(text)
+    }
+    
+}
