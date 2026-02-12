@@ -80,7 +80,7 @@ class PhotoViewController: BaseViewController {
     lazy var oneListView: PhotoListView = {
         let oneListView = PhotoListView()
         oneListView.descLabel.text = LStr("ID card front photo")
-        oneListView.peopleImageView.image = UIImage(named: "pho_place_image")
+        oneListView.peopleImageView.image = languageCode == .indonesian ? UIImage(named: "pho_place_image") : UIImage(named: "en_cad_nor_image")
         return oneListView
     }()
     
@@ -396,7 +396,7 @@ extension PhotoViewController {
                     oneListView.layer.borderWidth = 1
                     oneListView.layer.borderColor = UIColor.white.cgColor
                     oneListView.trptImageView.isHidden = false
-                    oneListView.peopleImageView.image = UIImage(named: "phoc_place_image")
+                    oneListView.peopleImageView.image = languageCode == .indonesian ? UIImage(named: "phoc_place_image") : UIImage(named: "en_cad_comp_image")
 //                    oneListView.peopleImageView.kf.setImage(with: URL(string: idUrl)) { result in
 //                        switch result {
 //                        case .success(_):

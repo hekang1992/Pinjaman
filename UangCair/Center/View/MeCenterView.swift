@@ -51,7 +51,7 @@ class MeCenterView: BaseView {
     lazy var appLabel: UILabel = {
         let appLabel = UILabel()
         appLabel.textAlignment = .center
-        appLabel.text = LStr("UangCair")
+        appLabel.text = LStr("Uang Cair")
         appLabel.textColor = UIColor(hexString: "#333333")
         appLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         return appLabel

@@ -171,7 +171,7 @@ extension H5ContentController {
         }
         
         let phone = UserManager.shared.getPhone() ?? ""
-        let body = "UangCair: \(phone)"
+        let body = "Uang Cair: \(phone)"
         
         guard let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let emailURL = URL(string: "mailto:\(email)?body=\(encodedBody)"),
