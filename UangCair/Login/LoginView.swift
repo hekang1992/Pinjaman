@@ -122,6 +122,7 @@ class LoginView: BaseView {
     lazy var lineView: UIView = {
         let lineView = UIView()
         lineView.backgroundColor = UIColor.init(hexString: "#252D43")
+        lineView.isHidden = true
         return lineView
     }()
     

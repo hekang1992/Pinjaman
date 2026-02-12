@@ -553,9 +553,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-UangCair/Pods-UangCair-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-UangCair/Pods-UangCair-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -688,10 +692,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UangCair/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Uang Cair";
-				INFOPLIST_KEY_NSCameraUsageDescription = "To efficiently complete identity verification in key business links, UangCair needs to request camera permission to take photos of ID cards and portraits.";
-				INFOPLIST_KEY_NSContactsUsageDescription = "To complete identity verification and screen for potential risks, UangCair needs to request contact list permission. This is to verify the authenticity of your identity, help you complete the authentication process quickly, and assist you in passing the loan application.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To achieve precise matching of services and needs, UangCair needs to request location permission to identify your region and provide you with more suitable loan products and services.";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "To push customized exclusive services to you, UangCair needs to request IDFA permission. The platform will use this permission to achieve precise delivery of content, and at the same time, encrypt user information with high intensity to protect your privacy and security in all aspects.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To efficiently complete identity verification in key business links, Uang Cair needs to request camera permission to take photos of ID cards and portraits.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "To complete identity verification and screen for potential risks, Uang Cair needs to request contact list permission. This is to verify the authenticity of your identity, help you complete the authentication process quickly, and assist you in passing the loan application.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To achieve precise matching of services and needs, Uang Cair needs to request location permission to identify your region and provide you with more suitable loan products and services.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "To push customized exclusive services to you, Uang Cair needs to request IDFA permission. The platform will use this permission to achieve precise delivery of content, and at the same time, encrypt user information with high intensity to protect your privacy and security in all aspects.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -737,10 +741,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UangCair/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Uang Cair";
-				INFOPLIST_KEY_NSCameraUsageDescription = "To efficiently complete identity verification in key business links, UangCair needs to request camera permission to take photos of ID cards and portraits.";
-				INFOPLIST_KEY_NSContactsUsageDescription = "To complete identity verification and screen for potential risks, UangCair needs to request contact list permission. This is to verify the authenticity of your identity, help you complete the authentication process quickly, and assist you in passing the loan application.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To achieve precise matching of services and needs, UangCair needs to request location permission to identify your region and provide you with more suitable loan products and services.";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "To push customized exclusive services to you, UangCair needs to request IDFA permission. The platform will use this permission to achieve precise delivery of content, and at the same time, encrypt user information with high intensity to protect your privacy and security in all aspects.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To efficiently complete identity verification in key business links, Uang Cair needs to request camera permission to take photos of ID cards and portraits.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "To complete identity verification and screen for potential risks, Uang Cair needs to request contact list permission. This is to verify the authenticity of your identity, help you complete the authentication process quickly, and assist you in passing the loan application.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To achieve precise matching of services and needs, Uang Cair needs to request location permission to identify your region and provide you with more suitable loan products and services.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "To push customized exclusive services to you, Uang Cair needs to request IDFA permission. The platform will use this permission to achieve precise delivery of content, and at the same time, encrypt user information with high intensity to protect your privacy and security in all aspects.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

@@ -41,7 +41,7 @@ class TwoHomeView: UIView {
     
     private lazy var bgImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "one_home_head_image")
+        iv.image = UIImage(named: "t+c_image_icon")
         iv.contentMode = .scaleAspectFill
         return iv
     }()
@@ -53,7 +53,7 @@ class TwoHomeView: UIView {
         
         bgImageView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
-            make.height.equalTo(399.pix())
+            make.height.equalTo(322.pix())
         }
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -83,6 +83,7 @@ extension TwoHomeView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let model = modelArry?[section]
         let count = modelArry?.count ?? 0
         if section == count - 1 {
             return 40
