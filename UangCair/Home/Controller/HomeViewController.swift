@@ -10,6 +10,7 @@ import SnapKit
 import MJRefresh
 import CoreLocation
 import FBSDKCoreKit
+import AppTrackingTransparency
 
 class HomeViewController: BaseViewController {
     
@@ -38,18 +39,35 @@ class HomeViewController: BaseViewController {
         setupViews()
         setupActions()
         setupRefresh()
-        locationService.requestCurrentLocation { locationDict in }
+        
+        if UserManager.shared.isLogin {
+            locationService.requestCurrentLocation { locationDict in }
+            
+            
+            let status = CLLocationManager().authorizationStatus
+            if LanguageManager.shared.currentType == .indonesian {
+                if status == .restricted || status == .denied {
+                    self.showSettingsAlert()
+                }
+            }
+            
+            
+        }
         
         let type = UserDefaults.standard.object(forKey: "upload_IDFA_Info") as? String ?? ""
         
         if type != "1" {
             Task {
-                await self.uploadIDFAInfo()
+//                await self.uploadIDFAInfo()
             }
         }
         
         Task {
             await self.getProvicesInfo()
+        }
+        
+        Task {
+            await self.getIDFA()
         }
     }
     
@@ -97,13 +115,13 @@ private extension HomeViewController {
             
             let productID = String(model.allosion ?? 0)
             
-            let status = CLLocationManager().authorizationStatus
-            if LanguageManager.shared.currentType == .indonesian {
-                if status == .restricted || status == .denied {
-                    self.showSettingsAlert()
-                    return
-                }
-            }
+//            let status = CLLocationManager().authorizationStatus
+//            if LanguageManager.shared.currentType == .indonesian {
+//                if status == .restricted || status == .denied {
+//                    self.showSettingsAlert()
+//                    return
+//                }
+//            }
             
             Task {
                 await self.clickProductInfo(with: productID)
@@ -113,18 +131,18 @@ private extension HomeViewController {
                 await self.uploadAppInfo()
             }
             
-            Task {
-                let start = UserDefaults.standard.object(forKey: "start") as? String ?? ""
-                let end = UserDefaults.standard.object(forKey: "end") as? String ?? ""
-                if !start.isEmpty && !end.isEmpty {
-                    await self.suddenlyalBeaconingInfo(with: self.productViewModel,
-                                                       productID: "",
-                                                       type: "1",
-                                                       orderID: "",
-                                                       start: start,
-                                                       end: end)
-                }
-            }
+//            Task {
+//                let start = UserDefaults.standard.object(forKey: "start") as? String ?? ""
+//                let end = UserDefaults.standard.object(forKey: "end") as? String ?? ""
+//                if !start.isEmpty && !end.isEmpty {
+//                    await self.suddenlyalBeaconingInfo(with: self.productViewModel,
+//                                                       productID: "",
+//                                                       type: "1",
+//                                                       orderID: "",
+//                                                       start: start,
+//                                                       end: end)
+//                }
+//            }
             
         }
         
@@ -138,13 +156,13 @@ private extension HomeViewController {
             
             let productID = String(model.allosion ?? 0)
             
-            let status = CLLocationManager().authorizationStatus
-            if LanguageManager.shared.currentType == .indonesian {
-                if status == .restricted || status == .denied {
-                    self.showSettingsAlert()
-                    return
-                }
-            }
+//            let status = CLLocationManager().authorizationStatus
+//            if LanguageManager.shared.currentType == .indonesian {
+//                if status == .restricted || status == .denied {
+//                    self.showSettingsAlert()
+//                    return
+//                }
+//            }
             
             Task {
                 await self.clickProductInfo(with: productID)
@@ -154,18 +172,18 @@ private extension HomeViewController {
                 await self.uploadAppInfo()
             }
             
-            Task {
-                let start = UserDefaults.standard.object(forKey: "start") as? String ?? ""
-                let end = UserDefaults.standard.object(forKey: "end") as? String ?? ""
-                if !start.isEmpty && !end.isEmpty {
-                    await self.suddenlyalBeaconingInfo(with: self.productViewModel,
-                                                       productID: "",
-                                                       type: "1",
-                                                       orderID: "",
-                                                       start: start,
-                                                       end: end)
-                }
-            }
+//            Task {
+//                let start = UserDefaults.standard.object(forKey: "start") as? String ?? ""
+//                let end = UserDefaults.standard.object(forKey: "end") as? String ?? ""
+//                if !start.isEmpty && !end.isEmpty {
+//                    await self.suddenlyalBeaconingInfo(with: self.productViewModel,
+//                                                       productID: "",
+//                                                       type: "1",
+//                                                       orderID: "",
+//                                                       start: start,
+//                                                       end: end)
+//                }
+//            }
         }
         
         twoView.tapBanBlock = { [weak self] model in
@@ -180,10 +198,12 @@ private extension HomeViewController {
         oneView.scrollView.mj_header = MJRefreshNormalHeader { [weak self] in
             guard let self = self else { return }
             Task { await self.getHomeInfo() }
+            Task { await self.uploadMacInfo() }
         }
         twoView.tableView.mj_header = MJRefreshNormalHeader { [weak self] in
             guard let self = self else { return }
             Task { await self.getHomeInfo() }
+            Task { await self.uploadMacInfo() }
         }
     }
     
@@ -365,8 +385,16 @@ extension HomeViewController {
 private extension HomeViewController {
     
     private func showSettingsAlert() {
+        let lastShownDate = UserDefaults.standard.object(forKey: "LastLocationAlertDate") as? Date
+        let calendar = Calendar.current
+        
+        if let lastDate = lastShownDate {
+            if calendar.isDateInToday(lastDate) {
+                return
+            }
+        }
+        
         DispatchQueue.main.async {
-            
             let alert = UIAlertController(
                 title: LStr("Location Services Disabled"),
                 message: LStr("Location permission is a necessary requirement for identity verification. It is only used for this verification, and the process cannot continue if it is not enabled. Please go to Settings to authorize it."),
@@ -386,6 +414,8 @@ private extension HomeViewController {
             alert.addAction(settingsAction)
             
             self.present(alert, animated: true, completion: nil)
+            
+            UserDefaults.standard.set(Date(), forKey: "LastLocationAlertDate")
         }
     }
     
@@ -396,4 +426,27 @@ private extension HomeViewController {
             goContentWebVc(with: pageUrl)
         }
     }
+}
+
+extension HomeViewController {
+    
+    func getIDFA() async {
+        guard #available(iOS 14, *) else { return }
+        
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
+        let status = await ATTrackingManager.requestTrackingAuthorization()
+        
+        switch status {
+        case .authorized, .denied, .notDetermined:
+//            await uploadIDFAInfo()
+            break
+            
+        case .restricted:
+            break
+            
+        @unknown default:
+            break
+        }
+    }
+    
 }

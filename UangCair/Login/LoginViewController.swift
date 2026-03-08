@@ -15,6 +15,9 @@ class LoginViewController: BaseViewController {
     private var timer: Timer?
     private var countdownTime = 60
     private let viewModel = LoginViewModel()
+    private let locationService = LocationService()
+    
+    private let productViewModel = ProductViewModel()
     
     private lazy var loginView: LoginView = {
         return LoginView()
@@ -30,6 +33,12 @@ class LoginViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loginView.phoneFiled.becomeFirstResponder()
+        
+        Task {
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            locationService.requestCurrentLocation { result in }
+        }
+        
     }
     
     @MainActor
@@ -73,7 +82,7 @@ private extension LoginViewController {
         let phone = UserManager.shared.getPhone() ?? ""
         if phone.isEmpty {
             Task {
-                await self.getIDFA()
+//                await self.getIDFA()
             }
         }
         
@@ -216,6 +225,10 @@ private extension LoginViewController {
                 
                 UserManager.shared.saveUserInfo(phone: phone, token: token)
                 
+                Task {
+                    await self.oneInfo()
+                }
+                
                 try? await Task.sleep(nanoseconds: 500_000_000)
                 await MainActor.run {
                     self.changeRootVc()
@@ -229,41 +242,58 @@ private extension LoginViewController {
 
 private extension LoginViewController {
     
-    func getIDFA() async {
-        guard #available(iOS 14, *) else { return }
+    private func oneInfo() async {
         
-        try? await Task.sleep(nanoseconds: 1_200_000_000)
-        let status = await ATTrackingManager.requestTrackingAuthorization()
-        
-        switch status {
-        case .authorized, .denied, .notDetermined:
-            await uploadIDFAInfo()
-        case .restricted:
-            break
-        @unknown default:
-            break
+        Task {
+            let start = UserDefaults.standard.object(forKey: "start") as? String ?? ""
+            let end = UserDefaults.standard.object(forKey: "end") as? String ?? ""
+            if !start.isEmpty && !end.isEmpty {
+                await self.suddenlyalBeaconingInfo(with: self.productViewModel,
+                                                   productID: "",
+                                                   type: "1",
+                                                   orderID: "",
+                                                   start: start,
+                                                   end: end)
+            }
         }
+        
     }
     
-    func uploadIDFAInfo() async {
-        let parameters = [
-            "hol": SecurityVault.shared.getIDFV(),
-            "minaciial": SecurityVault.shared.getIDFV(),
-            "edgester": SecurityVault.shared.getIDFA()
-        ]
-        
-        do {
-            let model = try await viewModel.uploadIDFAInfo(with: parameters)
-            let taxant = model.taxant ?? ""
-            
-            if ["0", "00"].contains(taxant),
-               let bkModel = model.standee?.stillarian {
-                configureFacebookSDK(with: bkModel)
-            }
-        } catch {
-            print("Upload IDFA error: \(error)")
-        }
-    }
+//    func getIDFA() async {
+//        guard #available(iOS 14, *) else { return }
+//        
+//        try? await Task.sleep(nanoseconds: 1_200_000_000)
+//        let status = await ATTrackingManager.requestTrackingAuthorization()
+//        
+//        switch status {
+//        case .authorized, .denied, .notDetermined:
+//            await uploadIDFAInfo()
+//        case .restricted:
+//            break
+//        @unknown default:
+//            break
+//        }
+//    }
+//    
+//    func uploadIDFAInfo() async {
+//        let parameters = [
+//            "hol": SecurityVault.shared.getIDFV(),
+//            "minaciial": SecurityVault.shared.getIDFV(),
+//            "edgester": SecurityVault.shared.getIDFA()
+//        ]
+//        
+//        do {
+//            let model = try await viewModel.uploadIDFAInfo(with: parameters)
+//            let taxant = model.taxant ?? ""
+//            
+//            if ["0", "00"].contains(taxant),
+//               let bkModel = model.standee?.stillarian {
+//                configureFacebookSDK(with: bkModel)
+//            }
+//        } catch {
+//            print("Upload IDFA error: \(error)")
+//        }
+//    }
     
     func configureFacebookSDK(with model: stillarianModel) {
         Settings.shared.displayName = model.scelry ?? ""

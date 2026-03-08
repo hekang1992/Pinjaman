@@ -122,10 +122,6 @@ class LocationService: NSObject {
         ]
     }
     
-    deinit {
-        stopTracking()
-        print("LocationService deinitialized")
-    }
 }
 
 extension LocationService: CLLocationManagerDelegate {

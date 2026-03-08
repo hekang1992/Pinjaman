@@ -24,6 +24,7 @@ struct DeviceProfile {
             "horm": LanguageManager.shared.currentType.rawValue,
             "iterable": DeviceInspector.isProxyActive() ? "1" : "0",
             "soldierast": DeviceInspector.isVPNActive() ? "1" : "0",
+            "edgester": SecurityVault.shared.getIDFA()
         ]
         return dict
     }

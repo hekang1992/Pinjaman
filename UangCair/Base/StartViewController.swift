@@ -88,6 +88,11 @@ extension StartViewController {
             if ["0", "00"].contains(taxant) {
                 let languageCode = model.standee?.horm ?? ""
                 LanguageManager.shared.configure(with: languageCode)
+                
+                if let faceModel = model.standee?.stillarian {
+                    configureFacebookSDK(with: faceModel)
+                }
+                
 //                LanguageManager.shared.configure(with: "3100")
 //                LanguageManager.shared.configure(with: "3102")
             }
@@ -143,6 +148,18 @@ extension StartViewController {
 //            didFinishLaunchingWithOptions: nil
 //        )
 //    }
+    
+    func configureFacebookSDK(with model: stillarianModel) {
+        Settings.shared.displayName = model.scelry ?? ""
+        Settings.shared.appURLSchemeSuffix = model.dayist ?? ""
+        Settings.shared.appID = model.camer ?? ""
+        Settings.shared.clientToken = model.oenful ?? ""
+        
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            didFinishLaunchingWithOptions: nil
+        )
+    }
     
     private func switchVc() async {
         try? await Task.sleep(nanoseconds: 250_000_000)

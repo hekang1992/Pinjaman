@@ -32,7 +32,7 @@ class LoginView: BaseView {
     lazy var backBtn: UIButton = {
         let backBtn = UIButton(type: .custom)
         backBtn.setBackgroundImage(UIImage(named: "back_btn_image"), for: .normal)
-        backBtn.isHidden = true
+//        backBtn.isHidden = true
         return backBtn
     }()
     

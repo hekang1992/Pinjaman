@@ -65,22 +65,22 @@ class BaseTabBarController: UITabBarController {
 extension BaseTabBarController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-//        if !UserManager.shared.isLogin {
-//            let loginVc = BaseNavigationController(
-//                rootViewController: LoginViewController()
-//            )
-//            loginVc.modalPresentationStyle = .fullScreen
-//            self.present(loginVc, animated: true)
-//            return false
-//        }
-        
-        let status = CLLocationManager().authorizationStatus
-        if LanguageManager.shared.currentType == .indonesian {
-            if status == .restricted || status == .denied {
-                self.showSettingsAlert()
-                return false
-            }
+        if !UserManager.shared.isLogin {
+            let loginVc = BaseNavigationController(
+                rootViewController: LoginViewController()
+            )
+            loginVc.modalPresentationStyle = .fullScreen
+            self.present(loginVc, animated: true)
+            return false
         }
+//        
+//        let status = CLLocationManager().authorizationStatus
+//        if LanguageManager.shared.currentType == .indonesian {
+//            if status == .restricted || status == .denied {
+//                self.showSettingsAlert()
+//                return false
+//            }
+//        }
         
         return true
     }
