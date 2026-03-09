@@ -8,8 +8,9 @@
 import Foundation
 import Alamofire
 
-let base_url = "http://8.215.86.57:9803/trixoon"
-let h5_base_url = "http://8.215.86.57:9803"
+let base_url = "https://luxetrope-finance.com/trixoon"
+let h5_base_url = "https://luxetrope-finance.com"
+
 class NetworkManager {
     static let shared = NetworkManager()
     
