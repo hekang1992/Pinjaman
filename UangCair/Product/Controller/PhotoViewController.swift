@@ -456,7 +456,7 @@ extension PhotoViewController {
                         if drugical == 1 {
                             self.sheetView(with: standeeModel)
                         }else {
-                            
+                            photoend = String(Int(Date().timeIntervalSince1970))
                             Task {
                                 await self.photoInfo()
                             }
