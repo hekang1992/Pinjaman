@@ -452,7 +452,26 @@ extension PhotoViewController {
                 /// PHOTO
                 if type == "11" {
                     if let standeeModel = model.standee {
-                        self.sheetView(with: standeeModel)
+                        let drugical = model.standee?.drugical ?? 0
+                        if drugical == 1 {
+                            self.sheetView(with: standeeModel)
+                        }else {
+                            
+                            Task {
+                                await self.photoInfo()
+                            }
+                            
+                            Task {
+                                try? await Task.sleep(nanoseconds: 3_000_000_000)
+                                await self.suddenlyalBeaconingInfo(with: viewModel,
+                                                                   productID: productID,
+                                                                   type: "2",
+                                                                   orderID: self.republicanModel?.receivester ?? "",
+                                                                   start: photostart,
+                                                                   end: photoend)
+                            }
+                            
+                        }
                     }
                 }else {
                     /// FACE

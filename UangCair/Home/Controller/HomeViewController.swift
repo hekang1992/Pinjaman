@@ -74,6 +74,10 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Task { await getHomeInfo() }
+        if UserManager.shared.isLogin {
+            Task { await self.uploadAppInfo() }
+//            Task { await self.uploadMacInfo() }
+        }
     }
 }
 
@@ -198,12 +202,19 @@ private extension HomeViewController {
         oneView.scrollView.mj_header = MJRefreshNormalHeader { [weak self] in
             guard let self = self else { return }
             Task { await self.getHomeInfo() }
-            Task { await self.uploadMacInfo() }
+            if UserManager.shared.isLogin {
+                Task { await self.uploadAppInfo() }
+//                Task { await self.uploadMacInfo() }
+            }
         }
+        
         twoView.tableView.mj_header = MJRefreshNormalHeader { [weak self] in
             guard let self = self else { return }
             Task { await self.getHomeInfo() }
-            Task { await self.uploadMacInfo() }
+            if UserManager.shared.isLogin {
+                Task { await self.uploadAppInfo() }
+//                Task { await self.uploadMacInfo() }
+            }
         }
     }
     

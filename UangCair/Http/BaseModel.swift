@@ -46,6 +46,7 @@ class standeeModel: Codable {
     var individualster: [individualsterModel]?
     var ticmost: ticmostModel?
     var stillarian: stillarianModel?
+    var drugical: Int?
 }
 
 class stillarianModel: Codable {
